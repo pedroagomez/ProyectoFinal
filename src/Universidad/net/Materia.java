@@ -34,4 +34,29 @@ public class Materia {
     public void setProfesor(Profesor profesor) {
         this.profesor = profesor;
     }
+
+    public boolean equals(Object object) {
+        boolean retorno = false;
+        if (object !=null){
+            if (object instanceof  Materia){
+                if (object.getID() = this.id){
+                    retorno=true;
+                }
+            }
+        }
+        return retorno;
+    }
+
+    public int hashCode() {
+        return 1;
+    }
+
+    @java.lang.Override
+    public java.lang.String toString() {
+        return "Materia{" +
+                "nombre=" + nombre +
+                ", id=" + id +
+                ", profesor=" + profesor +
+                '}';
+    }
 }
