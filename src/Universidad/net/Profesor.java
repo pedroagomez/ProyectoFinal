@@ -34,4 +34,20 @@ public class Profesor {
     public void setLegajo(int legajo) {
         this.legajo = legajo;
     }
+
+    public boolean equals(Object object) {
+        boolean retorno = false;
+        if (object!= null){
+                if (object instanceof Profesor){
+                    if ((Profesor)object.getLegajo == this.legajo) {
+                        retorno = true;
+                    }
+                }
+            }
+        return retorno;
+    }
+
+    public int hashCode() {
+        return 1;
+    }
 }
