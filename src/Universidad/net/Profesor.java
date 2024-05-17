@@ -39,7 +39,7 @@ public class Profesor {
         boolean retorno = false;
         if (object!= null){
                 if (object instanceof Profesor){
-                    if ((Profesor)object.getLegajo == this.legajo) {
+                    if (((Profesor) object).getLegajo() == this.legajo) {
                         retorno = true;
                     }
                 }
@@ -51,7 +51,7 @@ public class Profesor {
         return 1;
     }
 
-    @java.lang.Override
+    @Override
     public java.lang.String toString() {
         return "Profesor{" +
                 "nombre=" + nombre +

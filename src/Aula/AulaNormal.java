@@ -9,4 +9,6 @@ public class AulaNormal extends Aula{
     public String toString() {
         return "Aula normal "+super.toString();
     }
+
+
 }
