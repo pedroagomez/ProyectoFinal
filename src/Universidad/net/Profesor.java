@@ -50,4 +50,13 @@ public class Profesor {
     public int hashCode() {
         return 1;
     }
+
+    @java.lang.Override
+    public java.lang.String toString() {
+        return "Profesor{" +
+                "nombre=" + nombre +
+                ", apellido=" + apellido +
+                ", legajo=" + legajo +
+                '}';
+    }
 }
