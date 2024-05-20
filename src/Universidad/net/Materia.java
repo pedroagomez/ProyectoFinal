@@ -56,7 +56,7 @@ public class Materia {
         return "Materia{" +
                 "nombre=" + nombre +
                 ", id=" + id +
-                ", profesor=" + 
+                ", profesor=" +
                 '}';
     }
 }

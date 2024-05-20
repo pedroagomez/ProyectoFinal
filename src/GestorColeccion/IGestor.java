@@ -2,6 +2,6 @@ package GestorColeccion;
 
 public interface IGestor {
     void agregar(Object o);
-    void eliminar(Object o);
-    void filtrar();
+    boolean eliminar(Object o);
+    String filtrar(Object o);
 }
