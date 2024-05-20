@@ -2,43 +2,13 @@ package GestorColeccion;
 
 import java.util.*;
 
-public class GestorColeccion<T,K>{
-    private HashMap<K,T>mapa;
+public class GestorColeccion<T>{
     private HashSet<T>conjunto;
     private List<T> lista;
 
     public GestorColeccion() {
-        this.mapa = new HashMap<>();
         this.conjunto = new HashSet<>();
         this.lista = new LinkedList<>();
-    }
-
-    public void agregarMapa(K key, T elemento)
-    {
-        mapa.put(key,elemento);
-    }
-
-    public T obtenerMapa(K key)
-    {
-        return mapa.get(key);
-    }
-
-    public void eliminarMapa(K key)
-    {
-        mapa.remove(key);
-    }
-
-    public String listarMapa()
-    {
-        StringBuilder builder=new StringBuilder();
-        Iterator<Map.Entry<K,T>>it=mapa.entrySet().iterator();
-        while(it.hasNext())
-        {
-            Map.Entry<K,T> conjunto=it.next();
-            builder.append("Numero : "+ conjunto.getKey());
-            builder.append(conjunto.getValue()).append("\n");
-        }
-        return builder.toString();
     }
 
     //=================================================
@@ -54,10 +24,27 @@ public class GestorColeccion<T,K>{
         conjunto.remove(elemento);
     }
 
-    public boolean buscarElemento(T elemento)
+    public boolean verificarExistenciaElemento(T elemento)
     {
         return conjunto.contains(elemento);
     }
+
+    public String devolverElemento(T elemento) {
+        StringBuilder builder = new StringBuilder();
+        boolean encontrado=false;
+        Iterator<T> it=conjunto.iterator();
+        while(it.hasNext() && encontrado == false)
+        {
+            T dato = it.next();
+            if(dato.equals(elemento))
+            {
+                builder.append(dato.toString());
+                encontrado=true;
+            }
+        }
+        return builder.toString();
+    }
+
 
     public String listarConjunto()
     {
@@ -71,7 +58,15 @@ public class GestorColeccion<T,K>{
         return builder.toString();
     }
 
-    //===========================================================
+    public HashSet<T> getConjunto() {
+        return conjunto;
+    }
+
+    public void setConjunto(HashSet<T> conjunto) {
+        this.conjunto = conjunto;
+    }
+//===========================================================
+    //Metodos para listas
 
     public void agregarAlista(T elemento)
     {
@@ -99,7 +94,11 @@ public class GestorColeccion<T,K>{
     }
 
 
+    public List<T> getLista() {
+        return lista;
+    }
 
-
-
+    public void setLista(List<T> lista) {
+        this.lista = lista;
+    }
 }
