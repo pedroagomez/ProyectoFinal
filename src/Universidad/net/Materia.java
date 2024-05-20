@@ -35,11 +35,11 @@ public class Materia {
         this.profesor = profesor;
     }
 
-    public boolean equals(Object object) {
+    public boolean equals(Object o) {
         boolean retorno = false;
-        if (object !=null){
-            if (object instanceof  Materia){
-                if (object.getID() = this.id){
+        if (o !=null){
+            if (o instanceof  Materia){
+                if (((Materia) o).getId() == this.getId()){
                     retorno=true;
                 }
             }
