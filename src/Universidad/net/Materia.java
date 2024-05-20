@@ -3,12 +3,14 @@ package Universidad.net;
 public class Materia {
     private String nombre;
     private int id;
-    private Profesor profesor;
+    private static int IDSatic = 0 ;
+    //private Profesor profesor;
 
-    public Materia(java.lang.String nombre, int id, Profesor profesor) {
+    public Materia(java.lang.String nombre, Profesor profesor) {
         this.nombre = nombre;
-        this.id = id;
-        this.profesor = profesor;
+        this.id = IDSatic;
+        IDSatic++;
+        //this.profesor = profesor;
     }
 
     public java.lang.String getNombre() {
@@ -23,10 +25,8 @@ public class Materia {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
+    //PROFESOR LO PODEMOS MOVER?
+    /*
     public Profesor getProfesor() {
         return profesor;
     }
@@ -34,7 +34,7 @@ public class Materia {
     public void setProfesor(Profesor profesor) {
         this.profesor = profesor;
     }
-
+    */
     public boolean equals(Object o) {
         boolean retorno = false;
         if (o !=null){
@@ -56,7 +56,7 @@ public class Materia {
         return "Materia{" +
                 "nombre=" + nombre +
                 ", id=" + id +
-                ", profesor=" + profesor +
+                ", profesor=" + 
                 '}';
     }
 }
