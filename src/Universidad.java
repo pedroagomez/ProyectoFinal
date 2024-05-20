@@ -1,7 +1,7 @@
 import GestorColeccion.GestorColeccion;
 import Reserva.Reserva;
 import Universidad.net.*;
-
+import Aula.*;
 import javax.swing.*;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -20,6 +20,7 @@ public class Universidad {
         this.reservas = new LinkedList<>();;
     }
 
+    ///         FUNCIONES PARA PROFESOR
     public void cargarProfesoresAutomatico() {
         profesores.add(new Profesor("Rodrigo","Albert",1 ));
         profesores.add(new Profesor("Paula","Fernandez",2 ));
@@ -50,5 +51,13 @@ public class Universidad {
             }
         }
         return aux;
+    }
+
+
+    ///         FUNCIONES PARA AULAR
+
+    public void nuevaResrvaManual(Aula aula, Materia materia,Horario horario){
+        reservas.add(new Reserva(aula,materia,horario)) ;
+        /// Agregar funciones para cuando se cree no sobre Escriba otra aula
     }
 }
