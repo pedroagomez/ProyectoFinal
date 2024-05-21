@@ -13,17 +13,17 @@ public class GestorMateria {
         this.conjuntoMaterias = new GestionColeccion<>();
     }
 
-    public void agregarProfesor(Materia materia)
+    public void agregarMateria(Materia materia)
     {
         conjuntoMaterias.agregar(materia);
     }
 
-    public void eliminarProfesor(Materia materia)
+    public void eliminarMateria(Materia materia)
     {
         conjuntoMaterias.eliminar(materia);
     }
 
-    public String buscarYdevolver(Materia materia)
+    public String buscarYdevolverMateria(Materia materia)
     {
         StringBuilder builder = new StringBuilder();
         if (conjuntoMaterias.verificarExistenciaElemento(materia)) {
@@ -34,7 +34,7 @@ public class GestorMateria {
         return builder.toString();
     }
 
-    public String listarProfesores()
+    public String listarMaterias()
     {
         return conjuntoMaterias.listarConjunto();
     }

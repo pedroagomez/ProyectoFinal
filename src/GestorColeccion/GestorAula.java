@@ -20,20 +20,21 @@ public class GestorAula {
         mapaAula.put(numeroAula,aula);
     }
 
-    public boolean aulaNoDisponible(int numeroAula)
+    public String aulaNoDisponible()
     {
-        boolean disponible=true;
+        StringBuilder builder=new StringBuilder();
         Iterator<Map.Entry<Integer,Aula>>it=mapaAula.entrySet().iterator();
-        while(it.hasNext() && disponible== true)
+        while(it.hasNext() )
         {
             Map.Entry<Integer,Aula>conjunto=it.next();
-            if(conjunto.getKey() == numeroAula)
+            if(!conjunto.getValue().isDisponible())
             {
-                conjunto.getValue().setDisponible(false);
-                disponible=false;
+                builder.append("Numero de aula : "+conjunto.getKey()).append("\n");
+                builder.append(conjunto.getValue()).append("\n");
+
             }
         }
-        return disponible;
+        return builder.toString();
     }
 
     public String verAulasDisponibles()
@@ -79,6 +80,20 @@ public class GestorAula {
                 builder.append("Numero de aula : "+conjunto.getKey()).append("\n");
                 builder.append(conjunto.getValue()).append("\n");
             }
+        }
+        return builder.toString();
+    }
+
+    public String listarAulas()
+    {
+        StringBuilder builder= new StringBuilder();
+        Iterator<Map.Entry<Integer,Aula>>it=mapaAula.entrySet().iterator();
+        while(it.hasNext())
+        {
+            Map.Entry<Integer,Aula>conjunto=it.next();
+            builder.append("Numero de aula : "+conjunto.getKey()).append("\n");
+            builder.append(conjunto.getValue()).append("\n");
+
         }
         return builder.toString();
     }
