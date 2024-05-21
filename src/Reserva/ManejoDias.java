@@ -7,13 +7,12 @@ import java.util.Objects;
 
 public class ManejoDias {
     private String hora;
-    private LinkedList<Aula> aulas;
+    private LinkedList<Aula> aulas = new LinkedList<Aula>();
 
-    
 
-    public ManejoDias(String hora) {
+    public ManejoDias(String hora, LinkedList<Aula> aulas) {
         this.hora = hora;
-        this.aulas = new LinkedList<>();
+        this.aulas = aulas;
     }
 
     public String getHora() {
@@ -43,6 +42,14 @@ public class ManejoDias {
             }
         }
         return retorno;
+    }
+
+    @Override
+    public String toString() {
+        return ("/t\t") + "ManejoDias{" +
+                "hora='" + hora + '\'' +
+                ", aulas=" + aulas +
+                '}';
     }
 
     @Override

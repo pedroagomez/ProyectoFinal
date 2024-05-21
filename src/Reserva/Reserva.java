@@ -26,5 +26,10 @@ public class Reserva {
         configurador.put(dia,aux);
     }
 
-
+    @Override
+    public String toString() {
+        return "Reserva{" +
+                "configurador=" + configurador +
+                '}';
+    }
 }
