@@ -4,32 +4,35 @@ import Universidad.net.Materia;
 
 import java.util.LinkedList;
 
-public class GestorMateria implements IGestor{
-    private LinkedList<Materia> materias;
+public class GestorMateria {
 
+    private GestorColeccion<Materia> materias;
 
     public GestorMateria() {
-        this.materias = new LinkedList<>();
+        this.materias = new GestorColeccion<Materia>();
     }
 
-    @Override
-    public void agregar(Object o) {
-        if(o!=null){
-            if(o instanceof Materia){
-                if(!this.materias.contains(o)){
-                    materias.add((Materia)o);
+    
+
+    public boolean agregarMateria(Materia mat)
+    {   boolean agregada=false;
+        if(mat!=null){
+            if(mat instanceof Materia)
+                {
+                    materias.agregarAlista(mat);
+                    agregada=true;
                 }
-            }
         }
+        return agregada;
     }
 
-    @Override
-    public boolean eliminar(Object o) {
+
+    public boolean eliminar(Materia mat) {
         boolean eliminado = false;
-        if(o!=null){
-            if(o instanceof Materia){
-                if(this.materias.contains(o)){
-                    materias.remove((Materia)o);
+        if(mat!=null){
+            if(mat instanceof Materia){
+                if(materias.buscarEnLista(mat)){
+                    materias.eliminarDeLista(mat);
                     eliminado = true;
                 }
             }
@@ -37,13 +40,8 @@ public class GestorMateria implements IGestor{
         return eliminado;
     }
 
-    @Override
-    public String filtrar(Object o) {
-        StringBuilder sb = new StringBuilder();
+    public String listarListaProfesores() {
+       return materias.listarLista();
 
-        for (Materia materia : materias) {
-            sb.append(materia.getNombre()).append("/t");
-        }
-        return sb.toString();
     }
 }

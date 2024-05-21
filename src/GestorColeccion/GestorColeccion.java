@@ -73,6 +73,8 @@ public class GestorColeccion<T>{
         lista.add(elemento);
     }
 
+
+
     public void eliminarDeLista(T elemento)
     {
         lista.remove(elemento);
@@ -101,4 +103,6 @@ public class GestorColeccion<T>{
     public void setLista(List<T> lista) {
         this.lista = lista;
     }
+
+
 }

@@ -6,45 +6,39 @@ import Universidad.net.Profesor;
 import java.io.Serializable;
 import java.util.LinkedList;
 
-public class GestorProfesor implements IGestor {
-    private LinkedList<Profesor> profesores;
+public class GestorProfesor {
+
+    private GestorColeccion<Profesor> conjuntoProfesores;
 
     public GestorProfesor() {
-        this.profesores = new LinkedList<>();
+        this.conjuntoProfesores = new GestorColeccion<Profesor>();
     }
 
-    @Override
-    public void agregar(Object o) {
-        if(o!=null){
-            if(o instanceof Profesor){
-                if(!this.profesores.contains(o)){
-                    profesores.add((Profesor) o);
+
+    public void agregar(Profesor profe) {
+        if(profe!=null){
+            if(profe instanceof Profesor){
+                    conjuntoProfesores.agregarAconjunto(profe);
                 }
             }
-        }
     }
 
-    @Override
-    public boolean eliminar(Object o) {
+
+    public boolean eliminar(Profesor profe) {
         boolean eliminado = false;
-        if(o!=null){
-            if(o instanceof Profesor){
-                if(this.profesores.contains(o)){
-                    profesores.remove((Profesor) o);
-                    eliminado = true;
+        if(profe!=null){
+            if(profe instanceof Profesor){
+               if(conjuntoProfesores.verificarExistenciaElemento(profe))
+               {
+                   conjuntoProfesores.eliminarDeConjunto(profe);
                 }
             }
         }
         return eliminado;
     }
 
-    @Override
-    public String filtrar(Object o) {
-        StringBuilder sb = new StringBuilder();
+    public String listarListaProfesores() {
 
-        for (Profesor profesor : profesores) {
-            sb.append(profesor.getNombre()).append("/t");
-        }
-        return sb.toString();
+        return conjuntoProfesores.listarConjunto();
     }
 }

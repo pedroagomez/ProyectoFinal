@@ -1,5 +1,6 @@
-package Aula;
+package GestorColeccion;
 
+import Aula.Aula;
 import GestorColeccion.GestorColeccion;
 
 import java.util.Iterator;
