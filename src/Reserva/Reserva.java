@@ -4,48 +4,27 @@ import Aula.*;
 import Universidad.net.Horario;
 import Universidad.net.Materia;
 
+import java.util.HashMap;
+import java.util.LinkedList;
+
 
 public class Reserva {
-    private Aula numeroAula;
-    private Materia nombreMateria;
-    private Horario horario;
+    private HashMap<String,LinkedList<ManejoDias>>configurador;
 
-    public Reserva(Aula numeroAula, Materia nombreMateria, Horario horario) {
-        this.numeroAula= numeroAula;
-        this.nombreMateria = nombreMateria;
-        this.horario = horario;
+    public Reserva() {
+        this.configurador = new HashMap<>();
     }
 
-    public Aula getNumeroAula() {
-        return numeroAula;
+    public void agregar(String dia,ManejoDias manejo){
+        LinkedList<ManejoDias> aux = null;
+        if (configurador.containsKey(dia)){
+            aux = configurador.get(dia);
+        }else{
+            aux = new LinkedList<>();
+        }
+        aux.add(manejo);
+        configurador.put(dia,aux);
     }
 
-    public void setNumeroAula(Aula numeroAula) {
-        this.numeroAula = numeroAula;
-    }
 
-    public Materia getNombreMateria() {
-        return nombreMateria;
-    }
-
-    public void setNombreMateria(Materia nombreMateria) {
-        this.nombreMateria = nombreMateria;
-    }
-
-    public Horario getHorario() {
-        return horario;
-    }
-
-    public void setHorario(Horario horario) {
-        this.horario = horario;
-    }
-
-    @Override
-    public String toString() {
-        return "Reserva{" +
-                "numeroAula=" + numeroAula +
-                ", nombreMateria=" + nombreMateria +
-                ", horario=" + horario +
-                '}';
-    }
 }
