@@ -52,7 +52,7 @@ public class Profesor {
     }
 
     @Override
-    public java.lang.String toString() {
+    public String toString() {
         return "Profesor{" +
                 "nombre=" + nombre +
                 ", apellido=" + apellido +

@@ -4,41 +4,58 @@ import Universidad.net.Materia;
 import Universidad.net.Profesor;
 
 import java.io.Serializable;
+import java.util.Iterator;
 import java.util.LinkedList;
 
 public class GestorProfesor {
 
-    private GestorColeccion<Profesor> conjuntoProfesores;
+    private GestionColeccion<Profesor>conjuntoProfesores;
 
     public GestorProfesor() {
-        this.conjuntoProfesores = new GestorColeccion<Profesor>();
+        this.conjuntoProfesores = new GestionColeccion<Profesor>();
     }
 
-
-    public void agregar(Profesor profe) {
-        if(profe!=null){
-            if(profe instanceof Profesor){
-                    conjuntoProfesores.agregarAconjunto(profe);
-                }
-            }
+    public void agregarProfesor(Profesor profe)
+    {
+        conjuntoProfesores.agregar(profe);
     }
 
+    public void eliminarProfesor(Profesor profe)
+    {
+        conjuntoProfesores.eliminar(profe);
+    }
 
-    public boolean eliminar(Profesor profe) {
-        boolean eliminado = false;
-        if(profe!=null){
-            if(profe instanceof Profesor){
-               if(conjuntoProfesores.verificarExistenciaElemento(profe))
-               {
-                   conjuntoProfesores.eliminarDeConjunto(profe);
-                }
-            }
+    public String buscarYdevolver(Profesor profe)
+    {
+        StringBuilder builder = new StringBuilder();
+        if (conjuntoProfesores.verificarExistenciaElemento(profe)) {
+            builder.append(conjuntoProfesores.devolverElemento(profe)).append("\n");
+        } else {
+            builder.append("Elemento no encontrado");
         }
-        return eliminado;
+        return builder.toString();
     }
 
-    public String listarListaProfesores() {
-
+    public String listarProfesores()
+    {
         return conjuntoProfesores.listarConjunto();
     }
+
+    public Profesor buscarProfesorPorLegajo(int legajo)
+    {
+        Profesor aux=null;
+        Iterator<Profesor>it= conjuntoProfesores.getConjuntoIterator();
+        while(it.hasNext())
+        {
+            Profesor profe= it.next();
+            if(profe.getLegajo()==legajo)
+            {
+                aux=profe;
+            }
+        }
+        return aux;
+    }
+
+
+
 }

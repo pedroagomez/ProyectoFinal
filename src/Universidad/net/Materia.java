@@ -3,21 +3,22 @@ package Universidad.net;
 public class Materia {
     private String nombre;
     private int id;
-    private static int IDSatic = 0 ;
+    private static int iDSatic = 0 ;
+    private Profesor profesor;
     //private Profesor profesor;
 
-    public Materia(java.lang.String nombre, Profesor profesor) {
+
+    public Materia(String nombre, Profesor profesor) {
         this.nombre = nombre;
-        this.id = IDSatic;
-        IDSatic++;
-        //this.profesor = profesor;
+        this.id = iDSatic++;
+        this.profesor = profesor;
     }
 
-    public java.lang.String getNombre() {
+    public String getNombre() {
         return nombre;
     }
 
-    public void setNombre(java.lang.String nombre) {
+    public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
@@ -51,12 +52,24 @@ public class Materia {
         return 1;
     }
 
-    @java.lang.Override
-    public java.lang.String toString() {
+    @Override
+    public String toString() {
         return "Materia{" +
-                "nombre=" + nombre +
+                "nombre='" + nombre + '\'' +
                 ", id=" + id +
-                ", profesor=" +
+                ", profesor=" + profesor +
                 '}';
+    }
+
+    public Profesor getProfesor() {
+        return profesor;
+    }
+
+    public void setProfesor(Profesor profesor) {
+        this.profesor = profesor;
+    }
+
+    public String obtenerInformacionDetallada() {
+        return "Materia: " + this.nombre + ", Profesor: " + this.profesor.getNombre() + ", ID: " + this.id;
     }
 }
