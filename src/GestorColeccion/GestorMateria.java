@@ -24,16 +24,7 @@ public class GestorMateria {
         conjuntoMaterias.eliminar(materia);
     }
 
-    public String buscarYdevolverMateria(Materia materia)
-    {
-        StringBuilder builder = new StringBuilder();
-        if (conjuntoMaterias.verificarExistenciaElemento(materia)) {
-            builder.append(conjuntoMaterias.devolverElemento(materia)).append("\n");
-        } else {
-            builder.append("Elemento no encontrado");
-        }
-        return builder.toString();
-    }
+    
 
 
     //devuelve el string con toda la info de la materia.
