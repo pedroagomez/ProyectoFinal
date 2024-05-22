@@ -4,6 +4,7 @@ import Reserva.ManejoDias;
 import Aula.*;
 import Reserva.Reserva;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 
 public class Main {
@@ -18,14 +19,15 @@ public class Main {
         GestionColeccion<Aula> mi1 = new GestionColeccion<>();
         mi1.agregar(new AulaComputadora(101,20,false,false,true,10,false));
         ManejoDias man = new ManejoDias();
+        Aula aux = new AulaComputadora(101,20,false,false,true,10,false);
+
 
         Reserva miReserva = new Reserva();
-
+        miReserva.agregar("Martes","11",aux);
         System.out.println(miReserva.agregar("Lunes","10",new AulaComputadora(101,20,false,false,true,10,false)));
         System.out.println(miReserva.agregar("Martes","10",new AulaComputadora(102,20,false,false,true,20,false)));
 
         //miReserva.cancelarReserva("Lunes","10",new AulaComputadora(101,20,false,false,true,10,false));
         System.out.println(miReserva.toString() );
-
     }
 }
