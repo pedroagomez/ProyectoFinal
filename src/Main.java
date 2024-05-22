@@ -21,7 +21,7 @@ public class Main {
 
         Reserva miReserva = new Reserva();
 
-        System.out.println(miReserva.agregar("Lunes","10",new AulaComputadora(101,20,false,false,true,10,false)));
+        System.out.println(miReserva.agregar("11/09","10",new AulaComputadora(101,20,false,false,true,10,false)));
         System.out.println(miReserva.agregar("Martes","10",new AulaComputadora(102,20,false,false,true,20,false)));
 
         //miReserva.cancelarReserva("Lunes","10",new AulaComputadora(101,20,false,false,true,10,false));

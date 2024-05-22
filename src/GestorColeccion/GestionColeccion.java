@@ -4,15 +4,19 @@ import Universidad.net.Profesor;
 
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 
 public class GestionColeccion<T> implements IGestion<T>{
 
     private HashSet<T> conjunto;
 
+
     public GestionColeccion() {
         this.conjunto = new HashSet<T>();
     }
 
+
+    //AGREGAR ELEMENTO
     @Override
     public void agregar(T elemento) {
         if (elemento != null) {
@@ -20,6 +24,9 @@ public class GestionColeccion<T> implements IGestion<T>{
         }
     }
 
+
+
+    //ELIMINAR ELEMENTO
     @Override
     public boolean eliminar(T elemento) {
         boolean eliminar=false;
@@ -29,6 +36,9 @@ public class GestionColeccion<T> implements IGestion<T>{
         return eliminar;
     }
 
+
+
+    //VERIFICAR EXISTE DE UN ELEMENTO EN LA COLECCION. DEVUELVE UN BOOLEANO
     @Override
     public boolean verificarExistenciaElemento(T elemento) {
         return conjunto.contains(elemento);
@@ -42,6 +52,9 @@ public class GestionColeccion<T> implements IGestion<T>{
         this.conjunto = conjunto;
     }
 
+
+
+    //BUSCA Y DEVUELVE UNA CADENA DE STRING CON EL ELEMENTO QUE SE PASA POR PARAMETRO
     @Override
     public String devolverElemento(T elemento) {
         StringBuilder builder = new StringBuilder();
@@ -59,6 +72,8 @@ public class GestionColeccion<T> implements IGestion<T>{
         return builder.toString();
     }
 
+
+    //LISTA TODA LA COLECCION Y DEVUELVE UNA CADENA DE STRING
     @Override
     public String listarConjunto() {
         StringBuilder builder= new StringBuilder();

@@ -9,7 +9,7 @@ import java.util.LinkedList;
 
 public class GestorProfesor {
 
-    private GestionColeccion<Profesor>conjuntoProfesores;
+    private GestionColeccion<Profesor>conjuntoProfesores;           // HASHSET DE PROFESOR.
 
     public GestorProfesor() {
         this.conjuntoProfesores = new GestionColeccion<Profesor>();
@@ -25,21 +25,16 @@ public class GestorProfesor {
         conjuntoProfesores.eliminar(profe);
     }
 
-    public String buscarYdevolver(Profesor profe)
-    {
-        StringBuilder builder = new StringBuilder();
-        if (conjuntoProfesores.verificarExistenciaElemento(profe)) {
-            builder.append(conjuntoProfesores.devolverElemento(profe)).append("\n");
-        } else {
-            builder.append("Elemento no encontrado");
-        }
-        return builder.toString();
-    }
+
 
     public String listarProfesores()
     {
         return conjuntoProfesores.listarConjunto();
     }
+
+
+
+    //SE PASA POR PARAMETRO UN LEGAJO Y DEVUELVE AL PROFESOR
 
     public Profesor buscarProfesorPorLegajo(int legajo)
     {
