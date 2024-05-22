@@ -1,59 +1,71 @@
 package Reserva;
 
 import Aula.Aula;
+import GestorColeccion.GestionColeccion;
 
-import java.util.LinkedList;
-import java.util.Objects;
+import java.util.*;
 
 public class ManejoDias {
-    private String hora;
-    private LinkedList<Aula> aulas = new LinkedList<Aula>();
+
+    private HashMap<String,GestionColeccion<Aula>> horarios;
 
 
-    public ManejoDias(String hora, LinkedList<Aula> aulas) {
-        this.hora = hora;
-        this.aulas = aulas;
+    public ManejoDias() {
+        this.horarios = new HashMap<>();
     }
 
-    public String getHora() {
-        return hora;
+
+    public boolean agregarAulaEnHorario(String hora, Aula aula) {
+        boolean reservado = false;
+
+        if (!horarios.containsKey(hora)) {
+            horarios.put(hora, new GestionColeccion<Aula>());
+        }
+
+        GestionColeccion<Aula> aulasEnHorario = horarios.get(hora);
+
+        if (!aulasEnHorario.verificarExistenciaElemento(aula)) {
+            aulasEnHorario.agregar(aula);
+            aula.setDisponible(false);
+            reservado = true;
+        }
+
+        return reservado;
     }
 
-    public void setHora(String hora) {
-        this.hora = hora;
-    }
 
-    public LinkedList<Aula> getAulas() {
-        return aulas;
-    }
-
-    public void setAulas(LinkedList<Aula> aulas) {
-        this.aulas = aulas;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        boolean retorno = false;
-        if (o!=null){
-            if (o instanceof ManejoDias){
-                if(((ManejoDias) o).getHora().equalsIgnoreCase(this.hora)){
-                    retorno = true;
-                }
+    public boolean eliminarAulaEnHorario(String hora, Aula aula) {
+        boolean darBaja = false;
+        if (horarios.containsKey(hora))
+        {
+            GestionColeccion<Aula> setAula = horarios.get(hora);
+            if (setAula != null && setAula.eliminar(aula))
+            {
+                aula.setDisponible(true);
+                darBaja = true;
             }
         }
-        return retorno;
+        return darBaja;
     }
 
     @Override
     public String toString() {
-        return ("/t\t") + "ManejoDias{" +
-                "hora='" + hora + '\'' +
-                ", aulas=" + aulas +
-                '}';
-    }
+        StringBuilder builder = new StringBuilder();
+        Iterator<Map.Entry<String,GestionColeccion<Aula>>> it= horarios.entrySet().iterator();
+        while(it.hasNext())
+        {
+            Map.Entry<String,GestionColeccion<Aula>>conjunto =it.next();
+            builder.append("\tHorario: ").append(conjunto.getKey()).append("\n");
+            builder.append("\tAulas : \n");
+            GestionColeccion<Aula> conjuntoSet=conjunto.getValue();
+            Iterator<Aula> iterator= conjuntoSet.getConjuntoIterator();
+            while(iterator.hasNext())
+            {
+                Aula aula= iterator.next();
+                builder.append("\t\t").append(aula).append("\n");
+            }
+        }
 
-    @Override
-    public int hashCode() {
-        return 1;
+        return builder.toString();
     }
 }

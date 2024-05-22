@@ -34,6 +34,14 @@ public class GestionColeccion<T> implements IGestion<T>{
         return conjunto.contains(elemento);
     }
 
+    public HashSet<T> getConjunto() {
+        return conjunto;
+    }
+
+    public void setConjunto(HashSet<T> conjunto) {
+        this.conjunto = conjunto;
+    }
+
     @Override
     public String devolverElemento(T elemento) {
         StringBuilder builder = new StringBuilder();
@@ -65,5 +73,12 @@ public class GestionColeccion<T> implements IGestion<T>{
 
     public Iterator<T> getConjuntoIterator() {
         return conjunto.iterator();
+    }
+
+    @Override
+    public String toString() {
+        return "GestionColeccion{" +
+                "conjunto=" + conjunto +
+                '}';
     }
 }
