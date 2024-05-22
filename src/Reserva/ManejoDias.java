@@ -17,19 +17,15 @@ public class ManejoDias {
 
     public boolean agregarAulaEnHorario(String hora, Aula aula) {
         boolean reservado = false;
-
         if (!horarios.containsKey(hora)) {
             horarios.put(hora, new GestionColeccion<Aula>());
         }
-
         GestionColeccion<Aula> aulasEnHorario = horarios.get(hora);
-
         if (!aulasEnHorario.verificarExistenciaElemento(aula)) {
             aulasEnHorario.agregar(aula);
             aula.setDisponible(false);
             reservado = true;
         }
-
         return reservado;
     }
 
