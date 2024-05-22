@@ -15,25 +15,24 @@ public class ManejoDias {
     }
 
 
+    public boolean agregarAulaEnHorario(String hora, Aula aula) {
+        boolean reservado = false;
 
-    public boolean agregarAulaEnHorario(String hora, Aula aula)
-    {
-        boolean reservado=false;
-        GestionColeccion<Aula> setAula=horarios.get(hora);          // Traigo al setAula todas las aulas que estan en ese horario
-        if(setAula !=null && setAula.verificarExistenciaElemento(aula)) // Si existe significa que el horario esta ocupado
-        {
-            reservado=false;
+        if (!horarios.containsKey(hora)) {
+            horarios.put(hora, new GestionColeccion<Aula>());
         }
-        else if( setAula== null)                // Si no existe, por lo tanto es null.. entonces -->
-        {
-            setAula=new GestionColeccion<>();
-            setAula.agregar(aula);              // agrego el aula en la coleccion Gestion
-            horarios.put(hora,setAula);         // agrego al hashmap el horario y el aula
-            aula.setDisponible(false);          // el aula pasa a estar no disponible
-            reservado=true;
+
+        GestionColeccion<Aula> aulasEnHorario = horarios.get(hora);
+
+        if (!aulasEnHorario.verificarExistenciaElemento(aula)) {
+            aulasEnHorario.agregar(aula);
+            aula.setDisponible(false);
+            reservado = true;
         }
-        return  reservado;
+
+        return reservado;
     }
+
 
     public boolean eliminarAulaEnHorario(String hora, Aula aula) {
         boolean darBaja = false;
