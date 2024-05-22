@@ -9,7 +9,8 @@ import java.util.Map;
 
 public class GestorAula {
 
-    private HashMap<Integer,Aula> mapaAula;
+    private HashMap<Integer,Aula> mapaAula;             // SE UTILIZO UN HASHMAP PARA BUSCAR UN AULA
+                                                        // POR SU NUMERO.
 
     public GestorAula() {
         this.mapaAula = new HashMap<>();
@@ -37,6 +38,8 @@ public class GestorAula {
         return builder.toString();
     }
 
+
+    // DEVUELVE CADENA DE STRING QUE MUESTRA TODAS LAS AULAS DISPONIBLES
     public String verAulasDisponibles()
     {
         StringBuilder builder= new StringBuilder();
@@ -52,6 +55,8 @@ public class GestorAula {
         return builder.toString();
     }
 
+
+    // LISTA TODAS LAS AULAS QUE TIENEN UNA COMPUTADORA
     public String verAulasConComputadoras()
     {
         StringBuilder builder= new StringBuilder();
@@ -84,6 +89,7 @@ public class GestorAula {
         return builder.toString();
     }
 
+    //MUESTRA TODAS LAS AULAS
     public String listarAulas()
     {
         StringBuilder builder= new StringBuilder();

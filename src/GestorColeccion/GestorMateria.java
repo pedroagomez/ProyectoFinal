@@ -3,6 +3,7 @@ package GestorColeccion;
 import Universidad.net.Materia;
 import Universidad.net.Profesor;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 
 public class GestorMateria {
@@ -23,17 +24,44 @@ public class GestorMateria {
         conjuntoMaterias.eliminar(materia);
     }
 
-    public String buscarYdevolverMateria(Materia materia)
+    
+
+
+    //devuelve el string con toda la info de la materia.
+    public String encontrarYdevolverMateriaString(int id)
     {
-        StringBuilder builder = new StringBuilder();
-        if (conjuntoMaterias.verificarExistenciaElemento(materia)) {
-            builder.append(conjuntoMaterias.devolverElemento(materia)).append("\n");
-        } else {
-            builder.append("Elemento no encontrado");
+        boolean encontrado=false;
+        StringBuilder builder= new StringBuilder();
+        Iterator<Materia> it=  conjuntoMaterias.getConjuntoIterator();
+        while(it.hasNext() && encontrado==false)
+        {
+            Materia materia = it.next();
+            if(materia.getId()== id)
+            {
+                builder.append(materia.toString()).append("\n");
+                encontrado=true;
+            }
         }
         return builder.toString();
     }
 
+    //devuelve la materia en si
+    public Materia devolverMateria(int id)
+    {
+        boolean encontrado=false;
+        Materia aux=null;
+        Iterator<Materia> it=  conjuntoMaterias.getConjuntoIterator();
+        while(it.hasNext() && encontrado==false)
+        {
+            Materia materia = it.next();
+            if(materia.getId()== id)
+            {
+                aux=materia;
+                encontrado=true;
+            }
+        }
+        return aux;
+    }
     public String listarMaterias()
     {
         return conjuntoMaterias.listarConjunto();
