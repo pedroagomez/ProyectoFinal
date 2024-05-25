@@ -1,8 +1,9 @@
 package Aula;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public abstract class Aula {
+public abstract class Aula implements Serializable {
     private int numeroAula;
     private int capacidad;
     private boolean proyector;
