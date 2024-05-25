@@ -3,6 +3,7 @@ package GestorColeccion;
 import Aula.*;
 
 import javax.swing.plaf.basic.BasicButtonUI;
+import java.io.*;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -103,7 +104,46 @@ public class GestorAula {
         }
         return builder.toString();
     }
+    //archivos
+    public void cargarArchivoAula(){
+        try {
+            FileOutputStream ac=new FileOutputStream("Aulas.bin");
+            DataOutputStream bc=new DataOutputStream(ac);
+            ObjectOutputStream ar=new ObjectOutputStream(ac);
+            Iterator<Map.Entry<Integer,Aula>>it=mapaAula.entrySet().iterator();
+            while(it.hasNext())
+            {
+                Map.Entry<Integer,Aula>conjunto=it.next();
+                bc.writeInt(conjunto.getKey());
+                ar.writeObject(conjunto.getValue());
+            }
+            ac.close();
+        }
+        catch (IOException exception) {
+            exception.printStackTrace();
+        }
+    }
+    public void leerArchivoAula(){
 
+        try {
+            FileInputStream fis = new FileInputStream("Aulas.bin");
+            DataInputStream dis = new DataInputStream(fis);
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            boolean bandera = true;
+            while (bandera) {
+                agregarAula(dis.readInt(), (Aula) ois.readObject());
+            }
+            fis.close();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+
+    }
 
 
 }

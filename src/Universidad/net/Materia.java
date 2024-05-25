@@ -1,6 +1,8 @@
 package Universidad.net;
 
-public class Materia {
+import java.io.Serializable;
+
+public class Materia implements Serializable {
     private String nombre;
     private int id;
     private static int iDSatic = 0 ;

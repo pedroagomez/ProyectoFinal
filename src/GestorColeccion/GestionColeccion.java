@@ -1,7 +1,9 @@
 package GestorColeccion;
 
+
 import Universidad.net.Profesor;
 
+import java.io.*;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -95,5 +97,37 @@ public class GestionColeccion<T> implements IGestion<T>{
         return "GestionColeccion{" +
                 "conjunto=" + conjunto +
                 '}';
+    }
+    public void cargarArchivoConjunto(String nombreA){
+        try {
+            FileOutputStream ac = new FileOutputStream(nombreA);
+            ObjectOutputStream ar=new ObjectOutputStream(ac);
+            Iterator<T> it=conjunto.iterator();
+            while (it.hasNext()){
+                ar.writeObject(it.next());
+            }
+            ac.close();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+
+        }
+    }
+    public void leerArchivoConjunto(String nombreA){
+        try {
+            FileInputStream fis=new FileInputStream(nombreA);
+            ObjectInputStream ois=new ObjectInputStream(fis);
+            boolean bandera = true;
+            while (bandera) {
+                agregar((T)ois.readObject());
+            }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 }

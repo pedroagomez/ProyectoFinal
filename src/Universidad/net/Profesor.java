@@ -1,6 +1,8 @@
 package Universidad.net;
 
-public class Profesor {
+import java.io.Serializable;
+
+public class Profesor implements Serializable {
     private String nombre;
     private String apellido;
     private int legajo;

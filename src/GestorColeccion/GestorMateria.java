@@ -67,5 +67,10 @@ public class GestorMateria {
         return conjuntoMaterias.listarConjunto();
     }
 
-
+    public void cargarArchivoMateria(){
+        conjuntoMaterias.cargarArchivoConjunto("Materias.bin");
+    }
+    public void leerArchivoMateria(){
+        conjuntoMaterias.leerArchivoConjunto("Materias.bin");
+    }
 }
