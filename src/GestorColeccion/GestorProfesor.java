@@ -55,4 +55,10 @@ public class GestorProfesor {
         }
         return aux;
     }
+    public void cargarArchivoMateria(){
+        conjuntoProfesores.cargarArchivoConjunto("Profesores.bin");
+    }
+    public void leerArchivoMateria(){
+        conjuntoProfesores.leerArchivoConjunto("Profesores.bin");
+    }
 }

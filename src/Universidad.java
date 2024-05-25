@@ -83,4 +83,16 @@ public class Universidad {
     //RESERVA
     ///Agregamos una nueva reserva
 
+    public void cargarArchivoC(){
+        gestorAula.cargarArchivoAula();
+        gestorMateria.cargarArchivoMateria();
+        gestorProfesor.cargarArchivoMateria();
+    }
+    public void leerArchivoC(){
+        gestorAula.leerArchivoAula();
+        gestorMateria.leerArchivoMateria();
+        gestorProfesor.leerArchivoMateria();
+    }
+
+
 }
