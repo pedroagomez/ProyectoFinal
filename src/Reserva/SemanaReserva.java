@@ -3,14 +3,16 @@ package Reserva;
 import Aula.Aula;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
 
 public class SemanaReserva {
-    private HashMap<Integer,Reserva>reservaxSemana;
+    private LinkedHashMap<Integer,Reserva> reservaxSemana;
 
     public SemanaReserva() {
         this.reservaxSemana = new HashMap<>();
     }
-/*
+
     public boolean agregar(Integer semana,Reserva nuevita)
     {
         String mensaje = "";
@@ -33,6 +35,6 @@ public class SemanaReserva {
 
         return mensaje;
     }
-*/
+
 
 }
