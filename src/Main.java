@@ -1,6 +1,7 @@
 import Aula.AulaComputadora;
 import Enumeradores.EnumDia;
 import Enumeradores.EnumHorarios;
+import Enumeradores.EnumMes;
 import GestorColeccion.GestionColeccion;
 import Reserva.ManejoDias;
 import Aula.*;
@@ -38,7 +39,7 @@ public class Main {
         System.out.println(miReserva.agregar(EnumDia.LUNES, EnumHorarios.DIEZTREINTA_A_TRECE,new AulaComputadora(102,20,false,false,true,10,false),materia));
         miReserva.agregar(EnumDia.LUNES, EnumHorarios.OCHOTREINTA_A_DIEZTREINTA,new AulaComputadora(102,20,false,false,true,10,false),materia);
         //miReserva.cancelarReserva("Lunes","10",new AulaComputadora(101,20,false,false,true,10,false));
-        System.out.println(miReserva.toString() );
+        System.out.println(miReserva.toString());
 
         SemanaReserva semanal = new SemanaReserva();
         semanal.agregar(1,EnumDia.MARTES,EnumHorarios.OCHOTREINTA_A_DIEZTREINTA,aux,materia);
@@ -47,13 +48,17 @@ public class Main {
         semanal.agregar(1,EnumDia.MARTES,EnumHorarios.QUINCETREINTA_A_DIECIOCHO,aux,materia);
         semanal.agregar(2,EnumDia.MARTES,EnumHorarios.OCHOTREINTA_A_DIEZTREINTA,aux,materia);
 
-
-        System.out.println("\t\t\t\t\t\n\n\n\nMOSTRANDO PRIMER SEMANA");
-
-        System.out.println(semanal.accederASemana(1));
-
-        System.out.println("\t\t\t\t\t\n\n\n\nMOSTRANDO SEGUNDA SEMANA");
-        System.out.println(semanal.accederASemana(2));
-
+        System.out.println("\t\t\t\t\n\n\n\n\n\n\n\nCREACION DE MES");
+        ReservaXMes mes= new ReservaXMes();
+        mes.agregar(EnumMes.ENERO,1,EnumDia.MARTES,EnumHorarios.OCHOTREINTA_A_DIEZTREINTA,aux,materia);
+        mes.agregar(EnumMes.ENERO,1,EnumDia.MIERCOLES,EnumHorarios.OCHOTREINTA_A_DIEZTREINTA,aux,materia);
+        mes.agregar(EnumMes.ENERO,1,EnumDia.JUEVES,EnumHorarios.OCHOTREINTA_A_DIEZTREINTA,aux,materia);
+        mes.agregar(EnumMes.FEBRERO,2,EnumDia.MARTES,EnumHorarios.OCHOTREINTA_A_DIEZTREINTA,aux,materia);
+        mes.agregar(EnumMes.FEBRERO,3,EnumDia.MARTES,EnumHorarios.OCHOTREINTA_A_DIEZTREINTA,aux,materia);
+        mes.agregar(EnumMes.FEBRERO,4,EnumDia.MARTES,EnumHorarios.OCHOTREINTA_A_DIEZTREINTA,aux,materia);
+        System.out.println("\t\t\t\t\t\n\n\n\nMOSTRANDO MES ENERO");
+        System.out.println(mes.accederAMes(EnumMes.ENERO));
+        System.out.println("\t\t\t\t\t\n\n\n\nMOSTRANDO MES FEBRERO");
+        System.out.println(mes.accederAMes(EnumMes.FEBRERO));
     }
 }

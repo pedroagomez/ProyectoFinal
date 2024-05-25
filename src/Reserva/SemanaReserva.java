@@ -33,8 +33,10 @@ public class SemanaReserva {
 
     public String accederASemana (Integer semana){
         Reserva aux = null;
-        if(reservaxSemana.containsKey(semana))
-        aux = reservaxSemana.get(semana);
+        if(reservaxSemana.containsKey(semana)){
+            aux = reservaxSemana.get(semana);
+        }
+
         return aux.toString();
     }
 
