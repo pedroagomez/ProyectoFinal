@@ -1,4 +1,6 @@
 import Aula.AulaComputadora;
+import Enumeradores.EnumDia;
+import Enumeradores.EnumHorarios;
 import GestorColeccion.GestionColeccion;
 import Reserva.ManejoDias;
 import Aula.*;
@@ -28,13 +30,13 @@ public class Main {
         Profesor profesor = new Profesor("Pepe","Argento",1);
         Materia materia = new Materia("Matematica",profesor);
 
-        System.out.println(miReserva.agregar("11/09","10",new AulaComputadora(101,20,false,false,true,10,false),materia));
+        System.out.println(miReserva.agregar(EnumDia.LUNES, EnumHorarios.DIEZTREINTA_A_TRECE,new AulaComputadora(101,20,false,false,true,10,false),materia));
 
-        miReserva.agregar("Martes","11",aux,materia);
-        System.out.println(miReserva.agregar("Lunes","10",new AulaComputadora(101,20,false,false,true,10,false),materia));
+        miReserva.agregar(EnumDia.MARTES,EnumHorarios.OCHOTREINTA_A_DIEZTREINTA,aux,materia);
+        System.out.println(miReserva.agregar(EnumDia.JUEVES,EnumHorarios.DIEZTREINTA_A_TRECE,new AulaComputadora(101,20,false,false,true,10,false),materia));
 
-        System.out.println(miReserva.agregar("Martes","10",new AulaComputadora(102,20,false,false,true,20,false),materia));
-
+        System.out.println(miReserva.agregar(EnumDia.MARTES,EnumHorarios.OCHOTREINTA_A_DIEZTREINTA,new AulaComputadora(102,20,false,false,true,20,false),materia));
+        System.out.println(miReserva.agregar(EnumDia.LUNES, EnumHorarios.DIEZTREINTA_A_TRECE,new AulaComputadora(103,20,false,false,true,10,false),materia));
         //miReserva.cancelarReserva("Lunes","10",new AulaComputadora(101,20,false,false,true,10,false));
         System.out.println(miReserva.toString() );
     }

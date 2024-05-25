@@ -1,23 +1,23 @@
 package Reserva;
 
 import Aula.*;
-import Universidad.net.Horario;
+import Enumeradores.EnumDia;
+import Enumeradores.EnumHorarios;
 import Universidad.net.Materia;
-import Universidad.net.Profesor;
 
 import java.util.HashMap;
-import java.util.LinkedList;
+import java.util.LinkedHashMap;
 
 
 public class Reserva {
-    private HashMap<String, ManejoDias> configurador;
+    private LinkedHashMap<EnumDia, ManejoDias> configurador;
 
     public Reserva()
-    {this.configurador = new HashMap<>();
+    {this.configurador = new LinkedHashMap<>();
 
     }
 
-        public String agregar(String dia, String hora, Aula aula,Materia materia)
+        public String agregar(EnumDia dia, EnumHorarios hora, Aula aula, Materia materia)
         {
             String mensaje = "";
             ManejoDias manejoDias = configurador.get(dia); // Me trae todas las reservas del dia
@@ -39,7 +39,7 @@ public class Reserva {
             return mensaje;
         }
 
-        public void cancelarReserva(String dia, String hora, Aula aula) {
+        public void cancelarReserva(EnumDia dia, EnumHorarios hora, Aula aula) {
             if (configurador.containsKey(dia)) {
                 ManejoDias manejoDias = configurador.get(dia);
                 manejoDias.eliminarAulaEnHorario(hora, aula);

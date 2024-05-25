@@ -1,6 +1,7 @@
 package Reserva;
 
 import Aula.Aula;
+import Enumeradores.EnumHorarios;
 import GestorColeccion.GestionColeccion;
 import Universidad.net.Materia;
 import Universidad.net.Profesor;
@@ -9,7 +10,7 @@ import java.util.*;
 
 public class ManejoDias {
 
-    private HashMap<String,GestionColeccion<Aula>> horarios;
+    private HashMap<EnumHorarios,GestionColeccion<Aula>> horarios;
 
 
     public ManejoDias() {
@@ -17,7 +18,7 @@ public class ManejoDias {
     }
 
     ///ACA LAS NUEVAS MODIFICACIONES PARA AGREGAR AL PROFESOR Y LA RESERVA
-    public boolean agregarAulaEnHorario(String hora, Aula aula, Materia materia) {
+    public boolean agregarAulaEnHorario(EnumHorarios hora, Aula aula, Materia materia) {
         boolean reservado = false;
         if (!horarios.containsKey(hora)) {
             horarios.put(hora, new GestionColeccion<Aula>());
@@ -33,7 +34,7 @@ public class ManejoDias {
     }
 
 
-    public boolean eliminarAulaEnHorario(String hora, Aula aula) {
+    public boolean eliminarAulaEnHorario(EnumHorarios hora, Aula aula) {
         boolean darBaja = false;
         if (horarios.containsKey(hora))
         {
@@ -50,10 +51,10 @@ public class ManejoDias {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        Iterator<Map.Entry<String,GestionColeccion<Aula>>> it= horarios.entrySet().iterator();
+        Iterator<Map.Entry<EnumHorarios,GestionColeccion<Aula>>> it= horarios.entrySet().iterator();
         while(it.hasNext())
         {
-            Map.Entry<String,GestionColeccion<Aula>>conjunto =it.next();
+            Map.Entry<EnumHorarios,GestionColeccion<Aula>>conjunto =it.next();
             builder.append("\tHorario: ").append(conjunto.getKey()).append("\n");
             builder.append("\tAulas : \n");
             GestionColeccion<Aula> conjuntoSet=conjunto.getValue();
