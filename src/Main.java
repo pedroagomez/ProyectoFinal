@@ -35,16 +35,25 @@ public class Main {
 
         miReserva.agregar(EnumDia.MARTES,EnumHorarios.OCHOTREINTA_A_DIEZTREINTA,aux,materia);
         System.out.println(miReserva.agregar(EnumDia.JUEVES,EnumHorarios.DIEZTREINTA_A_TRECE,new AulaComputadora(101,20,false,false,true,10,false),materia));
-
-        System.out.println(miReserva.agregar(EnumDia.MARTES,EnumHorarios.OCHOTREINTA_A_DIEZTREINTA,new AulaComputadora(102,20,false,false,true,20,false),materia));
         System.out.println(miReserva.agregar(EnumDia.LUNES, EnumHorarios.DIEZTREINTA_A_TRECE,new AulaComputadora(102,20,false,false,true,10,false),materia));
+        miReserva.agregar(EnumDia.LUNES, EnumHorarios.OCHOTREINTA_A_DIEZTREINTA,new AulaComputadora(102,20,false,false,true,10,false),materia);
         //miReserva.cancelarReserva("Lunes","10",new AulaComputadora(101,20,false,false,true,10,false));
         System.out.println(miReserva.toString() );
 
         SemanaReserva semanal = new SemanaReserva();
-        semanal.agregar(1,miReserva);
-        semanal.agregar(2,miReserva);
-        System.out.println("\t\t\t\t");
-        System.out.println(semanal.toString());
+        semanal.agregar(1,EnumDia.MARTES,EnumHorarios.OCHOTREINTA_A_DIEZTREINTA,aux,materia);
+        semanal.agregar(1,EnumDia.JUEVES,EnumHorarios.OCHOTREINTA_A_DIEZTREINTA,aux,materia);
+        semanal.agregar(2,EnumDia.VIERNES,EnumHorarios.OCHOTREINTA_A_DIEZTREINTA,aux,materia);
+        semanal.agregar(1,EnumDia.MARTES,EnumHorarios.QUINCETREINTA_A_DIECIOCHO,aux,materia);
+        semanal.agregar(2,EnumDia.MARTES,EnumHorarios.OCHOTREINTA_A_DIEZTREINTA,aux,materia);
+
+
+        System.out.println("\t\t\t\t\t\n\n\n\nMOSTRANDO PRIMER SEMANA");
+
+        System.out.println(semanal.accederASemana(1));
+
+        System.out.println("\t\t\t\t\t\n\n\n\nMOSTRANDO SEGUNDA SEMANA");
+        System.out.println(semanal.accederASemana(2));
+
     }
 }

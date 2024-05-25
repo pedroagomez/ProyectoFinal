@@ -15,29 +15,27 @@ public class SemanaReserva {
         this.reservaxSemana = new LinkedHashMap<>();
     }
 
-    public String agregar(Integer numSemana, Reserva reservaNueva)
+    public String agregar(Integer numSemana, EnumDia dia, EnumHorarios hora, Aula aula, Materia materia)
     {
         String mensaje = "";
+
         Reserva reservaAux = reservaxSemana.get(numSemana); // Me trae todas las reservas de la semana
         if(reservaAux == null)                           // Si la semana no existe
         {
             reservaAux = new Reserva();              // agrega La semana
             reservaxSemana.put(numSemana,reservaAux);
-        }else{
-            reservaxSemana.put(numSemana,reservaNueva);
         }
-        boolean agregado = reservaxSemana.containsKey(numSemana);
-        boolean reserva = reservaxSemana.containsValue(reservaNueva);
-        if(agregado && reserva)
-        {
-            mensaje= "Reserva realizada";
-        }
-        else
-        {
-            mensaje="El aula ya esta reservada en este horario";
-        }
+        mensaje = reservaAux.agregar(dia,hora,aula,materia);
 
         return mensaje;
+    }
+
+
+    public String accederASemana (Integer semana){
+        Reserva aux = null;
+        if(reservaxSemana.containsKey(semana))
+        aux = reservaxSemana.get(semana);
+        return aux.toString();
     }
 
 
