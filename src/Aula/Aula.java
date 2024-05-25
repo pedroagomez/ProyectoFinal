@@ -1,5 +1,9 @@
 package Aula;
 
+
+import Universidad.net.Materia;
+import Universidad.net.Profesor;
+
 import java.util.Objects;
 
 public abstract class Aula {
@@ -8,6 +12,7 @@ public abstract class Aula {
     private boolean proyector;
     private boolean tele;
     private boolean disponible;
+    private Materia materia;
 
 
     public Aula(int numeroAula, int capacidad, boolean proyector, boolean tele, boolean disponible) {
@@ -16,6 +21,7 @@ public abstract class Aula {
         this.proyector = proyector;
         this.tele = tele;
         this.disponible = disponible;
+        this.materia = null;
     }
 
     public int getNumeroAula() {
@@ -54,6 +60,15 @@ public abstract class Aula {
         this.disponible = disponible;
     }
 
+
+    public Materia getMateria() {
+        return materia;
+    }
+
+    public void setMateria(Materia materia) {
+        this.materia = materia;
+    }
+
     @Override
     public String toString() {
         return "Aula{" +
@@ -62,6 +77,7 @@ public abstract class Aula {
                 ", proyector=" + proyector +
                 ", tele=" + tele +
                 ", disponible=" + disponible +
+                ", materia=" + materia +
                 '}';
     }
 
