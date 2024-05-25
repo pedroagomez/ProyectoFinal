@@ -3,6 +3,8 @@ import GestorColeccion.GestionColeccion;
 import Reserva.ManejoDias;
 import Aula.*;
 import Reserva.Reserva;
+import Universidad.net.Materia;
+import Universidad.net.Profesor;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -23,14 +25,15 @@ public class Main {
 
 
         Reserva miReserva = new Reserva();
+        Profesor profesor = new Profesor("Pepe","Argento",1);
+        Materia materia = new Materia("Matematica",profesor);
 
+        System.out.println(miReserva.agregar("11/09","10",new AulaComputadora(101,20,false,false,true,10,false),materia));
 
-        System.out.println(miReserva.agregar("11/09","10",new AulaComputadora(101,20,false,false,true,10,false)));
+        miReserva.agregar("Martes","11",aux,materia);
+        System.out.println(miReserva.agregar("Lunes","10",new AulaComputadora(101,20,false,false,true,10,false),materia));
 
-        miReserva.agregar("Martes","11",aux);
-        System.out.println(miReserva.agregar("Lunes","10",new AulaComputadora(101,20,false,false,true,10,false)));
-
-        System.out.println(miReserva.agregar("Martes","10",new AulaComputadora(102,20,false,false,true,20,false)));
+        System.out.println(miReserva.agregar("Martes","10",new AulaComputadora(102,20,false,false,true,20,false),materia));
 
         //miReserva.cancelarReserva("Lunes","10",new AulaComputadora(101,20,false,false,true,10,false));
         System.out.println(miReserva.toString() );

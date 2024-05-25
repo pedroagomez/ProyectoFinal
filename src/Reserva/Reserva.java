@@ -3,6 +3,7 @@ package Reserva;
 import Aula.*;
 import Universidad.net.Horario;
 import Universidad.net.Materia;
+import Universidad.net.Profesor;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -16,7 +17,7 @@ public class Reserva {
 
     }
 
-        public String agregar(String dia, String hora, Aula aula)
+        public String agregar(String dia, String hora, Aula aula,Materia materia)
         {
             String mensaje = "";
             ManejoDias manejoDias = configurador.get(dia); // Me trae todas las reservas del dia
@@ -25,7 +26,7 @@ public class Reserva {
                manejoDias=new ManejoDias();              // agrega el dia
                configurador.put(dia,manejoDias);
            }
-           boolean reserva= manejoDias.agregarAulaEnHorario(hora,aula);
+           boolean reserva = manejoDias.agregarAulaEnHorario(hora,aula,materia);
            if(reserva)
            {
                mensaje= "Reserva realizada";
@@ -49,8 +50,8 @@ public class Reserva {
         public String toString() {
             StringBuilder builder = new StringBuilder();
             configurador.forEach((dia, manejoDias) -> {
-                builder.append(dia).append(":\n");
-                builder.append(manejoDias).append("\n");
+                builder.append(dia).append(":\n\t");
+                builder.append(manejoDias).append("\n\t");
             });
             return builder.toString();
         }

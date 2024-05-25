@@ -2,6 +2,8 @@ package Reserva;
 
 import Aula.Aula;
 import GestorColeccion.GestionColeccion;
+import Universidad.net.Materia;
+import Universidad.net.Profesor;
 
 import java.util.*;
 
@@ -14,14 +16,15 @@ public class ManejoDias {
         this.horarios = new HashMap<>();
     }
 
-
-    public boolean agregarAulaEnHorario(String hora, Aula aula) {
+    ///ACA LAS NUEVAS MODIFICACIONES PARA AGREGAR AL PROFESOR Y LA RESERVA
+    public boolean agregarAulaEnHorario(String hora, Aula aula, Materia materia) {
         boolean reservado = false;
         if (!horarios.containsKey(hora)) {
             horarios.put(hora, new GestionColeccion<Aula>());
         }
         GestionColeccion<Aula> aulasEnHorario = horarios.get(hora);
         if (!aulasEnHorario.verificarExistenciaElemento(aula)) {
+            aula.setMateria(materia);
             aulasEnHorario.agregar(aula);
             aula.setDisponible(false);
             reservado = true;
