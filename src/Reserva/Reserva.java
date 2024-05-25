@@ -13,7 +13,8 @@ public class Reserva {
     private LinkedHashMap<EnumDia, ManejoDias> configurador;
     /// PEDRO PEDRO PEDRO TURURUR
     public Reserva()
-    {this.configurador = new LinkedHashMap<>();
+    {
+        this.configurador = new LinkedHashMap<>();
     }
 
         public String agregar(EnumDia dia, EnumHorarios hora, Aula aula, Materia materia)

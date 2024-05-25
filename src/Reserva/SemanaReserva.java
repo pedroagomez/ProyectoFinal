@@ -1,30 +1,34 @@
 package Reserva;
 
 import Aula.Aula;
+import Enumeradores.EnumDia;
+import Enumeradores.EnumHorarios;
+import GestorColeccion.GestionColeccion;
+import Universidad.net.Materia;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
+import java.util.*;
 
 public class SemanaReserva {
     private LinkedHashMap<Integer,Reserva> reservaxSemana;
 
     public SemanaReserva() {
-        this.reservaxSemana = new HashMap<>();
+        this.reservaxSemana = new LinkedHashMap<>();
     }
 
-    public boolean agregar(Integer semana,Reserva nuevita)
+    public String agregar(Integer numSemana, Reserva reservaNueva)
     {
         String mensaje = "";
-        boolean retorno = false;
-        Reserva reserva = reservaxSemana.get(semana); // Me trae todas las reservas del dia
-        if(reserva== null)                           // Si el dia pasado no existe
+        Reserva reservaAux = reservaxSemana.get(numSemana); // Me trae todas las reservas de la semana
+        if(reservaAux == null)                           // Si la semana no existe
         {
-            reserva = new Reserva();              // agrega el dia
-            reservaxSemana.put(semana,reserva);
+            reservaAux = new Reserva();              // agrega La semana
+            reservaxSemana.put(numSemana,reservaAux);
+        }else{
+            reservaxSemana.put(numSemana,reservaNueva);
         }
-        retorno = true;
-        if(retorno = true)
+        boolean agregado = reservaxSemana.containsKey(numSemana);
+        boolean reserva = reservaxSemana.containsValue(reservaNueva);
+        if(agregado && reserva)
         {
             mensaje= "Reserva realizada";
         }
@@ -35,6 +39,12 @@ public class SemanaReserva {
 
         return mensaje;
     }
+    
 
-
+    @Override
+    public String toString() {
+        return "SemanaReserva{" +
+                "reservaxSemana=" + reservaxSemana +
+                '}';
+    }
 }

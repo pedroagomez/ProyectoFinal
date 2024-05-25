@@ -4,9 +4,10 @@ import Enumeradores.EnumHorarios;
 import GestorColeccion.GestionColeccion;
 import Reserva.ManejoDias;
 import Aula.*;
-import Reserva.Reserva;
+import Reserva.*;
 import Universidad.net.Materia;
 import Universidad.net.Profesor;
+
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -36,8 +37,14 @@ public class Main {
         System.out.println(miReserva.agregar(EnumDia.JUEVES,EnumHorarios.DIEZTREINTA_A_TRECE,new AulaComputadora(101,20,false,false,true,10,false),materia));
 
         System.out.println(miReserva.agregar(EnumDia.MARTES,EnumHorarios.OCHOTREINTA_A_DIEZTREINTA,new AulaComputadora(102,20,false,false,true,20,false),materia));
-        System.out.println(miReserva.agregar(EnumDia.LUNES, EnumHorarios.DIEZTREINTA_A_TRECE,new AulaComputadora(103,20,false,false,true,10,false),materia));
+        System.out.println(miReserva.agregar(EnumDia.LUNES, EnumHorarios.DIEZTREINTA_A_TRECE,new AulaComputadora(102,20,false,false,true,10,false),materia));
         //miReserva.cancelarReserva("Lunes","10",new AulaComputadora(101,20,false,false,true,10,false));
         System.out.println(miReserva.toString() );
+
+        SemanaReserva semanal = new SemanaReserva();
+        semanal.agregar(1,miReserva);
+        semanal.agregar(2,miReserva);
+        System.out.println("\t\t\t\t");
+        System.out.println(semanal.toString());
     }
 }
