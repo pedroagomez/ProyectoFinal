@@ -11,7 +11,7 @@ import java.util.LinkedHashMap;
 
 public class Reserva {
     private LinkedHashMap<EnumDia, ManejoDias> configurador;
-
+    /// PEDRO PEDRO PEDRO TURURUR
     public Reserva()
     {this.configurador = new LinkedHashMap<>();
 
