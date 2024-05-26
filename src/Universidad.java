@@ -99,6 +99,16 @@ public class Universidad {
     {
         return gestorMateria.listarMaterias();
     }
+    /// Funcion para ver En que aulas se van a dictar esa materia en concreto
+
+    public String mostrarAulasPorMateria(Materia materia){
+        StringBuilder cadena = new StringBuilder();
+
+        cadena.append(reservaMes.retornoMateriaPorMes(materia));
+
+        return cadena.toString();
+    }
+
 
 
     //============================================
@@ -147,7 +157,7 @@ public class Universidad {
     //              METODOS PARA MENU
     //============================================
 
-    public String verAulasUsadasDiaEspecifico(EnumDia dia,EnumHorarios hora,EnumMes mes, EnumSemana semana){
+    public String verAulasUsadasDiaEspecifico(EnumDia dia,EnumMes mes, EnumSemana semana){
         StringBuilder cadena = new StringBuilder();
         cadena.append(reservaMes.retornoMesEspecifico(mes,semana,dia).append("\t")); ///BUSCA EL DIA ESPECIFICO QUE QUIERE VERSE
         return cadena.toString();

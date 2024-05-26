@@ -66,7 +66,20 @@ public class ManejoDias {
         return cadena;
     }
 
-
+    public StringBuilder retornarAulasPorMateriaPorHora(Materia materia) {
+        StringBuilder cadena = new StringBuilder();
+        HashSet<Aula> aux = null;
+        for (EnumHorarios hora : horarios.keySet()) {
+            aux = horarios.get(hora).getConjunto();
+            cadena.append(hora).append("\n");
+            for (Aula elemento : aux){
+                if (elemento.getMateria().equals(materia)){
+                    cadena.append(elemento.toString()).append("\n");
+                }
+            }
+        }
+        return cadena;
+    }
 
     @Override
     public String toString() {

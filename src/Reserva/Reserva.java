@@ -65,6 +65,17 @@ public class Reserva {
             return cadena;
         }
 
+    public StringBuilder retornoMateriaPorDia (Materia materia){
+        StringBuilder cadena = new StringBuilder();
+        ManejoDias aux = null;
+        for(EnumDia dia : configurador.keySet()){
+            cadena.append(dia).append("\n");
+            aux = configurador.get(dia);
+            cadena.append(aux.retornarAulasPorMateriaPorHora(materia)).append("\n");
+        }
+        return cadena;
+    }
+
 
     public String retornoDiaEspecifica (EnumDia dia){
         ManejoDias aux = null;

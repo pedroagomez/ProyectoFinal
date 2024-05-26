@@ -64,6 +64,17 @@ public class ReservaPorSemana {
         return cadena;
     }
 
+    public StringBuilder retornoMateriaPorSemana (Materia materia){
+        StringBuilder cadena = new StringBuilder();
+        Reserva aux = null;
+        for(EnumSemana semana : reservaxSemana.keySet()){
+            cadena.append(semana).append("\n");
+            aux = reservaxSemana.get(semana);
+            cadena.append(aux.retornoMateriaPorDia(materia).append("\n"));
+        }
+        return cadena;
+    }
+
 
     public StringBuilder retornoSemanaEspecifico (EnumSemana semana, EnumDia dia){
         StringBuilder cadena = new StringBuilder();
