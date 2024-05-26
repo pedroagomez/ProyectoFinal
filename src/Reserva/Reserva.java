@@ -52,13 +52,13 @@ public class Reserva {
 
 
 
-        public StringBuilder retornoProfesorXreserva (Profesor profesor){
+        public StringBuilder retornoProfesorPorDia (Profesor profesor){
             StringBuilder cadena = new StringBuilder();
             ManejoDias aux = null;
             for(EnumDia dia : configurador.keySet()){
                 cadena.append(dia).append("\n");
                 aux = configurador.get(dia);
-                cadena.append(aux.retornarProfesorXaula(profesor)).append("\n");
+                cadena.append(aux.retornarProfesorPorHora(profesor)).append("\n");
             }
             return cadena;
         }

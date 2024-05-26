@@ -5,6 +5,7 @@ import Enumeradores.EnumDia;
 import Enumeradores.EnumHorarios;
 import Enumeradores.EnumSemana;
 import Universidad.net.Materia;
+import Universidad.net.Profesor;
 
 import java.util.*;
 
@@ -49,6 +50,17 @@ public class ReservaPorSemana {
         }
 
         return aux.toString();
+    }
+
+    public StringBuilder retornoProfesorPorSemana (Profesor profesor){
+        StringBuilder cadena = new StringBuilder();
+        Reserva aux = null;
+        for(EnumSemana semana : reservaxSemana.keySet()){
+            cadena.append(semana).append("\n");
+            aux = reservaxSemana.get(semana);
+            cadena.append(aux.retornoProfesorPorDia(profesor).append("\n"));
+        }
+        return cadena;
     }
 
 

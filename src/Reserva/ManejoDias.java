@@ -48,7 +48,7 @@ public class ManejoDias {
         return darBaja;
     }
 
-    public StringBuilder retornarProfesorXaula(Profesor profesor) {
+    public StringBuilder retornarProfesorPorHora(Profesor profesor) {
         StringBuilder cadena = new StringBuilder();
         HashSet<Aula> aux = null;
         for (EnumHorarios hora : horarios.keySet()) {

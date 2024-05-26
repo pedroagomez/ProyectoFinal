@@ -6,6 +6,7 @@ import Enumeradores.EnumHorarios;
 import Enumeradores.EnumMes;
 import Enumeradores.EnumSemana;
 import Universidad.net.Materia;
+import Universidad.net.Profesor;
 
 import java.util.LinkedHashMap;
 
@@ -43,6 +44,16 @@ public class ReservaPorMes {
     }
 
 
+    public StringBuilder retornoProfesorPorMes (Profesor profesor){
+        StringBuilder cadena = new StringBuilder();
+        ReservaPorSemana aux = null;
+        for(EnumMes mes : reservaMensual.keySet()){
+            cadena.append(mes).append("\n");
+            aux = reservaMensual.get(mes);
+            cadena.append(aux.retornoProfesorPorSemana(profesor).append("\n"));
+        }
+        return cadena;
+    }
     public String accederAMes (EnumMes mes){
         ReservaPorSemana aux = null;
         if(reservaMensual.containsKey(mes))
