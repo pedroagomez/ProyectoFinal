@@ -1,3 +1,7 @@
+import Enumeradores.EnumDia;
+import Enumeradores.EnumHorarios;
+import Enumeradores.EnumMes;
+import Enumeradores.EnumSemana;
 import GestorColeccion.GestorAula;
 import GestorColeccion.GestorMateria;
 import GestorColeccion.GestorProfesor;
@@ -7,19 +11,26 @@ import Aula.*;
 
 import java.util.HashSet;
 import java.util.LinkedList;
-
+import Reserva.*;
 public class Universidad {
     private GestorAula gestorAula;
     private GestorProfesor gestorProfesor;
     private GestorMateria gestorMateria;
-    private Reserva reserva;
+    private ReservaPorMes reservaMes;
 
     public Universidad() {
         this.gestorAula = new GestorAula();
         this.gestorProfesor = new GestorProfesor();
         this.gestorMateria = new GestorMateria();
-        this.reserva = new Reserva();
+        this.reservaMes = new ReservaPorMes();
     }
+
+
+
+    //============================================
+    //              METODOS AULA
+    //============================================
+
     /// Agregar un aular a la coleccion
     public void agregarAula(Aula aulita)
     {
@@ -51,7 +62,12 @@ public class Universidad {
         return gestorAula.aulaNoDisponible();
     }
 
-    //METODOS PROFESOR
+
+
+    //============================================
+    //              METODOS PROFESOR
+    //============================================
+
 
     /// Cargar un profesor
     public void cargarProfesor(Profesor profe)
@@ -68,7 +84,10 @@ public class Universidad {
         return gestorProfesor.buscarProfesorPorLegajo(legajo);
     }
 
-    // Materias
+    //============================================
+    //              METODOS MATERIA
+    //============================================
+
 
     /// Cargar una materia nueva
     public void cargarMaterias(Materia materia)
@@ -80,21 +99,42 @@ public class Universidad {
     {
         return gestorMateria.listarMaterias();
     }
-    //RESERVA
-    ///Agregamos una nueva reserva
 
-    public void cargarArchivoC(){
+
+    //============================================
+    //              METODOS ARCHIVOS
+    //============================================
+
+
+    public void cargarArchivoGestores(){
         gestorAula.cargarArchivoAula();
         gestorMateria.cargarArchivoMateria();
         gestorProfesor.cargarArchivoMateria();
     }
-    public void leerArchivoC(){
+    public void leerArchivoGestores(){
         gestorAula.leerArchivoAula();
         gestorMateria.leerArchivoMateria();
         gestorProfesor.leerArchivoMateria();
     }
 
-    public String buscarYretornarProfeYAula(Profesor profe, ReservaXMes reserva){
+
+    //============================================
+    //              METODOS RESERVA
+    //============================================
+
+
+    public String agregarReserva(EnumMes mes, EnumSemana numSemana, EnumDia dia, EnumHorarios hora, Aula aula, Materia materia)
+    {
+        return reservaMes.agregar(mes,numSemana,dia,hora,aula,materia);
+    }
+
+    public boolean cancelarReserva(EnumMes mes, EnumSemana numSemana, EnumDia dia, EnumHorarios hora, Aula aula)
+    {
+        return reservaMes.cancelarReserva(mes,numSemana,dia,hora,aula);
+    }
+
+
+    public String buscarYretornarProfeYAula(Profesor profe, ReservaPorMes reserva){
         StringBuilder cadena = new StringBuilder();
 
 
@@ -102,5 +142,8 @@ public class Universidad {
 
         return cadena.toString();
     }
+
+
+
 
 }

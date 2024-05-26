@@ -69,14 +69,14 @@ public class ManejoDias {
         while(it.hasNext())
         {
             Map.Entry<EnumHorarios,GestionColeccion<Aula>>conjunto =it.next();
-            builder.append("\tHorario: ").append(conjunto.getKey()).append("\n");
-            builder.append("\tAulas : \n");
+            builder.append("\tHorario: ").append(conjunto.getKey());
+            builder.append("\t\t\t\t\t\t Aula : ");
             GestionColeccion<Aula> conjuntoSet=conjunto.getValue();
             Iterator<Aula> iterator= conjuntoSet.getConjuntoIterator();
             while(iterator.hasNext())
             {
                 Aula aula= iterator.next();
-                builder.append("\t\t").append(aula).append("\n");
+                builder.append(aula.getNumeroAula()).append(aula.getMateria().obtenerInformacionDetallada()).append("\n");
             }
         }
 

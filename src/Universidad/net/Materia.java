@@ -72,6 +72,6 @@ public class Materia implements Serializable {
     }
 
     public String obtenerInformacionDetallada() {
-        return "Materia: " + this.nombre + ", Profesor: " + this.profesor.getNombre() + ", ID: " + this.id;
+        return "Materia: " + this.nombre + ", Profesor: " + this.profesor.getNombre() ;
     }
 }
