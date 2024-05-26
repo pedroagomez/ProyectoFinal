@@ -3,6 +3,8 @@ package Reserva;
 import Aula.*;
 import Enumeradores.EnumDia;
 import Enumeradores.EnumHorarios;
+import Enumeradores.EnumMes;
+import Enumeradores.EnumSemana;
 import Universidad.net.Materia;
 import Universidad.net.Profesor;
 
@@ -62,6 +64,13 @@ public class Reserva {
             }
             return cadena;
         }
+
+
+    public String retornoDiaEspecifica (EnumDia dia){
+        ManejoDias aux = null;
+        aux = configurador.get(dia);
+        return aux.toString();
+    }
 
         @Override
         public String toString() {

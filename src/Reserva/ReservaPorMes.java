@@ -54,13 +54,20 @@ public class ReservaPorMes {
         }
         return cadena;
     }
+
+    public StringBuilder retornoMesEspecifico (EnumMes mes,EnumSemana semana, EnumDia dia){
+        StringBuilder cadena = new StringBuilder();
+        ReservaPorSemana aux = null;
+        aux = reservaMensual.get(mes);
+        cadena.append(aux.retornoSemanaEspecifico(semana,dia)).append("\n");
+        return cadena;
+    }
+
     public String accederAMes (EnumMes mes){
         ReservaPorSemana aux = null;
         if(reservaMensual.containsKey(mes))
             aux = reservaMensual.get(mes);
         return aux.toString();
     }
-
-
 
 }

@@ -143,7 +143,13 @@ public class Universidad {
         return cadena.toString();
     }
 
+    //============================================
+    //              METODOS PARA MENU
+    //============================================
 
-
-
+    public String verAulasUsadasDiaEspecifico(EnumDia dia,EnumHorarios hora,EnumMes mes, EnumSemana semana){
+        StringBuilder cadena = new StringBuilder();
+        cadena.append(reservaMes.retornoMesEspecifico(mes,semana,dia).append("\t")); ///BUSCA EL DIA ESPECIFICO QUE QUIERE VERSE
+        return cadena.toString();
+    }
 }

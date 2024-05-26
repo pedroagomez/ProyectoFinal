@@ -1,7 +1,10 @@
 package Reserva;
 
 import Aula.Aula;
+import Enumeradores.EnumDia;
 import Enumeradores.EnumHorarios;
+import Enumeradores.EnumMes;
+import Enumeradores.EnumSemana;
 import GestorColeccion.GestionColeccion;
 import Universidad.net.Materia;
 import Universidad.net.Profesor;
@@ -62,6 +65,8 @@ public class ManejoDias {
         }
         return cadena;
     }
+
+
 
     @Override
     public String toString() {

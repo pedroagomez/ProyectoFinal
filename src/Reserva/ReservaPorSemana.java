@@ -3,6 +3,7 @@ package Reserva;
 import Aula.Aula;
 import Enumeradores.EnumDia;
 import Enumeradores.EnumHorarios;
+import Enumeradores.EnumMes;
 import Enumeradores.EnumSemana;
 import Universidad.net.Materia;
 import Universidad.net.Profesor;
@@ -60,6 +61,15 @@ public class ReservaPorSemana {
             aux = reservaxSemana.get(semana);
             cadena.append(aux.retornoProfesorPorDia(profesor).append("\n"));
         }
+        return cadena;
+    }
+
+
+    public StringBuilder retornoSemanaEspecifico (EnumSemana semana, EnumDia dia){
+        StringBuilder cadena = new StringBuilder();
+        Reserva aux = null;
+        aux = reservaxSemana.get(semana);
+        cadena.append(aux.retornoDiaEspecifica(dia)).append("\n");
         return cadena;
     }
 
