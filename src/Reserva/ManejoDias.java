@@ -50,7 +50,6 @@ public class ManejoDias {
 
     public StringBuilder retornarProfesorXaula(Profesor profesor) {
         StringBuilder cadena = new StringBuilder();
-        LinkedList<Aula> aulas = new LinkedList<>();
         HashSet<Aula> aux = null;
         for (EnumHorarios hora : horarios.keySet()) {
             aux = horarios.get(hora).getConjunto();
