@@ -3,19 +3,19 @@ package Reserva;
 import Aula.Aula;
 import Enumeradores.EnumDia;
 import Enumeradores.EnumHorarios;
-import GestorColeccion.GestionColeccion;
+import Enumeradores.EnumSemana;
 import Universidad.net.Materia;
 
 import java.util.*;
 
-public class SemanaReserva {
-    private LinkedHashMap<Integer,Reserva> reservaxSemana;
+public class ReservaPorSemana {
+    private LinkedHashMap<EnumSemana,Reserva> reservaxSemana;
 
-    public SemanaReserva() {
+    public ReservaPorSemana() {
         this.reservaxSemana = new LinkedHashMap<>();
     }
 
-    public String agregar(Integer numSemana, EnumDia dia, EnumHorarios hora, Aula aula, Materia materia)
+    public String agregar(EnumSemana numSemana, EnumDia dia, EnumHorarios hora, Aula aula, Materia materia)
     {
         String mensaje = "";
 
@@ -30,8 +30,19 @@ public class SemanaReserva {
         return mensaje;
     }
 
+    public boolean cancelarReserva(EnumSemana numSemana, EnumDia dia, EnumHorarios hora, Aula aula) {
+        boolean reservaCancelada=false;
+        if (reservaxSemana.containsKey(numSemana)) {
+            Reserva reservaAux = reservaxSemana.get(dia);
+            reservaAux.cancelarReserva(dia,hora,aula);
+            reservaCancelada=true;
+        }
+        return reservaCancelada;
+    }
 
-    public String accederASemana (Integer semana){
+
+
+    public String accederASemana (EnumSemana semana){
         Reserva aux = null;
         if(reservaxSemana.containsKey(semana)){
             aux = reservaxSemana.get(semana);

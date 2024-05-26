@@ -2,16 +2,13 @@ import Aula.AulaComputadora;
 import Enumeradores.EnumDia;
 import Enumeradores.EnumHorarios;
 import Enumeradores.EnumMes;
+import Enumeradores.EnumSemana;
 import GestorColeccion.GestionColeccion;
 import Reserva.ManejoDias;
 import Aula.*;
 import Reserva.*;
 import Universidad.net.Materia;
 import Universidad.net.Profesor;
-
-
-import java.util.HashMap;
-import java.util.LinkedList;
 
 public class Main {
     public static void main(String [] args)
@@ -41,24 +38,37 @@ public class Main {
         //miReserva.cancelarReserva("Lunes","10",new AulaComputadora(101,20,false,false,true,10,false));
         System.out.println(miReserva.toString());
 
-        SemanaReserva semanal = new SemanaReserva();
-        semanal.agregar(1,EnumDia.MARTES,EnumHorarios.OCHOTREINTA_A_DIEZTREINTA,aux,materia);
-        semanal.agregar(1,EnumDia.JUEVES,EnumHorarios.OCHOTREINTA_A_DIEZTREINTA,aux,materia);
-        semanal.agregar(2,EnumDia.VIERNES,EnumHorarios.OCHOTREINTA_A_DIEZTREINTA,aux,materia);
-        semanal.agregar(1,EnumDia.MARTES,EnumHorarios.QUINCETREINTA_A_DIECIOCHO,aux,materia);
-        semanal.agregar(2,EnumDia.MARTES,EnumHorarios.OCHOTREINTA_A_DIEZTREINTA,aux,materia);
+        ReservaPorSemana semanal = new ReservaPorSemana();
+        semanal.agregar(EnumSemana.SEMANA1,EnumDia.MARTES,EnumHorarios.OCHOTREINTA_A_DIEZTREINTA,aux,materia);
+        semanal.agregar(EnumSemana.SEMANA1,EnumDia.JUEVES,EnumHorarios.OCHOTREINTA_A_DIEZTREINTA,aux,materia);
+        semanal.agregar(EnumSemana.SEMANA1,EnumDia.VIERNES,EnumHorarios.OCHOTREINTA_A_DIEZTREINTA,aux,materia);
+        semanal.agregar(EnumSemana.SEMANA1,EnumDia.MARTES,EnumHorarios.QUINCETREINTA_A_DIECIOCHO,aux,materia);
+        semanal.agregar(EnumSemana.SEMANA2,EnumDia.MARTES,EnumHorarios.OCHOTREINTA_A_DIEZTREINTA,aux,materia);
 
         System.out.println("\t\t\t\t\n\n\n\n\n\n\n\nCREACION DE MES");
-        ReservaXMes mes= new ReservaXMes();
-        mes.agregar(EnumMes.ENERO,1,EnumDia.MARTES,EnumHorarios.OCHOTREINTA_A_DIEZTREINTA,aux,materia);
-        mes.agregar(EnumMes.ENERO,1,EnumDia.MIERCOLES,EnumHorarios.OCHOTREINTA_A_DIEZTREINTA,aux,materia);
-        mes.agregar(EnumMes.ENERO,1,EnumDia.JUEVES,EnumHorarios.OCHOTREINTA_A_DIEZTREINTA,aux,materia);
-        mes.agregar(EnumMes.FEBRERO,2,EnumDia.MARTES,EnumHorarios.OCHOTREINTA_A_DIEZTREINTA,aux,materia);
-        mes.agregar(EnumMes.FEBRERO,3,EnumDia.MARTES,EnumHorarios.OCHOTREINTA_A_DIEZTREINTA,aux,materia);
-        mes.agregar(EnumMes.FEBRERO,4,EnumDia.MARTES,EnumHorarios.OCHOTREINTA_A_DIEZTREINTA,aux,materia);
+        ReservaPorMes mes= new ReservaPorMes();
+        mes.agregar(EnumMes.ENERO,EnumSemana.SEMANA1,EnumDia.MARTES,EnumHorarios.OCHOTREINTA_A_DIEZTREINTA,aux,materia);
+        mes.agregar(EnumMes.ENERO,EnumSemana.SEMANA2,EnumDia.MIERCOLES,EnumHorarios.OCHOTREINTA_A_DIEZTREINTA,aux,materia);
+        mes.agregar(EnumMes.ENERO,EnumSemana.SEMANA2,EnumDia.JUEVES,EnumHorarios.OCHOTREINTA_A_DIEZTREINTA,aux,materia);
+        mes.agregar(EnumMes.FEBRERO,EnumSemana.SEMANA2,EnumDia.MARTES,EnumHorarios.OCHOTREINTA_A_DIEZTREINTA,aux,materia);
+        mes.agregar(EnumMes.FEBRERO,EnumSemana.SEMANA2,EnumDia.MARTES,EnumHorarios.OCHOTREINTA_A_DIEZTREINTA,aux,materia);
+        mes.agregar(EnumMes.FEBRERO,EnumSemana.SEMANA3,EnumDia.MARTES,EnumHorarios.OCHOTREINTA_A_DIEZTREINTA,aux,materia);
         System.out.println("\t\t\t\t\t\n\n\n\nMOSTRANDO MES ENERO");
         System.out.println(mes.accederAMes(EnumMes.ENERO));
         System.out.println("\t\t\t\t\t\n\n\n\nMOSTRANDO MES FEBRERO");
         System.out.println(mes.accederAMes(EnumMes.FEBRERO));
+
+        /*Universidad universidad1=new Universidad();
+        Aula aula1=new AulaComputadora(101,20,false,false,true,10,false);
+        Aula aula2=new AulaComputadora(202,20,false,false,false,10,false);
+
+        universidad1.agregarAula(aula1);
+        universidad1.agregarAula(aula2);
+        universidad1.agregarAula(new AulaComputadora(303,20,false,false,false,10,false));
+
+        universidad1.cargarProfesor(new Profesor("Pepe","Argento",1));
+        Materia materia1=new Materia("Programacion",new Profesor("Pepe","Argento",1));
+        universidad1.agregarReserva(EnumMes.MARZO,1,EnumDia.LUNES,EnumHorarios.OCHOTREINTA_A_DIEZTREINTA,aula1,materia1);*/
+
     }
 }

@@ -11,7 +11,7 @@ import java.util.LinkedHashMap;
 
 public class Reserva {
     private LinkedHashMap<EnumDia, ManejoDias> configurador;
-    /// PEDRO PEDRO PEDRO TURURUR
+
     public Reserva()
     {
         this.configurador = new LinkedHashMap<>();
@@ -39,11 +39,14 @@ public class Reserva {
             return mensaje;
         }
 
-        public void cancelarReserva(EnumDia dia, EnumHorarios hora, Aula aula) {
+        public boolean cancelarReserva(EnumDia dia, EnumHorarios hora, Aula aula) {
+            boolean reservaCancelada=false;
             if (configurador.containsKey(dia)) {
                 ManejoDias manejoDias = configurador.get(dia);
                 manejoDias.eliminarAulaEnHorario(hora, aula);
+                reservaCancelada=true;
             }
+            return reservaCancelada;
         }
 
         @Override
