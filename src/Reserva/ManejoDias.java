@@ -53,9 +53,10 @@ public class ManejoDias {
         HashSet<Aula> aux = null;
         for (EnumHorarios hora : horarios.keySet()) {
             aux = horarios.get(hora).getConjunto();
+            cadena.append(hora).append("\n");
             for (Aula elemento : aux){
                 if (elemento.getMateria().getProfesor().equals(profesor)){
-                    cadena.append(elemento.toString());
+                    cadena.append(elemento.toString()).append("\n");
                 }
             }
         }

@@ -69,6 +69,7 @@ public class Main {
         universidad1.cargarProfesor(new Profesor("Pepe","Argento",1));
         Materia materia1=new Materia("Programacion",new Profesor("Pepe","Argento",1));
         universidad1.agregarReserva(EnumMes.MARZO,1,EnumDia.LUNES,EnumHorarios.OCHOTREINTA_A_DIEZTREINTA,aula1,materia1);*/
-
+        System.out.println("\t\t\t\t\t\n\n\n\nMOSTRANDO DONDE LABURA EL PROFE CON SUS HORARIOS");
+        System.out.println(miReserva.retornoProfesorXreserva(profesor));
     }
 }

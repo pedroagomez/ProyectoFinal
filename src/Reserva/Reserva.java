@@ -56,8 +56,9 @@ public class Reserva {
             StringBuilder cadena = new StringBuilder();
             ManejoDias aux = null;
             for(EnumDia dia : configurador.keySet()){
+                cadena.append(dia).append("\n");
                 aux = configurador.get(dia);
-                cadena.append(aux.retornarProfesorXaula(profesor));
+                cadena.append(aux.retornarProfesorXaula(profesor)).append("\n");
             }
             return cadena;
         }
