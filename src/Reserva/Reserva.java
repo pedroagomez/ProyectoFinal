@@ -4,6 +4,7 @@ import Aula.*;
 import Enumeradores.EnumDia;
 import Enumeradores.EnumHorarios;
 import Universidad.net.Materia;
+import Universidad.net.Profesor;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -44,6 +45,18 @@ public class Reserva {
                 ManejoDias manejoDias = configurador.get(dia);
                 manejoDias.eliminarAulaEnHorario(hora, aula);
             }
+        }
+
+
+
+        public StringBuilder retornoProfesorXreserva (Profesor profesor){
+            StringBuilder cadena = new StringBuilder();
+            ManejoDias aux = null;
+            for(EnumDia dia : configurador.keySet()){
+                aux = configurador.get(dia);
+                cadena.append(aux.retornarProfesorXaula(profesor));
+            }
+            return cadena;
         }
 
         @Override
