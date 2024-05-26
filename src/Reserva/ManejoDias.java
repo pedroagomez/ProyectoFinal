@@ -48,6 +48,21 @@ public class ManejoDias {
         return darBaja;
     }
 
+    public StringBuilder retornarProfesorXaula(Profesor profesor) {
+        StringBuilder cadena = new StringBuilder();
+        LinkedList<Aula> aulas = new LinkedList<>();
+        HashSet<Aula> aux = null;
+        for (EnumHorarios hora : horarios.keySet()) {
+            aux = horarios.get(hora).getConjunto();
+            for (Aula elemento : aux){
+                if (elemento.getMateria().getProfesor().equals(profesor)){
+                    cadena.append(elemento.toString());
+                }
+            }
+        }
+        return cadena;
+    }
+
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
