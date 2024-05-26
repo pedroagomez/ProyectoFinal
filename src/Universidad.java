@@ -1,7 +1,7 @@
 import GestorColeccion.GestorAula;
 import GestorColeccion.GestorMateria;
 import GestorColeccion.GestorProfesor;
-import Reserva.Reserva;
+import Reserva.*;
 import Universidad.net.*;
 import Aula.*;
 
@@ -94,5 +94,13 @@ public class Universidad {
         gestorProfesor.leerArchivoMateria();
     }
 
+    public String buscarYretornarProfeYAula(Profesor profe, ReservaXMes reserva){
+        StringBuilder cadena = new StringBuilder();
+
+
+
+
+        return cadena.toString();
+    }
 
 }

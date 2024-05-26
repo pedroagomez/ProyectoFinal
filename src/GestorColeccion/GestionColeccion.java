@@ -75,6 +75,8 @@ public class GestionColeccion<T> implements IGestion<T>{
     }
 
 
+
+
     //LISTA TODA LA COLECCION Y DEVUELVE UNA CADENA DE STRING
     @Override
     public String listarConjunto() {
