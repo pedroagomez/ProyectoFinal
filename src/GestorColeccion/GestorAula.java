@@ -40,6 +40,7 @@ public class GestorAula {
     }
 
 
+
     // DEVUELVE CADENA DE STRING QUE MUESTRA TODAS LAS AULAS DISPONIBLES
     public String verAulasDisponibles()
     {
@@ -55,6 +56,7 @@ public class GestorAula {
         }
         return builder.toString();
     }
+
 
 
     // LISTA TODAS LAS AULAS QUE TIENEN UNA COMPUTADORA
@@ -95,6 +97,10 @@ public class GestorAula {
 
         }
         return builder.toString();
+    }
+
+    public Aula buscarAulaPorNumero(int numeroAula) {
+        return mapaAula.get(numeroAula);
     }
     //archivos
     public void cargarArchivoAula(){

@@ -353,7 +353,8 @@ public static void cargarAulaNormal(Scanner entrada, Universidad universidad)
             opcion = entrada.nextInt();
             switch (opcion)
             {
-
+                case 1 -> verReservas(entrada,universidad);
+                case 2 ->agregarReserva(entrada,universidad);
             }
         }while(opcion!=0);
 
@@ -370,7 +371,8 @@ public static void cargarAulaNormal(Scanner entrada, Universidad universidad)
                 \t[2] Ver reservas de dia determinado
                 \t[3] Ver reservas de semana determinada
                 \t[4] Ver reservas de mes determinado
-                \t[0] Ver reservas de profesor
+                \t[5] Ver reservas de profesor
+                \t[0] Menu anterior
                 """;
             System.out.println(cadena);
             while (!entrada.hasNextInt()) {
@@ -380,18 +382,26 @@ public static void cargarAulaNormal(Scanner entrada, Universidad universidad)
             opcion = entrada.nextInt();
             switch (opcion)
             {
-                case 1 -> System.out.println("");
+                case 1 -> verTodasLasReservas(entrada,universidad);
                 case 2 -> System.out.println(" ");
                 case 3 -> System.out.println( " ");
                 case 4 -> reservaMes(entrada,universidad);
+                case 0 -> System.out.println("Volviendo al menu anterior");
+                default -> System.out.println("Opcion invalida");
 
             }
         }while(opcion!=0);
 
     }
 
+
+    public static void verTodasLasReservas(Scanner entrada, Universidad universidad)
+    {
+        System.out.println(universidad.verReservas());
+    }
     public static void reservaMes(Scanner entrada, Universidad universidad) {
         System.out.println("Ingrese el mes: ");
+        entrada.nextLine();
         while (!entrada.hasNextLine()) {
             System.out.println("Opcion invalida. Por favor, ingrese el mes: ");
             entrada.nextLine();
@@ -410,8 +420,115 @@ public static void cargarAulaNormal(Scanner entrada, Universidad universidad)
     public static void verReservasProfesor(Scanner entrada, Universidad universidad)
     {
         verListadoProfesores(universidad);
-        
+
     }
+
+    public static void agregarReserva(Scanner entrada, Universidad universidad) {
+        // Mostrar y pedir al usuario que ingrese el mes
+        System.out.println("Ingrese el mes (elija una de las siguientes opciones): ");
+        for (EnumMes mesEnum : EnumMes.values()) {
+            System.out.println(mesEnum.name());
+        }
+        EnumMes mes = null;
+        while (mes == null) {
+            String mesString = entrada.nextLine();
+            entrada.nextLine();
+            try {
+                mes = EnumMes.valueOf(mesString.toUpperCase());
+            } catch (IllegalArgumentException e) {
+                System.out.println("Mes ingresado no válido. Por favor, ingrese un mes válido.");
+            }
+        }
+
+        // Mostrar y pedir al usuario que ingrese la semana
+        System.out.println("Ingrese la semana (elija una de las siguientes opciones): ");
+        for (EnumSemana semanaEnum : EnumSemana.values()) {
+            System.out.println(semanaEnum.name());
+        }
+        EnumSemana semana = null;
+        while (semana == null) {
+            String semanaString = entrada.nextLine();
+            try {
+                semana = EnumSemana.valueOf(semanaString.toUpperCase());
+            } catch (IllegalArgumentException e) {
+                System.out.println("Semana ingresada no válida. Por favor, ingrese una semana válida.");
+            }
+        }
+
+        // Mostrar y pedir al usuario que ingrese el día
+        System.out.println("Ingrese el día (elija una de las siguientes opciones): ");
+        for (EnumDia diaEnum : EnumDia.values()) {
+            System.out.println(diaEnum.name());
+        }
+        EnumDia dia = null;
+        while (dia == null) {
+            String diaString = entrada.nextLine();
+            try {
+                dia = EnumDia.valueOf(diaString.toUpperCase());
+            } catch (IllegalArgumentException e) {
+                System.out.println("Día ingresado no válido. Por favor, ingrese un día válido.");
+            }
+        }
+
+
+        System.out.println("Ingrese la hora (elija una de las siguientes opciones): ");
+        for (EnumHorarios horario : EnumHorarios.values()) {
+            System.out.println(horario.ordinal() + 1 + ". " + horario.name() + " (" + horario.getHoraInicio() + "-" + horario.getHoraFin() + ")");
+        }
+        EnumHorarios hora = null;
+        while (hora == null) {
+            while (!entrada.hasNextInt()) {
+                System.out.println("Entrada no válida. Por favor, ingrese un número: ");
+                entrada.next();
+            }
+            int elegirHora = entrada.nextInt();
+            if (elegirHora > 0 && elegirHora <= EnumHorarios.values().length) {  // al hacer un EnumHorarios.values automaticamente se crea un array
+                hora = EnumHorarios.values()[elegirHora - 1];       // accedemos a la pos del array.
+            } else {
+                System.out.println("Hora ingresada no válida. Por favor, ingrese un número válido.");
+            }
+        }
+
+
+        System.out.println("Ingrese el número de aula: ");
+        while (!entrada.hasNextInt()) {
+            System.out.println("Entrada no válida. Por favor, ingrese un número de aula válido: ");
+            entrada.next();
+        }
+        int numeroAula = entrada.nextInt();
+        Aula aula = universidad.getGestorAula().buscarAulaPorNumero(numeroAula);
+        if (aula == null) {
+            System.out.println("Aula no encontrada. Por favor, ingrese un número de aula válido.");
+
+        }
+        entrada.nextLine();
+
+
+        System.out.println("Ingrese el ID de la materia: ");
+        while (!entrada.hasNextInt()) {
+            System.out.println("Entrada no válida. Por favor, ingrese un ID de materia válido: ");
+            entrada.next();
+        }
+        int idMateria = entrada.nextInt();
+        Materia materia=null;
+        while(materia==null)
+        {
+            try{
+                materia = universidad.getGestorMateria().devolverMateria(idMateria);
+            }
+            catch (IllegalArgumentException e)
+            {
+                System.out.println("Materia no encontrada. Por favor, ingrese un ID de materia valido.");
+            }
+
+        }
+
+
+        String verReserva = universidad.agregarReserva(mes, semana, dia, hora, aula, materia);
+        System.out.println(verReserva);
+    }
+
+
 
 
 

@@ -61,6 +61,10 @@ public class ReservaPorMes {
         return aux.toString();
     }
 
-
-
+    @Override
+    public String toString() {
+        return
+                "reservaMensual=" + reservaMensual +
+                '}';
+    }
 }

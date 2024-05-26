@@ -10,21 +10,21 @@ import Universidad.net.Profesor;
 import java.util.*;
 
 public class ReservaPorSemana {
-    private LinkedHashMap<EnumSemana,Reserva> reservaxSemana;
+    private LinkedHashMap<EnumSemana,Reserva> reservaPorSemana;
 
     public ReservaPorSemana() {
-        this.reservaxSemana = new LinkedHashMap<>();
+        this.reservaPorSemana = new LinkedHashMap<>();
     }
 
     public String agregar(EnumSemana numSemana, EnumDia dia, EnumHorarios hora, Aula aula, Materia materia)
     {
         String mensaje = "";
 
-        Reserva reservaAux = reservaxSemana.get(numSemana); // Me trae todas las reservas de la semana
+        Reserva reservaAux = reservaPorSemana.get(numSemana); // Me trae todas las reservas de la semana
         if(reservaAux == null)                           // Si la semana no existe
         {
             reservaAux = new Reserva();              // agrega La semana
-            reservaxSemana.put(numSemana,reservaAux);
+            reservaPorSemana.put(numSemana,reservaAux);
         }
         mensaje = reservaAux.agregar(dia,hora,aula,materia);
 
@@ -33,8 +33,8 @@ public class ReservaPorSemana {
 
     public boolean cancelarReserva(EnumSemana numSemana, EnumDia dia, EnumHorarios hora, Aula aula) {
         boolean reservaCancelada=false;
-        if (reservaxSemana.containsKey(numSemana)) {
-            Reserva reservaAux = reservaxSemana.get(dia);
+        if (reservaPorSemana.containsKey(numSemana)) {
+            Reserva reservaAux = reservaPorSemana.get(dia);
             reservaAux.cancelarReserva(dia,hora,aula);
             reservaCancelada=true;
         }
@@ -45,8 +45,8 @@ public class ReservaPorSemana {
 
     public String accederASemana (EnumSemana semana){
         Reserva aux = null;
-        if(reservaxSemana.containsKey(semana)){
-            aux = reservaxSemana.get(semana);
+        if(reservaPorSemana.containsKey(semana)){
+            aux = reservaPorSemana.get(semana);
         }
 
         return aux.toString();
@@ -55,9 +55,9 @@ public class ReservaPorSemana {
     public StringBuilder retornoProfesorPorSemana (Profesor profesor){
         StringBuilder cadena = new StringBuilder();
         Reserva aux = null;
-        for(EnumSemana semana : reservaxSemana.keySet()){
+        for(EnumSemana semana : reservaPorSemana.keySet()){
             cadena.append(semana).append("\n");
-            aux = reservaxSemana.get(semana);
+            aux = reservaPorSemana.get(semana);
             cadena.append(aux.retornoProfesorPorDia(profesor).append("\n"));
         }
         return cadena;
@@ -66,8 +66,8 @@ public class ReservaPorSemana {
 
     @Override
     public String toString() {
-        return "SemanaReserva{" +
-                "reservaxSemana=" + reservaxSemana +
-                '}';
+        return "SemanaReserva " +
+                "reservaSemana=" + reservaPorSemana
+                ;
     }
 }

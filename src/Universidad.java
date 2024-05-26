@@ -25,6 +25,24 @@ public class Universidad {
         this.reservaMes = new ReservaPorMes();
     }
 
+    // ============================ GETTERS AND SETTERS
+    public GestorAula getGestorAula() {
+        return gestorAula;
+    }
+
+    public GestorProfesor getGestorProfesor() {
+        return gestorProfesor;
+    }
+
+    public GestorMateria getGestorMateria() {
+        return gestorMateria;
+    }
+
+    public ReservaPorMes getReservaMes() {
+        return reservaMes;
+    }
+
+
 
 
     //============================================
@@ -150,6 +168,12 @@ public class Universidad {
     {
         return reservaMes.accederAMes(mes);
     }
+
+    public String verReservas()
+    {
+        return  reservaMes.toString();
+    }
+
 
 
     public String buscarYretornarProfeYAula(Profesor profe){
