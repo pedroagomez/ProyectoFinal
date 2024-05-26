@@ -24,6 +24,20 @@ public class GestorMateria {
         conjuntoMaterias.eliminar(materia);
     }
 
+    public boolean eliminarMateriaPorId(int id)
+    {
+        boolean eliminado=false;
+        for(Materia materia :conjuntoMaterias.getConjunto())
+        {
+            if(materia.getId()==id)
+            {
+                conjuntoMaterias.eliminar(materia);
+                eliminado=true;
+            }
+        }
+        return  eliminado;
+    }
+
     
 
 

@@ -70,7 +70,13 @@ public abstract class Aula {
     }
 
 
-
+    public String toStringSinMateria() {
+        return   "NumeroAula=" + numeroAula +
+                ", capacidad=" + capacidad +
+                ", proyector=" + proyector +
+                ", tele=" + tele +
+                ", disponible=" + disponible ;
+    }
     @Override
     public String toString() {
         return "Aula{" +

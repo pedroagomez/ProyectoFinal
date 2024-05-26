@@ -25,6 +25,20 @@ public class GestorProfesor {
         conjuntoProfesores.eliminar(profe);
     }
 
+    public boolean eliminarProfesorPorLegajo(int legajo)
+    {
+        boolean eliminado=false;
+        for(Profesor profesor :conjuntoProfesores.getConjunto())
+        {
+            if(profesor.getLegajo()==legajo)
+            {
+                conjuntoProfesores.eliminar(profesor);
+                eliminado=true;
+            }
+        }
+        return  eliminado;
+    }
+
 
 
     public String listarProfesores()
