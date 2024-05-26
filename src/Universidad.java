@@ -117,14 +117,6 @@ public class Universidad {
         gestorProfesor.leerArchivoMateria();
     }
 
-    public String buscarYretornarProfeYAula(Profesor profe, ReservaXMes reserva){
-        StringBuilder cadena = new StringBuilder();
-
-
-
-
-        return cadena.toString();
-    }
 
     //============================================
     //              METODOS RESERVA
@@ -141,6 +133,15 @@ public class Universidad {
         return reservaMes.cancelarReserva(mes,numSemana,dia,hora,aula);
     }
 
+
+    public String buscarYretornarProfeYAula(Profesor profe, ReservaPorMes reserva){
+        StringBuilder cadena = new StringBuilder();
+
+
+
+
+        return cadena.toString();
+    }
 
 
 
