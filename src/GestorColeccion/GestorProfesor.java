@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-public class GestorProfesor {
+public class GestorProfesor implements  Serializable  {
 
     private GestionColeccion<Profesor>conjuntoProfesores;           // HASHSET DE PROFESOR.
 

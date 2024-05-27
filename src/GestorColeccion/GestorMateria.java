@@ -3,10 +3,11 @@ package GestorColeccion;
 import Universidad.net.Materia;
 import Universidad.net.Profesor;
 
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-public class GestorMateria {
+public class GestorMateria implements Serializable {
 
     private GestionColeccion<Materia>conjuntoMaterias;
 

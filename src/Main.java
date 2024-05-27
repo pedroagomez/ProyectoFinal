@@ -23,16 +23,16 @@ public class Main {
 
 
 
-public static void menu() {
-    Universidad universidad = new Universidad();
+    public static void menu() {
+        Universidad universidad = new Universidad();
 
-    universidad.cargarArchivoGestores();
-    universidad.leerArchivoGestores();
+        // Leer los datos de los archivos al iniciar
+        universidad.leerArchivoGestores();
 
-    int opcion;
-    Scanner entrada = new Scanner(System.in);
-    do {
-        String cadena = """
+        int opcion;
+        Scanner entrada = new Scanner(System.in);
+        do {
+            String cadena = """
                 \tBienvenido al menú
                 \t[1] Aulas
                 \t[2] Reservas
@@ -40,106 +40,109 @@ public static void menu() {
                 \t[4] Materias
                 \t[0] Salir
                 """;
-        System.out.println(cadena);
-        while (!entrada.hasNextInt()) {
-            System.out.println("Entrada no válida. Por favor, ingrese un número: ");
-            entrada.next();
-        }
-        opcion = entrada.nextInt();
-        entrada.nextLine();
-        switch (opcion) {
-            case 1 -> menuAulas(entrada, universidad);
-            case 2 -> menuReservas(entrada,universidad);
-            case 3 -> menuProfesor(entrada,universidad);
-            case 4 -> menuMateria(entrada,universidad);
-            case 0 -> System.out.println("Saliendo...");
-            default -> System.out.println("Opción inválida");
-        }
-    } while (opcion != 0);
-}
+            System.out.println(cadena);
+            while (!entrada.hasNextInt()) {
+                System.out.println("Entrada no válida. Por favor, ingrese un número: ");
+                entrada.next();
+            }
+            opcion = entrada.nextInt();
+            entrada.nextLine();
+            switch (opcion) {
+                case 1 -> menuAulas(entrada, universidad);
+                case 2 -> menuReservas(entrada, universidad);
+                case 3 -> menuProfesor(entrada, universidad);
+                case 4 -> menuMateria(entrada, universidad);
+                case 0 -> System.out.println("Saliendo...");
+                default -> System.out.println("Opción inválida");
+            }
+        } while (opcion != 0);
 
+        // Guardar los datos en los archivos al salir
+        universidad.cargarArchivoGestores();
+    }
 
-//========================== METODOS AULA=============================================
+    //========================== METODOS AULA =============================================
 
-public static void menuAulas(Scanner entrada, Universidad universidad) {
-    int opcion;
-    do {
-        String cadena = """
+    public static void menuAulas(Scanner entrada, Universidad universidad) {
+        int opcion;
+        do {
+            String cadena = """
                 \tSeleccione una opción
                 \t[1] Ver aulas
                 \t[2] Cargar aulas
                 \t[0] Menú anterior
                 """;
-        System.out.println(cadena);
-        while (!entrada.hasNextInt()) {
-            System.out.println("Entrada no válida. Por favor, ingrese un número: ");
-            entrada.next();
-        }
-        opcion = entrada.nextInt();
-        entrada.nextLine();
-        switch (opcion) {
-            case 1 -> verAulas(entrada, universidad);
-            case 2 -> menuCargarAula(entrada, universidad);
-            case 0 -> System.out.println("Volviendo al menú anterior...");
-            default -> System.out.println("Opción inválida");
-        }
-    } while (opcion != 0);
-}
+            System.out.println(cadena);
+            while (!entrada.hasNextInt()) {
+                System.out.println("Entrada no válida. Por favor, ingrese un número: ");
+                entrada.next();
+            }
+            opcion = entrada.nextInt();
+            entrada.nextLine();
+            switch (opcion) {
+                case 1 -> verAulas(entrada, universidad);
+                case 2 -> menuCargarAula(entrada, universidad);
+                case 0 -> System.out.println("Volviendo al menú anterior...");
+                default -> System.out.println("Opción inválida");
+            }
+        } while (opcion != 0);
+    }
 
-//===================================================================
-public static void verAulas(Scanner entrada, Universidad universidad) {
-    int opcion;
-    do {
-        String cadena = """
-                \t Menú aula
+    //===================================================================
+    public static void verAulas(Scanner entrada, Universidad universidad) {
+        int opcion;
+        do {
+            String cadena = """
+                \tMenú aula
                 \t[1] Ver aulas con computadora
                 \t[2] Ver aulas normales
                 \t[3] Ver aulas disponibles
                 \t[4] Ver todas las aulas
                 \t[0] Salir
                 """;
-        System.out.println(cadena);
-        while (!entrada.hasNextInt()) {
-            System.out.println("Entrada no válida. Por favor, ingrese un número: ");
-            entrada.next();
-        }
-        opcion = entrada.nextInt();
-        entrada.nextLine();
-        switch (opcion) {
-            case 1 -> System.out.println(universidad.verAulasComputadoras());
-            case 2 -> System.out.println(universidad.verAulasNormales());
-            case 3 -> System.out.println(universidad.verAulasDisponibles());
-            case 4 -> System.out.println(universidad.listarAulas());
-            case 0 -> System.out.println("Saliendo...");
-            default -> System.out.println("Opción inválida");
-        }
-    } while (opcion != 0);
-}
+            System.out.println(cadena);
+            while (!entrada.hasNextInt()) {
+                System.out.println("Entrada no válida. Por favor, ingrese un número: ");
+                entrada.next();
+            }
+            opcion = entrada.nextInt();
+            entrada.nextLine();
+            switch (opcion) {
+                case 1 -> System.out.println(universidad.verAulasComputadoras());
+                case 2 -> System.out.println(universidad.verAulasNormales());
+                case 3 -> System.out.println(universidad.verAulasDisponibles());
+                case 4 -> System.out.println(universidad.listarAulas());
+                case 0 -> System.out.println("Saliendo...");
+                default -> System.out.println("Opción inválida");
+            }
+        } while (opcion != 0);
+    }
     //===================================================================
-public static void menuCargarAula(Scanner entrada, Universidad universidad) {
-    int opcion;
-    do {
-        String cadena = """
+    public static void menuCargarAula(Scanner entrada, Universidad universidad) {
+        int opcion;
+        do {
+            String cadena = """
                 \tSeleccione el tipo de aula que desea cargar
                 \t[1] Aula con computadora
                 \t[2] Aula normal
                 \t[0] Menú anterior
                 """;
-        System.out.println(cadena);
-        while (!entrada.hasNextInt()) {
-            System.out.println("Entrada no válida. Por favor, ingrese un número: ");
-            entrada.next();
-        }
-        opcion = entrada.nextInt();
-        entrada.nextLine();
-        switch (opcion) {
-            case 1 -> cargarAulaComputadora(entrada, universidad);
-            case 2 -> cargarAulaNormal(entrada, universidad);
-            case 0 -> System.out.println("Volviendo al menú anterior...");
-            default -> System.out.println("Opción inválida");
-        }
-    } while (opcion != 0);
-}
+            System.out.println(cadena);
+
+            while (!entrada.hasNextInt()) {
+                System.out.println("Entrada no válida. Por favor, ingrese un número: ");
+                entrada.next();
+            }
+            opcion = entrada.nextInt();
+            entrada.nextLine();
+            switch (opcion) {
+                case 1 -> cargarAulaComputadora(entrada, universidad);
+                case 2 -> cargarAulaNormal(entrada, universidad);
+                case 0 -> System.out.println("Volviendo al menú anterior...");
+                default -> System.out.println("Opción inválida");
+            }
+        } while (opcion != 0);
+    }
     //===================================================================
 public static void cargarAulaComputadora(Scanner entrada, Universidad universidad) {
     int opcion;
@@ -225,6 +228,7 @@ public static void cargarAulaNormal(Scanner entrada, Universidad universidad)
         do {
             opcion= entrada.nextInt();
             System.out.println("Número de aula: ");
+
             while (!entrada.hasNextInt()) {
                 System.out.println("Entrada no válida. Por favor, ingrese un número: ");
                 entrada.next();
