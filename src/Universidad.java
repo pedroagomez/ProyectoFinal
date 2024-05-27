@@ -103,7 +103,7 @@ public class Universidad {
 
     public boolean eliminarProfesorPorLegajo(int legajo)
     {
-       return gestorProfesor.eliminarProfesorPorLegajo(legajo);
+        return gestorProfesor.eliminarProfesorPorLegajo(legajo);
     }
     /// Buscar y retornar un profesor por legajo
     public Profesor buscarProfesorPorLegajo(int legajo){
@@ -125,16 +125,6 @@ public class Universidad {
     {
         return gestorMateria.listarMaterias();
     }
-    /// Funcion para ver En que aulas se van a dictar esa materia en concreto
-
-    public String mostrarAulasPorMateria(Materia materia){
-        StringBuilder cadena = new StringBuilder();
-
-        cadena.append(reservaMes.retornoMateriaPorMes(materia));
-
-        return cadena.toString();
-    }
-
 
     public boolean eliminarMateriaPorId( int id)
     {
@@ -184,21 +174,21 @@ public class Universidad {
         return  reservaMes.toString();
     }
 
+    public String verReservasDiaDeterminado(EnumDia dia)
+    {
+        return reservaMes.verReservaDiaDeterminado(dia);
+    }
+
+    public String verReservaSemanaDeterminada(EnumSemana semana)
+    {
+        return  reservaMes.verReservaSemana(semana);
+    }
+
 
 
     public String buscarYretornarProfeYAula(Profesor profe){
         StringBuilder builder =new StringBuilder();
         builder.append(reservaMes.retornoProfesorPorMes(profe));
         return builder.toString();
-    }
-
-    //============================================
-    //              METODOS PARA MENU
-    //============================================
-
-    public String verAulasUsadasDiaEspecifico(EnumDia dia,EnumMes mes, EnumSemana semana){
-        StringBuilder cadena = new StringBuilder();
-        cadena.append(reservaMes.retornoMesEspecifico(mes,semana,dia).append("\t")); ///BUSCA EL DIA ESPECIFICO QUE QUIERE VERSE
-        return cadena.toString();
     }
 }
