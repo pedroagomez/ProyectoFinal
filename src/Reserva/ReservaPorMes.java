@@ -54,26 +54,6 @@ public class ReservaPorMes {
         }
         return cadena;
     }
-
-    public StringBuilder retornoMateriaPorMes (Materia materia){
-        StringBuilder cadena = new StringBuilder();
-        ReservaPorSemana aux = null;
-        for(EnumMes mes : reservaMensual.keySet()){
-            cadena.append(mes).append("\n");
-            aux = reservaMensual.get(mes);
-            cadena.append(aux.retornoMateriaPorSemana(materia).append("\n"));
-        }
-        return cadena;
-    }
-
-    public StringBuilder retornoMesEspecifico (EnumMes mes,EnumSemana semana, EnumDia dia){
-        StringBuilder cadena = new StringBuilder();
-        ReservaPorSemana aux = null;
-        aux = reservaMensual.get(mes);
-        cadena.append(aux.retornoSemanaEspecifico(semana,dia)).append("\n");
-        return cadena;
-    }
-
     public String accederAMes (EnumMes mes){
         ReservaPorSemana aux = null;
         if(reservaMensual.containsKey(mes))
@@ -81,4 +61,36 @@ public class ReservaPorMes {
         return aux.toString();
     }
 
+
+    public String verReservaDiaDeterminado(EnumDia dia)
+    {
+        StringBuilder builder=new StringBuilder();
+        for(EnumMes mes : reservaMensual.keySet())
+        {
+            ReservaPorSemana reservaPorSemana= reservaMensual.get(mes);
+            String reservaDia=reservaPorSemana.verReservaDia(dia);
+            builder.append(reservaDia.toString()).append("\n");
+        }
+
+        return builder.toString();
+    }
+
+    public String verReservaSemana(EnumSemana semana)
+    {
+        StringBuilder builder=new StringBuilder();
+        for(EnumMes aux : reservaMensual.keySet())
+        {
+            ReservaPorSemana reservaPorSemana = reservaMensual.get(aux);
+            String sem = reservaPorSemana.accederASemana(semana);
+            builder.append(sem.toString()).append("\n");
+        }
+        return builder.toString();
+    }
+
+    @Override
+    public String toString() {
+        return
+                "reservaMensual=" + reservaMensual +
+                        '}';
+    }
 }

@@ -121,6 +121,7 @@ public class GestionColeccion<T> implements IGestion<T>{
             ObjectInputStream ois=new ObjectInputStream(fis);
             boolean bandera = true;
             while (bandera) {
+
                 agregar((T)ois.readObject());
             }
         } catch (FileNotFoundException e) {
