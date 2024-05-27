@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-public class GestorProfesor {
+public class GestorProfesor implements  Serializable  {
 
     private GestionColeccion<Profesor>conjuntoProfesores;           // HASHSET DE PROFESOR.
 
@@ -23,6 +23,20 @@ public class GestorProfesor {
     public void eliminarProfesor(Profesor profe)
     {
         conjuntoProfesores.eliminar(profe);
+    }
+
+    public boolean eliminarProfesorPorLegajo(int legajo)
+    {
+        boolean eliminado=false;
+        for(Profesor profesor :conjuntoProfesores.getConjunto())
+        {
+            if(profesor.getLegajo()==legajo)
+            {
+                conjuntoProfesores.eliminar(profesor);
+                eliminado=true;
+            }
+        }
+        return  eliminado;
     }
 
 

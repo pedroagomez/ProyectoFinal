@@ -3,10 +3,11 @@ package GestorColeccion;
 import Universidad.net.Materia;
 import Universidad.net.Profesor;
 
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-public class GestorMateria {
+public class GestorMateria implements Serializable {
 
     private GestionColeccion<Materia>conjuntoMaterias;
 
@@ -22,6 +23,20 @@ public class GestorMateria {
     public void eliminarMateria(Materia materia)
     {
         conjuntoMaterias.eliminar(materia);
+    }
+
+    public boolean eliminarMateriaPorId(int id)
+    {
+        boolean eliminado=false;
+        for(Materia materia :conjuntoMaterias.getConjunto())
+        {
+            if(materia.getId()==id)
+            {
+                conjuntoMaterias.eliminar(materia);
+                eliminado=true;
+            }
+        }
+        return  eliminado;
     }
 
     

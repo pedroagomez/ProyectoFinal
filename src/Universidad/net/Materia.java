@@ -7,7 +7,7 @@ public class Materia implements Serializable {
     private int id;
     private static int iDSatic = 0 ;
     private Profesor profesor;
-    //private Profesor profesor;
+
 
 
     public Materia(String nombre, Profesor profesor) {

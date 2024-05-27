@@ -32,12 +32,13 @@ public class GestorAula {
             if(!conjunto.getValue().isDisponible())
             {
                 builder.append("Numero de aula : "+conjunto.getKey()).append("\n");
-                builder.append(conjunto.getValue()).append("\n");
+                builder.append(conjunto.getValue().toStringSinMateria()).append("\n");
 
             }
         }
         return builder.toString();
     }
+
 
 
     // DEVUELVE CADENA DE STRING QUE MUESTRA TODAS LAS AULAS DISPONIBLES
@@ -50,41 +51,34 @@ public class GestorAula {
             Map.Entry<Integer,Aula>conjunto=it.next();
             if(conjunto.getValue().isDisponible())
             {
-                builder.append(conjunto.getValue()).append("\n");
+                builder.append(conjunto.getValue().toStringSinMateria()).append("\n");
             }
         }
         return builder.toString();
     }
+
 
 
     // LISTA TODAS LAS AULAS QUE TIENEN UNA COMPUTADORA
-    public String verAulasConComputadoras()
-    {
-        StringBuilder builder= new StringBuilder();
-        Iterator<Map.Entry<Integer,Aula>>it=mapaAula.entrySet().iterator();
-        while(it.hasNext())
-        {
-            Map.Entry<Integer,Aula>conjunto=it.next();
-            if(conjunto instanceof AulaComputadora)
-            {
-                builder.append("Numero de aula : "+conjunto.getKey()).append("\n");
-                builder.append(conjunto.getValue()).append("\n");
+    public String verAulasConComputadoras() {
+        StringBuilder builder = new StringBuilder();
+        for (Map.Entry<Integer, Aula> entry : mapaAula.entrySet()) {
+            Aula aula = entry.getValue();
+            if (aula instanceof AulaComputadora) {
+                builder.append("Numero de aula: ").append(entry.getKey()).append("\n");
+                builder.append(aula.toStringSinMateria()).append("\n");
             }
         }
         return builder.toString();
     }
 
-    public String verAulasNormales()
-    {
-        StringBuilder builder= new StringBuilder();
-        Iterator<Map.Entry<Integer,Aula>>it=mapaAula.entrySet().iterator();
-        while(it.hasNext())
-        {
-            Map.Entry<Integer,Aula>conjunto=it.next();
-            if(conjunto instanceof AulaNormal)
-            {
-                builder.append("Numero de aula : "+conjunto.getKey()).append("\n");
-                builder.append(conjunto.getValue()).append("\n");
+    public String verAulasNormales() {
+        StringBuilder builder = new StringBuilder();
+        for (Map.Entry<Integer, Aula> entry : mapaAula.entrySet()) {
+            Aula aula = entry.getValue();
+            if (aula instanceof AulaNormal) {
+                builder.append("Numero de aula: ").append(entry.getKey()).append("\n");
+                builder.append(aula.toStringSinMateria()).append("\n");
             }
         }
         return builder.toString();
@@ -99,10 +93,14 @@ public class GestorAula {
         {
             Map.Entry<Integer,Aula>conjunto=it.next();
             builder.append("Numero de aula : "+conjunto.getKey()).append("\n");
-            builder.append(conjunto.getValue()).append("\n");
+            builder.append(conjunto.getValue().toStringSinMateria()).append("\n");
 
         }
         return builder.toString();
+    }
+
+    public Aula buscarAulaPorNumero(int numeroAula) {
+        return mapaAula.get(numeroAula);
     }
     //archivos
     public void cargarArchivoAula(){

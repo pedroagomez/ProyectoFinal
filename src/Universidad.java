@@ -25,6 +25,24 @@ public class Universidad {
         this.reservaMes = new ReservaPorMes();
     }
 
+    // ============================ GETTERS AND SETTERS
+    public GestorAula getGestorAula() {
+        return gestorAula;
+    }
+
+    public GestorProfesor getGestorProfesor() {
+        return gestorProfesor;
+    }
+
+    public GestorMateria getGestorMateria() {
+        return gestorMateria;
+    }
+
+    public ReservaPorMes getReservaMes() {
+        return reservaMes;
+    }
+
+
 
 
     //============================================
@@ -62,6 +80,9 @@ public class Universidad {
         return gestorAula.aulaNoDisponible();
     }
 
+    // HACER METODO PARA ELEGIR PROFE Y METERLO EN MATERIA
+
+
 
 
     //============================================
@@ -79,6 +100,11 @@ public class Universidad {
     {
         return gestorProfesor.listarProfesores();
     }
+
+    public boolean eliminarProfesorPorLegajo(int legajo)
+    {
+       return gestorProfesor.eliminarProfesorPorLegajo(legajo);
+    }
     /// Buscar y retornar un profesor por legajo
     public Profesor buscarProfesorPorLegajo(int legajo){
         return gestorProfesor.buscarProfesorPorLegajo(legajo);
@@ -90,7 +116,7 @@ public class Universidad {
 
 
     /// Cargar una materia nueva
-    public void cargarMaterias(Materia materia)
+    public void agregarMateria(Materia materia)
     {
         gestorMateria.agregarMateria(materia);
     }
@@ -109,6 +135,11 @@ public class Universidad {
         return cadena.toString();
     }
 
+
+    public boolean eliminarMateriaPorId( int id)
+    {
+        return gestorMateria.eliminarMateriaPorId(id);
+    }
 
 
     //============================================
@@ -143,14 +174,32 @@ public class Universidad {
         return reservaMes.cancelarReserva(mes,numSemana,dia,hora,aula);
     }
 
+    public String verReservasMes(EnumMes mes)
+    {
+        return reservaMes.accederAMes(mes);
+    }
 
-    public String buscarYretornarProfeYAula(Profesor profe, ReservaPorMes reserva){
-        StringBuilder cadena = new StringBuilder();
+    public String verReservas()
+    {
+        return  reservaMes.toString();
+    }
+
+    public String verReservasDiaDeterminado(EnumDia dia)
+    {
+        return reservaMes.verReservaDiaDeterminado(dia);
+    }
+
+    public String verReservaSemanaDeterminada(EnumSemana semana)
+    {
+        return  reservaMes.verReservaSemana(semana);
+    }
 
 
 
-
-        return cadena.toString();
+    public String buscarYretornarProfeYAula(Profesor profe){
+        StringBuilder builder =new StringBuilder();
+        builder.append(reservaMes.retornoProfesorPorMes(profe));
+        return builder.toString();
     }
 
     //============================================
