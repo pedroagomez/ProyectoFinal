@@ -83,7 +83,8 @@ public class Main {
 public static void menu() {
     Universidad universidad = new Universidad();
 
-    // universidad.leerArchivoGestores();
+    universidad.cargarArchivoGestores();
+    universidad.leerArchivoGestores();
 
     int opcion;
     Scanner entrada = new Scanner(System.in);
@@ -383,8 +384,8 @@ public static void cargarAulaNormal(Scanner entrada, Universidad universidad)
             switch (opcion)
             {
                 case 1 -> verTodasLasReservas(entrada,universidad);
-                case 2 -> System.out.println(" ");
-                case 3 -> System.out.println( " ");
+                case 2 -> verReservaDiaDeterminado(entrada,universidad);
+                case 3 -> verReservaSemanaDeterminado(entrada,universidad);
                 case 4 -> reservaMes(entrada,universidad);
                 case 0 -> System.out.println("Volviendo al menu anterior");
                 default -> System.out.println("Opcion invalida");
@@ -399,6 +400,42 @@ public static void cargarAulaNormal(Scanner entrada, Universidad universidad)
     {
         System.out.println(universidad.verReservas());
     }
+
+    public static void verReservaDiaDeterminado(Scanner entrada, Universidad universidad)
+    {
+        System.out.println("Ingrese el día (elija una de las siguientes opciones): ");
+        for (EnumDia diaEnum : EnumDia.values()) {
+            System.out.println(diaEnum.name());
+        }
+        EnumDia dia = null;
+        while (dia == null) {
+            String diaString = entrada.nextLine();
+            try {
+                dia = EnumDia.valueOf(diaString.toUpperCase());
+            } catch (IllegalArgumentException e) {
+                System.out.println("Día ingresado no válido. Por favor, ingrese un día válido.");
+            }
+        }
+        System.out.println(universidad.verReservasDiaDeterminado(dia));
+    }
+
+    public static void verReservaSemanaDeterminado(Scanner entrada, Universidad universidad)
+    {
+        System.out.println("Ingrese la semana (elija una de las siguientes opciones): ");
+        for (EnumSemana semana : EnumSemana.values()) {
+            System.out.println(semana.name());
+        }
+        EnumSemana semana = null;
+        while (semana == null) {
+            String semanaString = entrada.nextLine();
+            try {
+                semana = EnumSemana.valueOf(semanaString.toUpperCase());
+            } catch (IllegalArgumentException e) {
+                System.out.println("Día ingresado no válido. Por favor, ingrese un día válido.");
+            }
+        }
+        System.out.println(universidad.verReservaSemanaDeterminada(semana));
+    }
     public static void reservaMes(Scanner entrada, Universidad universidad) {
         System.out.println("Ingrese el mes: ");
         entrada.nextLine();
@@ -409,7 +446,7 @@ public static void cargarAulaNormal(Scanner entrada, Universidad universidad)
         String mesString = entrada.nextLine();
         try {
             EnumMes mes = EnumMes.valueOf(mesString.toUpperCase());
-            universidad.verReservasMes(mes);
+            System.out.println(universidad.verReservasMes(mes));
 
         } catch (IllegalArgumentException e) {
             System.out.println("Mes ingresado no valido. Por favor, ingrese un mes valido.");
@@ -419,9 +456,11 @@ public static void cargarAulaNormal(Scanner entrada, Universidad universidad)
 
     public static void verReservasProfesor(Scanner entrada, Universidad universidad)
     {
-        verListadoProfesores(universidad);
+
 
     }
+
+
 
     public static void agregarReserva(Scanner entrada, Universidad universidad) {
         // Mostrar y pedir al usuario que ingrese el mes

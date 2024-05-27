@@ -174,6 +174,16 @@ public class Universidad {
         return  reservaMes.toString();
     }
 
+    public String verReservasDiaDeterminado(EnumDia dia)
+    {
+        return reservaMes.verReservaDiaDeterminado(dia);
+    }
+
+    public String verReservaSemanaDeterminada(EnumSemana semana)
+    {
+        return  reservaMes.verReservaSemana(semana);
+    }
+
 
 
     public String buscarYretornarProfeYAula(Profesor profe){

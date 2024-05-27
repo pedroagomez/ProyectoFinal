@@ -64,6 +64,20 @@ public class ReservaPorSemana {
     }
 
 
+    public String verReservaDia(EnumDia dia)
+    {
+        StringBuilder builder=new StringBuilder();
+        for(EnumSemana semana : reservaPorSemana.keySet())
+        {
+            Reserva reserva = reservaPorSemana.get(semana);
+            String diaSemana = reserva.verReservaDia(dia);
+            builder.append(diaSemana.toString()).append("\n");
+        }
+
+        return  builder.toString();
+    }
+
+
     @Override
     public String toString() {
         return "SemanaReserva " +

@@ -63,6 +63,22 @@ public class Reserva {
             return cadena;
         }
 
+        public String verReservaDia(EnumDia dia)
+        {
+            StringBuilder builder=new StringBuilder();
+            ManejoDias manejoDias = configurador.get(dia);
+            if(manejoDias!=null)
+            {
+                builder.append(manejoDias.toString()).append("\n");
+            }
+            else
+            {
+                builder.append("No hay reservas para este dia");
+            }
+
+            return  builder.toString();
+
+        }
         @Override
         public String toString() {
             StringBuilder builder = new StringBuilder();
