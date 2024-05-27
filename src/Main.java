@@ -16,64 +16,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String [] args)
     {
-        /*Universidad miUniversidad = new Universidad();
-        miUniversidad.agregarAula(new AulaComputadora(101,20,false,false,true,10,false));
-        miUniversidad.agregarAula(new AulaComputadora(202,20,false,false,false,10,false));
-        miUniversidad.agregarAula(new AulaComputadora(303,20,false,false,false,10,false));
-        //System.out.println(miUniversidad.listarAulas());
-        //System.out.println(miUniversidad.aulasNoDisponibles());
-        GestionColeccion<Aula> mi1 = new GestionColeccion<>();
-        mi1.agregar(new AulaComputadora(101,20,false,false,true,10,false));
-        ManejoDias man = new ManejoDias();
-        Aula aux = new AulaComputadora(101,20,false,false,true,10,false);
 
-
-        Reserva miReserva = new Reserva();
-        Profesor profesor = new Profesor("Pepe","Argento",1);
-        Materia materia = new Materia("Matematica",profesor);
-
-        System.out.println(miReserva.agregar(EnumDia.LUNES, EnumHorarios.DIEZTREINTA_A_TRECE,new AulaComputadora(101,20,false,false,true,10,false),materia));
-
-        miReserva.agregar(EnumDia.MARTES,EnumHorarios.OCHOTREINTA_A_DIEZTREINTA,aux,materia);
-        System.out.println(miReserva.agregar(EnumDia.JUEVES,EnumHorarios.OCHOTREINTA_A_DIEZTREINTA,new AulaComputadora(101,20,false,false,true,10,false),materia));
-        System.out.println(miReserva.agregar(EnumDia.LUNES, EnumHorarios.DIEZTREINTA_A_TRECE,new AulaComputadora(102,20,false,false,true,10,false),materia));
-        miReserva.agregar(EnumDia.LUNES, EnumHorarios.OCHOTREINTA_A_DIEZTREINTA,new AulaComputadora(102,20,false,false,true,10,false),materia);
-        //miReserva.cancelarReserva("Lunes","10",new AulaComputadora(101,20,false,false,true,10,false));
-        System.out.println(miReserva.toString());
-
-        ReservaPorSemana semanal = new ReservaPorSemana();
-        semanal.agregar(EnumSemana.SEMANA1,EnumDia.MARTES,EnumHorarios.OCHOTREINTA_A_DIEZTREINTA,aux,materia);
-        semanal.agregar(EnumSemana.SEMANA1,EnumDia.JUEVES,EnumHorarios.OCHOTREINTA_A_DIEZTREINTA,aux,materia);
-        semanal.agregar(EnumSemana.SEMANA1,EnumDia.VIERNES,EnumHorarios.OCHOTREINTA_A_DIEZTREINTA,aux,materia);
-        semanal.agregar(EnumSemana.SEMANA1,EnumDia.MARTES,EnumHorarios.QUINCETREINTA_A_DIECIOCHO,aux,materia);
-        semanal.agregar(EnumSemana.SEMANA2,EnumDia.MARTES,EnumHorarios.OCHOTREINTA_A_DIEZTREINTA,aux,materia);
-
-        System.out.println("\t\t\t\t\n\n\n\n\n\n\n\nCREACION DE MES");
-        ReservaPorMes mes= new ReservaPorMes();
-        mes.agregar(EnumMes.ENERO,EnumSemana.SEMANA1,EnumDia.MARTES,EnumHorarios.OCHOTREINTA_A_DIEZTREINTA,aux,materia);
-        mes.agregar(EnumMes.ENERO,EnumSemana.SEMANA2,EnumDia.MIERCOLES,EnumHorarios.OCHOTREINTA_A_DIEZTREINTA,aux,materia);
-        mes.agregar(EnumMes.ENERO,EnumSemana.SEMANA2,EnumDia.JUEVES,EnumHorarios.OCHOTREINTA_A_DIEZTREINTA,aux,materia);
-        mes.agregar(EnumMes.FEBRERO,EnumSemana.SEMANA2,EnumDia.MARTES,EnumHorarios.OCHOTREINTA_A_DIEZTREINTA,aux,materia);
-        mes.agregar(EnumMes.FEBRERO,EnumSemana.SEMANA2,EnumDia.MARTES,EnumHorarios.OCHOTREINTA_A_DIEZTREINTA,aux,materia);
-        mes.agregar(EnumMes.FEBRERO,EnumSemana.SEMANA3,EnumDia.MARTES,EnumHorarios.OCHOTREINTA_A_DIEZTREINTA,aux,materia);
-        System.out.println("\t\t\t\t\t\n\n\n\nMOSTRANDO MES ENERO");
-        System.out.println(mes.accederAMes(EnumMes.ENERO));
-        System.out.println("\t\t\t\t\t\n\n\n\nMOSTRANDO MES FEBRERO");
-        System.out.println(mes.accederAMes(EnumMes.FEBRERO));
-
-        Universidad universidad1=new Universidad();
-        Aula aula1=new AulaComputadora(101,20,false,false,true,10,false);
-        Aula aula2=new AulaComputadora(202,20,false,false,false,10,false);
-
-        universidad1.agregarAula(aula1);
-        universidad1.agregarAula(aula2);
-        universidad1.agregarAula(new AulaComputadora(303,20,false,false,false,10,false));
-
-        universidad1.cargarProfesor(new Profesor("Pepe","Argento",1));
-        Materia materia1=new Materia("Programacion",new Profesor("Pepe","Argento",1));
-        universidad1.agregarReserva(EnumMes.MARZO,1,EnumDia.LUNES,EnumHorarios.OCHOTREINTA_A_DIEZTREINTA,aula1,materia1);
-        System.out.println("\t\t\t\t\t\n\n\n\nMOSTRANDO DONDE LABURA EL PROFE CON SUS HORARIOS");
-        System.out.println(mes.retornoProfesorPorMes(profesor));*/
             menu();
 
     }
@@ -143,6 +86,7 @@ public static void menuAulas(Scanner entrada, Universidad universidad) {
     } while (opcion != 0);
 }
 
+//===================================================================
 public static void verAulas(Scanner entrada, Universidad universidad) {
     int opcion;
     do {
@@ -171,7 +115,7 @@ public static void verAulas(Scanner entrada, Universidad universidad) {
         }
     } while (opcion != 0);
 }
-
+    //===================================================================
 public static void menuCargarAula(Scanner entrada, Universidad universidad) {
     int opcion;
     do {
@@ -196,7 +140,7 @@ public static void menuCargarAula(Scanner entrada, Universidad universidad) {
         }
     } while (opcion != 0);
 }
-
+    //===================================================================
 public static void cargarAulaComputadora(Scanner entrada, Universidad universidad) {
     int opcion;
     do {
@@ -274,7 +218,7 @@ public static void cargarAulaComputadora(Scanner entrada, Universidad universida
 
     } while (opcion != 0);
 }
-
+    //===================================================================
 public static void cargarAulaNormal(Scanner entrada, Universidad universidad)
     {
         int opcion;
@@ -361,7 +305,7 @@ public static void cargarAulaNormal(Scanner entrada, Universidad universidad)
 
     }
 
-
+    //===================================================================
     public  static void verReservas(Scanner entrada, Universidad universidad)
     {
         int opcion;
@@ -395,12 +339,12 @@ public static void cargarAulaNormal(Scanner entrada, Universidad universidad)
 
     }
 
-
+    //===================================================================
     public static void verTodasLasReservas(Scanner entrada, Universidad universidad)
     {
         System.out.println(universidad.verReservas());
     }
-
+    //===================================================================
     public static void verReservaDiaDeterminado(Scanner entrada, Universidad universidad)
     {
         System.out.println("Ingrese el día (elija una de las siguientes opciones): ");
@@ -418,7 +362,7 @@ public static void cargarAulaNormal(Scanner entrada, Universidad universidad)
         }
         System.out.println(universidad.verReservasDiaDeterminado(dia));
     }
-
+    //===================================================================
     public static void verReservaSemanaDeterminado(Scanner entrada, Universidad universidad)
     {
         System.out.println("Ingrese la semana (elija una de las siguientes opciones): ");
@@ -436,6 +380,7 @@ public static void cargarAulaNormal(Scanner entrada, Universidad universidad)
         }
         System.out.println(universidad.verReservaSemanaDeterminada(semana));
     }
+    //===================================================================
     public static void reservaMes(Scanner entrada, Universidad universidad) {
         System.out.println("Ingrese el mes: ");
         entrada.nextLine();
@@ -453,14 +398,14 @@ public static void cargarAulaNormal(Scanner entrada, Universidad universidad)
 
         }
     }
-
+    //===================================================================
     public static void verReservasProfesor(Scanner entrada, Universidad universidad)
     {
 
 
     }
 
-
+    //===================================================================
 
     public static void agregarReserva(Scanner entrada, Universidad universidad) {
         // Mostrar y pedir al usuario que ingrese el mes
@@ -604,6 +549,8 @@ public static void cargarAulaNormal(Scanner entrada, Universidad universidad)
 
     }
 
+
+    //===================================================================
     public static void cargaProfesor(Scanner entrada, Universidad universidad)
     {
         System.out.println("Ingrese el nombre ");
@@ -635,12 +582,14 @@ public static void cargarAulaNormal(Scanner entrada, Universidad universidad)
 
         universidad.cargarProfesor(profesor);
     }
+    //===================================================================
 
     public static void verListadoProfesores(Universidad universidad)
     {
         System.out.println(universidad.listarProfesores());
     }
 
+    //===================================================================
     public static void darDeBajaProfesor(Scanner entrada, Universidad universidad) {
 
         verListadoProfesores(universidad);
@@ -691,6 +640,7 @@ public static void cargarAulaNormal(Scanner entrada, Universidad universidad)
 
     }
 
+    //===================================================================
     public static void cargarMateria(Scanner entrada, Universidad universidad) {
 
         GestorProfesor gestorProfesor= new GestorProfesor();
@@ -722,11 +672,13 @@ public static void cargarAulaNormal(Scanner entrada, Universidad universidad)
         }
     }
 
+    //===================================================================
     public static void verListadoDeMaterias(Universidad universidad)
     {
         System.out.println(universidad.listarMaterias());
     }
 
+    //===================================================================
     public static void darDeBajaMateria(Scanner entrada, Universidad universidad) {
 
         verListadoDeMaterias(universidad);
