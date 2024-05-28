@@ -2,6 +2,9 @@ package GestorColeccion;
 
 import Universidad.net.Materia;
 import Universidad.net.Profesor;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.Serializable;
 import java.util.Iterator;
@@ -13,6 +16,19 @@ public class GestorMateria implements Serializable {
 
     public GestorMateria() {
         this.conjuntoMaterias = new GestionColeccion<>();
+    }
+
+
+    public JSONArray toJson() throws JSONException
+    {
+        JSONArray array = new JSONArray();
+        JSONObject object = new JSONObject();
+        for(Materia materia : conjuntoMaterias.getConjunto())
+        {
+            array.put(materia.toJson());
+        }
+
+        return array;
     }
 
     public void agregarMateria(Materia materia)

@@ -29,7 +29,7 @@ public class AulaComputadora extends Aula{
     @Override
     public String toString() {
         return  "AulaComputadora{" +
-                "cantidadComputadoras=" + cantidadComputadoras +
+                 "cantidadComputadoras=" + cantidadComputadoras +
                 ", auriculares=" + auriculares + super.toString();
     }
 }

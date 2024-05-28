@@ -12,6 +12,9 @@ import Aula.*;
 import java.util.HashSet;
 import java.util.LinkedList;
 import Reserva.*;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class Universidad {
     private GestorAula gestorAula;
     private GestorProfesor gestorProfesor;
@@ -23,6 +26,14 @@ public class Universidad {
         this.gestorProfesor = new GestorProfesor();
         this.gestorMateria = new GestorMateria();
         this.reservaMes = new ReservaPorMes();
+    }
+
+
+    public JSONObject toJson() throws JSONException
+    {
+        JSONObject objeto= new JSONObject();
+        objeto.put("Reservas",reservaMes.toJson());
+        return objeto;
     }
 
     // ============================ GETTERS AND SETTERS

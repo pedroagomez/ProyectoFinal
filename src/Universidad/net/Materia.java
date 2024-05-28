@@ -1,5 +1,8 @@
 package Universidad.net;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.Serializable;
 
 public class Materia implements Serializable {
@@ -14,6 +17,16 @@ public class Materia implements Serializable {
         this.nombre = nombre;
         this.id = iDSatic++;
         this.profesor = profesor;
+    }
+
+
+    public JSONObject toJson() throws JSONException
+    {
+        JSONObject objeto = new JSONObject();
+        objeto.put("nombre",this.nombre);
+        objeto.put("id",this.id);
+        objeto.put("profesor",this.profesor.toJson());
+        return  objeto;
     }
 
     public String getNombre() {
