@@ -3,11 +3,16 @@ package Reserva;
 import Aula.*;
 import Enumeradores.EnumDia;
 import Enumeradores.EnumHorarios;
+import GestorColeccion.GestionColeccion;
 import Universidad.net.Materia;
 import Universidad.net.Profesor;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.Map;
 
 
 public class Reserva {
@@ -16,6 +21,20 @@ public class Reserva {
     public Reserva()
     {
         this.configurador = new LinkedHashMap<>();
+    }
+
+    public JSONArray toJson()  throws JSONException
+    {
+        JSONArray array = new JSONArray();
+        JSONObject objeto = new JSONObject();
+        for(Map.Entry<EnumDia, ManejoDias>it : configurador.entrySet())
+        {
+            objeto.put("Dia",it.getKey().toString());
+            objeto.put("Horarios",it.getValue().toJson());
+            array.put(objeto);
+        }
+        return array;
+
     }
 
         public String agregar(EnumDia dia, EnumHorarios hora, Aula aula, Materia materia)

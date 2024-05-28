@@ -5,6 +5,9 @@ import Enumeradores.EnumHorarios;
 import GestorColeccion.GestionColeccion;
 import Universidad.net.Materia;
 import Universidad.net.Profesor;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.*;
 
@@ -17,6 +20,27 @@ public class ManejoDias {
         this.horarios = new HashMap<>();
     }
 
+
+    public JSONArray toJson()  throws JSONException
+    {
+        JSONArray array = new JSONArray();
+        JSONObject objeto = new JSONObject();
+        for(Map.Entry<EnumHorarios,GestionColeccion<Aula>>it : horarios.entrySet())
+        {
+            objeto.put("Hora",it.getKey());
+           JSONArray aulasArray= new JSONArray();
+           for(Aula aula : it.getValue().getConjunto())
+           {
+               aulasArray.put(aula.toJson());
+           }
+           objeto.put("aulas",aulasArray);
+        }
+        array.put(objeto);
+
+        return array;
+
+    }
+
     ///ACA LAS NUEVAS MODIFICACIONES PARA AGREGAR AL PROFESOR Y LA RESERVA
     public boolean agregarAulaEnHorario(EnumHorarios hora, Aula aula, Materia materia) {
         boolean reservado = false;
@@ -24,7 +48,7 @@ public class ManejoDias {
             horarios.put(hora, new GestionColeccion<Aula>());
         }
         GestionColeccion<Aula> aulasEnHorario = horarios.get(hora);
-        if (!aulasEnHorario.verificarExistenciaElemento(aula)) {
+        if (!aulasEnHorario.verificarExistenciaElemento(aula) && aula.isDisponible()) {
             aula.setMateria(materia);
             aulasEnHorario.agregar(aula);
             aula.setDisponible(false);

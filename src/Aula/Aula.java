@@ -3,6 +3,8 @@ package Aula;
 
 import Universidad.net.Materia;
 import Universidad.net.Profesor;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -23,6 +25,21 @@ public abstract class Aula  implements Serializable {
         this.tele = tele;
         this.disponible = disponible;
         this.materia = null;
+    }
+
+    public JSONObject toJson() throws JSONException {
+        JSONObject obj = new JSONObject();
+        obj.put("numeroAula", this.numeroAula);
+        obj.put("capacidad", this.capacidad);
+        obj.put("proyector", this.proyector);
+        obj.put("tele", this.tele);
+        obj.put("disponible", this.disponible);
+        if (this.materia != null) {
+            obj.put("materia", this.materia.toJson());
+        } else {
+            obj.put("materia", JSONObject.NULL);
+        }
+        return obj;
     }
 
     public int getNumeroAula() {

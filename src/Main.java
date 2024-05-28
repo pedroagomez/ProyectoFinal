@@ -10,7 +10,9 @@ import Aula.*;
 import Reserva.*;
 import Universidad.net.Materia;
 import Universidad.net.Profesor;
-
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import java.util.Scanner;
 
 public class Main {
@@ -18,6 +20,8 @@ public class Main {
     {
 
             menu();
+
+
 
     }
 
@@ -38,6 +42,7 @@ public class Main {
                 \t[2] Reservas
                 \t[3] Profesores
                 \t[4] Materias
+                \t[5] Mostrar archivo
                 \t[0] Salir
                 """;
             System.out.println(cadena);
@@ -52,6 +57,7 @@ public class Main {
                 case 2 -> menuReservas(entrada, universidad);
                 case 3 -> menuProfesor(entrada, universidad);
                 case 4 -> menuMateria(entrada, universidad);
+                case 5 -> mostrarJson(universidad);
                 case 0 -> System.out.println("Saliendo...");
                 default -> System.out.println("Opción inválida");
             }
@@ -61,6 +67,18 @@ public class Main {
         universidad.cargarArchivoGestores();
     }
 
+
+    public static void mostrarJson(Universidad universidad)
+    {
+        try
+        {
+            System.out.println(universidad.toJson().toString());
+        }
+        catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+    }
     //========================== METODOS AULA =============================================
 
     public static void menuAulas(Scanner entrada, Universidad universidad) {

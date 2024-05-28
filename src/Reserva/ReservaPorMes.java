@@ -7,14 +7,33 @@ import Enumeradores.EnumMes;
 import Enumeradores.EnumSemana;
 import Universidad.net.Materia;
 import Universidad.net.Profesor;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class ReservaPorMes {
     private LinkedHashMap<EnumMes, ReservaPorSemana> reservaMensual;
 
     public ReservaPorMes() {
         this.reservaMensual = new LinkedHashMap<>();
+    }
+
+
+    public JSONArray toJson()  throws JSONException
+    {
+        JSONArray array = new JSONArray();
+
+        for(Map.Entry<EnumMes, ReservaPorSemana>it : reservaMensual.entrySet())
+        {   JSONObject objeto = new JSONObject();
+            objeto.put("Mes",it.getKey().toString());
+            objeto.put("Semana",it.getValue().toJson());
+            array.put(objeto);
+        }
+        return array;
+
     }
 
     public String agregar(EnumMes mes, EnumSemana numSemana, EnumDia dia, EnumHorarios hora, Aula aula, Materia materia){
