@@ -671,28 +671,36 @@ public static void cargarAulaNormal(Scanner entrada, Universidad universidad)
 
     //===================================================================
     public static void cargarMateria(Scanner entrada, Universidad universidad) {
+        int comprobante = 0;
         System.out.println("Ingrese el nombre de la materia: ");
         entrada.nextLine();
         String nombre = entrada.nextLine();
-        
+
         System.out.println("Profesores disponibles:");
         System.out.println(universidad.listarProfesores());
+        int legajoProfesor=1;
+        while (comprobante == 0){
+            System.out.println("Ingrese el número de legajo del profesor para esta materia: ");
+            legajoProfesor = entrada.nextInt();
+            if (!entrada.hasNextInt()) {
+                System.out.println("Entrada no válida. Por favor, ingrese un número de legajo: ");
+                while(!entrada.hasNextInt()){
+                    legajoProfesor = entrada.nextInt();
+                }
+            }
+            Profesor profesor = universidad.buscarProfesorPorLegajo(legajoProfesor);
+            if (profesor != null){
+                Materia materia = new Materia(nombre, profesor);
+                universidad.agregarMateria(materia);
+                System.out.println("Materia cargada correctamente.");
+                comprobante=1;
+            } else {
+                System.out.println("No se encontro ningun profesor con el numero de legajo proporcionado.");
+                System.out.println("Aprete 0 para voler al menu o 1 para ingresar otro legajo");
+                comprobante = entrada.nextInt();
+            }
+        }
 
-        System.out.println("Ingrese el número de legajo del profesor para esta materia: ");
-        while (!entrada.hasNextInt()) {
-            System.out.println("Entrada no válida. Por favor, ingrese un número de legajo: ");
-            entrada.next();
-        }
-        int legajoProfesor = entrada.nextInt();
-        entrada.nextLine();
-        Profesor profesor = universidad.buscarProfesorPorLegajo(legajoProfesor);
-        if (profesor != null) {
-            Materia materia = new Materia(nombre, profesor);
-            universidad.agregarMateria(materia);
-            System.out.println("Materia cargada correctamente.");
-        } else {
-            System.out.println("No se encontro ningun profesor con el numero de legajo proporcionado.");
-        }
     }
 
     //===================================================================
