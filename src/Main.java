@@ -115,6 +115,7 @@ public class Main {
                 \t[2] Ver aulas normales
                 \t[3] Ver aulas disponibles
                 \t[4] Ver todas las aulas
+           
                 \t[0] Salir
                 """;
             System.out.println(cadena);
@@ -429,7 +430,7 @@ public static void cargarAulaNormal(Scanner entrada, Universidad universidad)
     //===================================================================
 
     public static void agregarReserva(Scanner entrada, Universidad universidad) {
-        // Mostrar y pedir al usuario que ingrese el mes
+
         System.out.println("Ingrese el mes (elija una de las siguientes opciones): ");
         for (EnumMes mesEnum : EnumMes.values()) {
             System.out.println(mesEnum.name());
@@ -437,7 +438,7 @@ public static void cargarAulaNormal(Scanner entrada, Universidad universidad)
         EnumMes mes = null;
         while (mes == null) {
             String mesString = entrada.nextLine();
-            entrada.nextLine();
+            //entrada.nextLine();
             try {
                 mes = EnumMes.valueOf(mesString.toUpperCase());
             } catch (IllegalArgumentException e) {
@@ -445,7 +446,7 @@ public static void cargarAulaNormal(Scanner entrada, Universidad universidad)
             }
         }
 
-        // Mostrar y pedir al usuario que ingrese la semana
+
         System.out.println("Ingrese la semana (elija una de las siguientes opciones): ");
         for (EnumSemana semanaEnum : EnumSemana.values()) {
             System.out.println(semanaEnum.name());
@@ -460,7 +461,7 @@ public static void cargarAulaNormal(Scanner entrada, Universidad universidad)
             }
         }
 
-        // Mostrar y pedir al usuario que ingrese el día
+
         System.out.println("Ingrese el día (elija una de las siguientes opciones): ");
         for (EnumDia diaEnum : EnumDia.values()) {
             System.out.println(diaEnum.name());
@@ -495,42 +496,49 @@ public static void cargarAulaNormal(Scanner entrada, Universidad universidad)
         }
 
 
-        System.out.println("Ingrese el número de aula: ");
-        while (!entrada.hasNextInt()) {
-            System.out.println("Entrada no válida. Por favor, ingrese un número de aula válido: ");
-            entrada.next();
-        }
-        int numeroAula = entrada.nextInt();
-        Aula aula = universidad.getGestorAula().buscarAulaPorNumero(numeroAula);
-        if (aula == null) {
-            System.out.println("Aula no encontrada. Por favor, ingrese un número de aula válido.");
-
-        }
-        entrada.nextLine();
-
-
-        System.out.println("Ingrese el ID de la materia: ");
-        while (!entrada.hasNextInt()) {
-            System.out.println("Entrada no válida. Por favor, ingrese un ID de materia válido: ");
-            entrada.next();
-        }
-        int idMateria = entrada.nextInt();
-        Materia materia=null;
-        while(materia==null)
-        {
-            try{
-                materia = universidad.getGestorMateria().devolverMateria(idMateria);
+        Aula aula = null;
+        int intentos = 0;
+        boolean aulaEncontrada = false;
+        while (!aulaEncontrada && intentos < 3) {
+            System.out.println("Ingrese el número de aula: ");
+            while (!entrada.hasNextInt()) {
+                System.out.println("Entrada no válida. Por favor, ingrese un número de aula válido: ");
+                entrada.next();
             }
-            catch (IllegalArgumentException e)
-            {
-                System.out.println("Materia no encontrada. Por favor, ingrese un ID de materia valido.");
+            int numeroAula = entrada.nextInt();
+            aula = universidad.getGestorAula().buscarAulaPorNumero(numeroAula);
+            if (aula == null) {
+                System.out.println("Aula no encontrada. Por favor, ingrese un número de aula válido.");
+                intentos++;
+            } else {
+                aulaEncontrada = true;
             }
-
+            entrada.nextLine();
         }
 
+        if (aulaEncontrada) {
 
-        String verReserva = universidad.agregarReserva(mes, semana, dia, hora, aula, materia);
-        System.out.println(verReserva);
+            System.out.println("Ingrese el ID de la materia: ");
+            while (!entrada.hasNextInt()) {
+                System.out.println("Entrada no valida. Por favor, ingrese un ID de materia válido: ");
+                entrada.next();
+            }
+            int idMateria = entrada.nextInt();
+            Materia materia = null;
+            while (materia == null) {
+                try {
+                    materia = universidad.getGestorMateria().devolverMateria(idMateria);
+                } catch (IllegalArgumentException e) {
+                    System.out.println("Materia no encontrada. Por favor, ingrese un ID de materia valido.");
+                }
+            }
+
+
+            String verReserva = universidad.agregarReserva(mes, semana, dia, hora, aula, materia);
+            System.out.println(verReserva);
+        } else {
+            System.out.println("No se pudo realizar la reserva debido a intentos fallidos con el número de aula.");
+        }
     }
 
 
