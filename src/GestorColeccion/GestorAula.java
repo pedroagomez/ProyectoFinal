@@ -1,6 +1,9 @@
 package GestorColeccion;
 
 import Aula.*;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import javax.swing.plaf.basic.BasicButtonUI;
 import java.io.*;
@@ -15,6 +18,21 @@ public class GestorAula {
 
     public GestorAula() {
         this.mapaAula = new HashMap<>();
+    }
+
+    public JSONArray toJson()throws JSONException
+    {
+        JSONObject obj = new JSONObject();
+        JSONArray array = new JSONArray();
+        for(Map.Entry<Integer,Aula> it : mapaAula.entrySet())
+        {
+            obj.put("numero",it.getKey());
+            obj.put("aula",it.getValue().toJson());
+            array.put(obj);
+
+        }
+        return array;
+
     }
 
     public void agregarAula(int numeroAula,Aula aula)

@@ -2,6 +2,9 @@ package GestorColeccion;
 
 import Universidad.net.Materia;
 import Universidad.net.Profesor;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.Serializable;
 import java.util.Iterator;
@@ -13,6 +16,17 @@ public class GestorProfesor implements  Serializable  {
 
     public GestorProfesor() {
         this.conjuntoProfesores = new GestionColeccion<Profesor>();
+    }
+
+    public JSONArray toJson() throws JSONException
+    {
+        JSONArray array = new JSONArray();
+        JSONObject object = new JSONObject();
+        for(Profesor profesor : conjuntoProfesores.getConjunto())
+        {
+            array.put(profesor.toJson());
+        }
+        return array;
     }
 
     public void agregarProfesor(Profesor profe)
@@ -28,11 +42,13 @@ public class GestorProfesor implements  Serializable  {
     public boolean eliminarProfesorPorLegajo(int legajo)
     {
         boolean eliminado=false;
-        for(Profesor profesor :conjuntoProfesores.getConjunto())
-        {
-            if(profesor.getLegajo()==legajo)
+        Iterator<Profesor>it= conjuntoProfesores.getConjuntoIterator();
+        while (it.hasNext())
+         {
+            Profesor profesor= it.next();
+            if(profesor.getLegajo() == legajo)
             {
-                conjuntoProfesores.eliminar(profesor);
+                it.remove();
                 eliminado=true;
             }
         }

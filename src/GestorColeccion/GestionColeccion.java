@@ -2,6 +2,9 @@ package GestorColeccion;
 
 
 import Universidad.net.Profesor;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.*;
 import java.util.HashSet;
@@ -16,6 +19,7 @@ public class GestionColeccion<T> implements IGestion<T>{
     public GestionColeccion() {
         this.conjunto = new HashSet<T>();
     }
+
 
 
     //AGREGAR ELEMENTO
@@ -49,6 +53,8 @@ public class GestionColeccion<T> implements IGestion<T>{
     public HashSet<T> getConjunto() {
         return conjunto;
     }
+
+
 
     public void setConjunto(HashSet<T> conjunto) {
         this.conjunto = conjunto;
