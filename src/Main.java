@@ -25,12 +25,11 @@ public class Main {
 
     }
 
-
-
     public static void menu() {
         Universidad universidad = new Universidad();
 
         // Leer los datos de los archivos al iniciar
+        universidad.cargarArchivoGestores();
         universidad.leerArchivoGestores();
 
         int opcion;
