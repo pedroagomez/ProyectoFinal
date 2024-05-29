@@ -704,6 +704,9 @@ public static void cargarAulaNormal(Scanner entrada, Universidad universidad)
     //===================================================================
     public static void verListadoDeMaterias(Universidad universidad)
     {
+        if(universidad.listarMaterias().isEmpty()){
+            System.out.println("\n\t\tLista de materias cargada no encontrada");
+        }
         System.out.println(universidad.listarMaterias());
     }
 
