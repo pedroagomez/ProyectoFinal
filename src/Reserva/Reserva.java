@@ -20,50 +20,50 @@ public class Reserva {
         this.configurador = new LinkedHashMap<>();
     }
 
-        public String agregar(EnumDia dia, EnumHorarios hora, Aula aula, Materia materia)
+    public String agregar(EnumDia dia, EnumHorarios hora, Aula aula, Materia materia)
+    {
+        String mensaje = "";
+        ManejoDias manejoDias = configurador.get(dia); // Me trae todas las reservas del dia
+        if(manejoDias== null)                           // Si el dia pasado no existe
         {
-            String mensaje = "";
-            ManejoDias manejoDias = configurador.get(dia); // Me trae todas las reservas del dia
-           if(manejoDias== null)                           // Si el dia pasado no existe
-           {
-               manejoDias=new ManejoDias();              // agrega el dia
-               configurador.put(dia,manejoDias);
-           }
-           boolean reserva = manejoDias.agregarAulaEnHorario(hora,aula,materia);
-           if(reserva)
-           {
-               mensaje= "Reserva realizada";
-           }
-           else
-           {
-               mensaje="El aula ya esta reservada en este horario";
-           }
-
-            return mensaje;
+            manejoDias=new ManejoDias();              // agrega el dia
+            configurador.put(dia,manejoDias);
+        }
+        boolean reserva = manejoDias.agregarAulaEnHorario(hora,aula,materia);
+        if(reserva)
+        {
+            mensaje= "Reserva realizada";
+        }
+        else
+        {
+            mensaje="El aula ya esta reservada en este horario";
         }
 
-        public boolean cancelarReserva(EnumDia dia, EnumHorarios hora, Aula aula) {
-            boolean reservaCancelada=false;
-            if (configurador.containsKey(dia)) {
-                ManejoDias manejoDias = configurador.get(dia);
-                manejoDias.eliminarAulaEnHorario(hora, aula);
-                reservaCancelada=true;
-            }
-            return reservaCancelada;
+        return mensaje;
+    }
+
+    public boolean cancelarReserva(EnumDia dia, EnumHorarios hora, Aula aula) {
+        boolean reservaCancelada=false;
+        if (configurador.containsKey(dia)) {
+            ManejoDias manejoDias = configurador.get(dia);
+            manejoDias.eliminarAulaEnHorario(hora, aula);
+            reservaCancelada=true;
         }
+        return reservaCancelada;
+    }
 
 
 
-        public StringBuilder retornoProfesorPorDia (Profesor profesor){
-            StringBuilder cadena = new StringBuilder();
-            ManejoDias aux = null;
-            for(EnumDia dia : configurador.keySet()){
-                cadena.append(dia).append("\n");
-                aux = configurador.get(dia);
-                cadena.append(aux.retornarProfesorPorHora(profesor)).append("\n");
-            }
-            return cadena;
+    public StringBuilder retornoProfesorPorDia (Profesor profesor){
+        StringBuilder cadena = new StringBuilder();
+        ManejoDias aux = null;
+        for(EnumDia dia : configurador.keySet()){
+            cadena.append(dia).append("\n");
+            aux = configurador.get(dia);
+            cadena.append(aux.retornarProfesorPorHora(profesor)).append("\n");
         }
+        return cadena;
+    }
 
     public StringBuilder retornoMateriaPorDia (Materia materia){
         StringBuilder cadena = new StringBuilder();
@@ -83,14 +83,15 @@ public class Reserva {
         return aux.toString();
     }
 
-        @Override
-        public String toString() {
-            StringBuilder builder = new StringBuilder();
-            configurador.forEach((dia, manejoDias) -> {
-                builder.append(dia).append(":\n\t");
-                builder.append(manejoDias).append("\n\t");
-            });
-            return builder.toString();
-        }
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        configurador.forEach((dia, manejoDias) -> {
+            builder.append(dia).append(":\n\t");
+            builder.append(manejoDias).append("\n\t");
+        });
+        return builder.toString();
+    }
 }
+
 
