@@ -671,13 +671,10 @@ public static void cargarAulaNormal(Scanner entrada, Universidad universidad)
 
     //===================================================================
     public static void cargarMateria(Scanner entrada, Universidad universidad) {
-
-        GestorProfesor gestorProfesor= new GestorProfesor();
         System.out.println("Ingrese el nombre de la materia: ");
         entrada.nextLine();
         String nombre = entrada.nextLine();
-
-
+        
         System.out.println("Profesores disponibles:");
         System.out.println(universidad.listarProfesores());
 
@@ -688,10 +685,7 @@ public static void cargarAulaNormal(Scanner entrada, Universidad universidad)
         }
         int legajoProfesor = entrada.nextInt();
         entrada.nextLine();
-
-
         Profesor profesor = universidad.buscarProfesorPorLegajo(legajoProfesor);
-
         if (profesor != null) {
             Materia materia = new Materia(nombre, profesor);
             universidad.agregarMateria(materia);
