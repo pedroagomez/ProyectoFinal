@@ -3,7 +3,6 @@ package Reserva;
 import Aula.Aula;
 import Enumeradores.EnumDia;
 import Enumeradores.EnumHorarios;
-import Enumeradores.EnumMes;
 import Enumeradores.EnumSemana;
 import Universidad.net.Materia;
 import Universidad.net.Profesor;
@@ -82,26 +81,6 @@ public class ReservaPorSemana {
         return cadena;
     }
 
-    public StringBuilder retornoMateriaPorSemana (Materia materia){
-        StringBuilder cadena = new StringBuilder();
-        Reserva aux = null;
-        for(EnumSemana semana : reservaPorSemana.keySet()){
-            cadena.append(semana).append("\n");
-            aux = reservaPorSemana.get(semana);
-            cadena.append(aux.retornoMateriaPorDia(materia).append("\n"));
-        }
-        return cadena;
-    }
-
-
-    public StringBuilder retornoSemanaEspecifico (EnumSemana semana, EnumDia dia){
-        StringBuilder cadena = new StringBuilder();
-        Reserva aux = null;
-        aux = reservaPorSemana.get(semana);
-        cadena.append(aux.retornoDiaEspecifica(dia)).append("\n");
-        return cadena;
-    }
-
 
     public String verReservaDia(EnumDia dia)
     {
@@ -109,7 +88,7 @@ public class ReservaPorSemana {
         for(EnumSemana semana : reservaPorSemana.keySet())
         {
             Reserva reserva = reservaPorSemana.get(semana);
-            String diaSemana = reserva.retornoDiaEspecifica(dia);
+            String diaSemana = reserva.verReservaDia(dia);
             builder.append(diaSemana.toString()).append("\n");
         }
 
