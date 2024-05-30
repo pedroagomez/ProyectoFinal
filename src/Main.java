@@ -5,6 +5,7 @@ import Enumeradores.EnumMes;
 import Enumeradores.EnumSemana;
 import GestorColeccion.GestionColeccion;
 import GestorColeccion.GestorProfesor;
+import JsonUtil.JsonUtil;
 import Reserva.ManejoDias;
 import Aula.*;
 import Reserva.*;
@@ -25,13 +26,15 @@ public class Main {
 
     }
 
-
-
     public static void menu() {
         Universidad universidad = new Universidad();
 
         // Leer los datos de los archivos al iniciar
+<<<<<<< HEAD
 
+=======
+        //universidad.cargarArchivoGestores();
+>>>>>>> Pruebas
         universidad.leerArchivoGestores();
 
         int opcion;
@@ -44,6 +47,7 @@ public class Main {
                 \t[3] Profesores
                 \t[4] Materias
                 \t[5] Mostrar archivo
+                \t[6] Cargar archivo
                 \t[0] Salir
                 """;
             System.out.println(cadena);
@@ -59,6 +63,7 @@ public class Main {
                 case 3 -> menuProfesor(entrada, universidad);
                 case 4 -> menuMateria(entrada, universidad);
                 case 5 -> mostrarJson(universidad);
+                case 6 ->cargarJson(universidad);
                 case 0 -> System.out.println("Saliendo...");
                 default -> System.out.println("Opción inválida");
             }
@@ -80,7 +85,23 @@ public class Main {
         {
             e.printStackTrace();
         }
+
     }
+
+    public static void cargarJson(Universidad universidad)
+    {
+        try
+        {
+            JsonUtil.grabar(universidad.toJson(),"ArchivoJson");
+        }
+       catch (JSONException e)
+       {
+           e.printStackTrace();
+       }
+
+    }
+
+
     //========================== METODOS AULA =============================================
 
     public static void menuAulas(Scanner entrada, Universidad universidad) {
@@ -118,6 +139,7 @@ public class Main {
                 \t[2] Ver aulas normales
                 \t[3] Ver aulas disponibles
                 \t[4] Ver todas las aulas
+           
                 \t[0] Salir
                 """;
             System.out.println(cadena);
@@ -673,39 +695,45 @@ public static void cargarAulaNormal(Scanner entrada, Universidad universidad)
 
     //===================================================================
     public static void cargarMateria(Scanner entrada, Universidad universidad) {
-
-        GestorProfesor gestorProfesor= new GestorProfesor();
+        int comprobante = 0;
         System.out.println("Ingrese el nombre de la materia: ");
         entrada.nextLine();
         String nombre = entrada.nextLine();
 
-
         System.out.println("Profesores disponibles:");
         System.out.println(universidad.listarProfesores());
+        int legajoProfesor;
+        while (comprobante == 0){
+            System.out.println("Ingrese el número de legajo del profesor para esta materia: ");
+            //legajoProfesor = entrada.nextInt();
 
-        System.out.println("Ingrese el número de legajo del profesor para esta materia: ");
-        while (!entrada.hasNextInt()) {
-            System.out.println("Entrada no válida. Por favor, ingrese un número de legajo: ");
-            entrada.next();
+                while(!entrada.hasNextInt()){
+                    System.out.println("Entrada no válida. Por favor, ingrese un número de legajo: ");
+                    entrada.next();
+                }
+                legajoProfesor = entrada.nextInt();
+
+            Profesor profesor = universidad.buscarProfesorPorLegajo(legajoProfesor);
+            if (profesor != null){
+                Materia materia = new Materia(nombre, profesor);
+                universidad.agregarMateria(materia);
+                System.out.println("Materia cargada correctamente.");
+                comprobante=1;
+            } else {
+                System.out.println("No se encontro ningun profesor con el numero de legajo proporcionado.");
+                System.out.println("Aprete 1 para voler al menu o 0 para ingresar otro legajo");
+                comprobante = entrada.nextInt();
+            }
         }
-        int legajoProfesor = entrada.nextInt();
-        entrada.nextLine();
 
-
-        Profesor profesor = universidad.buscarProfesorPorLegajo(legajoProfesor);
-
-        if (profesor != null) {
-            Materia materia = new Materia(nombre, profesor);
-            universidad.agregarMateria(materia);
-            System.out.println("Materia cargada correctamente.");
-        } else {
-            System.out.println("No se encontro ningun profesor con el numero de legajo proporcionado.");
-        }
     }
 
     //===================================================================
     public static void verListadoDeMaterias(Universidad universidad)
     {
+        if(universidad.listarMaterias().isEmpty()){
+            System.out.println("\n\t\tLista de materias cargada no encontrada");
+        }
         System.out.println(universidad.listarMaterias());
     }
 
