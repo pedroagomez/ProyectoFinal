@@ -39,13 +39,14 @@ public class ReservaPorMes {
     public String agregar(EnumMes mes, EnumSemana numSemana, EnumDia dia, EnumHorarios hora, Aula aula, Materia materia){
         String mensaje = "";
 
-        ReservaPorSemana reservaAux = reservaMensual.get(mes); // Me trae el mes si hay
-        if(reservaAux == null)                           // Si el mes no existe
-        {
-            reservaAux = new ReservaPorSemana();              // agrega el mes
-            reservaMensual.put(mes,reservaAux);
-        }
-        mensaje = reservaAux.agregar(numSemana,dia,hora,aula,materia);
+
+            ReservaPorSemana reservaAux = reservaMensual.get(mes); // Me trae el mes si hay
+            if(reservaAux == null)                           // Si el mes no existe
+            {
+                reservaAux = new ReservaPorSemana();              // agrega el mes
+                reservaMensual.put(mes,reservaAux);
+            }
+            mensaje = reservaAux.agregar(numSemana,dia,hora,aula,materia);
 
         return mensaje;
     }
@@ -81,7 +82,7 @@ public class ReservaPorMes {
     }
 
 
-    public String verReservaDiaDeterminado(EnumDia dia)
+    /*public String verReservaDiaDeterminado(EnumDia dia)
     {
         StringBuilder builder=new StringBuilder();
         for(EnumMes mes : reservaMensual.keySet())
@@ -92,19 +93,36 @@ public class ReservaPorMes {
         }
 
         return builder.toString();
-    }
+    }*/
 
-    public String verReservaSemana(EnumSemana semana)
+    public String verReservaSemana(EnumMes mes, EnumSemana semana)
     {
         StringBuilder builder=new StringBuilder();
-        for(EnumMes aux : reservaMensual.keySet())
+        if(reservaMensual.containsKey(mes))
         {
-            ReservaPorSemana reservaPorSemana = reservaMensual.get(aux);
-            String sem = reservaPorSemana.accederASemana(semana);
-            builder.append(sem.toString()).append("\n");
+            ReservaPorSemana reservaPorSemana = reservaMensual.get(mes);
+            builder.append(reservaPorSemana.accederASemana(semana)).append("\n");
         }
+
         return builder.toString();
     }
+    public String verReservaDia(EnumDia dia,EnumSemana semana,EnumMes mes)
+    {
+        StringBuilder aux=new StringBuilder();
+        StringBuilder builder=new StringBuilder();
+        if(reservaMensual.containsKey(mes))
+        {
+            ReservaPorSemana reserva = reservaMensual.get(mes);
+            String diaSemana = reserva.verReservaDia(dia,semana);
+            aux=builder.append(reserva.verReservaDia(dia,semana)).append("\n");
+        } else
+        {
+            aux=builder.append("Reserva no encontrada");
+        }
+
+        return  builder.toString();
+    }
+
 
     @Override
     public String toString() {

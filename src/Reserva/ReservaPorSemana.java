@@ -38,13 +38,13 @@ public class ReservaPorSemana {
     {
         String mensaje = "";
 
-        Reserva reservaAux = reservaPorSemana.get(numSemana); // Me trae todas las reservas de la semana
-        if(reservaAux == null)                           // Si la semana no existe
-        {
-            reservaAux = new Reserva();              // agrega La semana
-            reservaPorSemana.put(numSemana,reservaAux);
-        }
-        mensaje = reservaAux.agregar(dia,hora,aula,materia);
+            Reserva reservaAux = reservaPorSemana.get(numSemana);         // Me trae todas las reservas de la semana
+            if(reservaAux == null)                                       // Si la semana no existe
+            {
+                reservaAux = new Reserva();                               // agrega La semana
+                reservaPorSemana.put(numSemana,reservaAux);
+            }
+            mensaje = reservaAux.agregar(dia,hora,aula,materia);
 
         return mensaje;
     }
@@ -82,18 +82,19 @@ public class ReservaPorSemana {
     }
 
 
-    public String verReservaDia(EnumDia dia)
+    public String verReservaDia(EnumDia dia,EnumSemana semana)
     {
         StringBuilder builder=new StringBuilder();
-        for(EnumSemana semana : reservaPorSemana.keySet())
+        if(reservaPorSemana.containsKey(semana))
         {
             Reserva reserva = reservaPorSemana.get(semana);
-            String diaSemana = reserva.verReservaDia(dia);
-            builder.append(diaSemana.toString()).append("\n");
+            builder.append(reserva.verReservaDia(dia)).append("\n");
         }
-
         return  builder.toString();
     }
+
+
+
 
 
     @Override

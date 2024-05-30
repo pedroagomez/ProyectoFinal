@@ -22,7 +22,7 @@ public class Main {
 
             menu();
 
-
+            
 
     }
 
@@ -30,7 +30,9 @@ public class Main {
         Universidad universidad = new Universidad();
 
         // Leer los datos de los archivos al iniciar
+
         //universidad.cargarArchivoGestores();
+
         universidad.leerArchivoGestores();
 
         int opcion;
@@ -59,7 +61,7 @@ public class Main {
                 case 3 -> menuProfesor(entrada, universidad);
                 case 4 -> menuMateria(entrada, universidad);
                 case 5 -> mostrarJson(universidad);
-                case 6 ->cargarJson(universidad);
+                case 6 -> cargarJson(universidad);
                 case 0 -> System.out.println("Saliendo...");
                 default -> System.out.println("Opción inválida");
             }
@@ -67,6 +69,7 @@ public class Main {
 
         // Guardar los datos en los archivos al salir
         universidad.cargarArchivoGestores();
+
     }
 
 
@@ -181,141 +184,165 @@ public class Main {
         } while (opcion != 0);
     }
     //===================================================================
-public static void cargarAulaComputadora(Scanner entrada, Universidad universidad) {
-    int opcion;
-    do {
-        System.out.println("Número de aula: ");
-        while (!entrada.hasNextInt()) {
-            System.out.println("Entrada no válida. Por favor, ingrese un número: ");
-            entrada.next();
-        }
-        int numeroAula = entrada.nextInt();
-        entrada.nextLine();
-
-        System.out.println("Capacidad del aula: ");
-        while (!entrada.hasNextInt()) {
-            System.out.println("Entrada no válida. Por favor, ingrese un número: ");
-            entrada.next();
-        }
-        int capacidad = entrada.nextInt();
-        entrada.nextLine();
-
-        System.out.println("Cantidad de computadoras: ");
-        while (!entrada.hasNextInt()) {
-            System.out.println("Entrada no válida. Por favor, ingrese un número: ");
-            entrada.next();
-        }
-        int cantidad = entrada.nextInt();
-        entrada.nextLine();
-
-        System.out.println("¿Con proyector? (true/false): ");
-        while (!entrada.hasNextBoolean()) {
-            System.out.println("Entrada no válida. Por favor, ingrese true o false: ");
-            entrada.next();
-        }
-        boolean proyector = entrada.nextBoolean();
-        entrada.nextLine();
-
-        System.out.println("¿Con televisor? (true/false): ");
-        while (!entrada.hasNextBoolean()) {
-            System.out.println("Entrada no válida. Por favor, ingrese true o false: ");
-            entrada.next();
-        }
-        boolean tele = entrada.nextBoolean();
-        entrada.nextLine(); //BORRA RESTO DEL BUFFER
-
-        System.out.println("¿El aula estará disponible? (true/false): ");
-        while (!entrada.hasNextBoolean()) {
-            System.out.println("Entrada no válida. Por favor, ingrese true o false: ");
-            entrada.next();
-        }
-        boolean disponible = entrada.nextBoolean();
-        entrada.nextLine();
-
-        System.out.println("¿Tiene auriculares? (true/false): ");
-        while (!entrada.hasNextBoolean()) {
-            System.out.println("Entrada no válida. Por favor, ingrese true o false: ");
-            entrada.next();
-        }
-        boolean auriculares = entrada.nextBoolean();
-        entrada.nextLine();
-
-        Aula aula = new AulaComputadora(numeroAula, capacidad, proyector, tele, disponible, cantidad, auriculares);
-        universidad.agregarAula(aula);
+    public static void cargarAulaComputadora(Scanner entrada, Universidad universidad) {
+        int opcion=-1;
+        int intentos = 0;
+        boolean continuar = true;
 
         do {
-            System.out.println("¿Desea cargar otra aula? (1: Sí, 0: No): ");
-            while (!entrada.hasNextInt()) {
-                System.out.println("Entrada no válida. Por favor, ingrese 1 para Sí o 0 para No: ");
-                entrada.next();
-            }
-            opcion = entrada.nextInt();
-            entrada.nextLine(); // Consumir el salto de línea
-            if (opcion != 1 && opcion != 0) {
-                System.out.println("Entrada no válida. Por favor, ingrese 1 para Sí o 0 para No: ");
-            }
-        } while (opcion != 1 && opcion != 0);
 
-    } while (opcion != 0);
-}
-    //===================================================================
-public static void cargarAulaNormal(Scanner entrada, Universidad universidad)
-    {
-        int opcion;
-        do {
-            opcion= entrada.nextInt();
-            System.out.println("Número de aula: ");
-
-            while (!entrada.hasNextInt()) {
-                System.out.println("Entrada no válida. Por favor, ingrese un número: ");
-                entrada.next();
-            }
-            int numeroAula = entrada.nextInt();
-            System.out.println("Capacidad del aula: ");
-            while(!entrada.hasNextInt())
-            {
-                System.out.println("Entrada no válida. Por favor, ingrese un número: ");
-                entrada.next();
-            }
-            int capacidad = entrada.nextInt();
-
-            System.out.println("¿Con proyector? (true/false): ");
-            while (!entrada.hasNextBoolean()) {
-                System.out.println("Entrada no válida. Por favor, ingrese true o false: ");
-                entrada.next();
-            }
-            boolean proyector = entrada.nextBoolean();
-
-            System.out.println("¿Con televisor? (true/false): ");
-            while (!entrada.hasNextBoolean()) {
-                System.out.println("Entrada no válida. Por favor, ingrese true o false: ");
-                entrada.next();
-            }
-            boolean tele = entrada.nextBoolean();
-
-            System.out.println("¿El aula estará disponible? (true/false): ");
-            while(!entrada.hasNextBoolean())
-            {
-                System.out.println("Entrada no válida, ingrese true o false : ");
-            }
-            boolean disponible = entrada.nextBoolean();
-
-            Aula aula=new AulaNormal(numeroAula,capacidad,proyector,tele,disponible);
-            universidad.agregarAula(aula);
+            int numeroAula;
             do {
-                System.out.println("¿Desea cargar otra aula? (1: Sí, 0: No): ");
+                System.out.println("Número de aula: ");
                 while (!entrada.hasNextInt()) {
-                    System.out.println("Entrada no válida. Por favor, ingrese 1 para Sí o 0 para No: ");
+                    System.out.println("Entrada no válida. Por favor, ingrese un número: ");
                     entrada.next();
                 }
-                opcion = entrada.nextInt();
-                if (opcion != 1 && opcion != 0) {
-                    System.out.println("Entrada no válida. Por favor, ingrese 1 para Sí o 0 para No: ");
+                numeroAula = entrada.nextInt();
+                entrada.nextLine();
+                intentos++;
+            } while (universidad.validarExistenciaDeAula(numeroAula) && intentos < 3);
+
+            if (intentos >= 3) {
+                System.out.println("Supero el máximo de intentos permitidos. Por favor, intentelo nuevamente");
+                continuar = false;
+            } else {
+                System.out.println("Capacidad del aula: ");
+                while (!entrada.hasNextInt()) {
+                    System.out.println("Entrada no válida. Por favor, ingrese un número: ");
+                    entrada.next();
                 }
-            } while (opcion != 1 && opcion != 0);
+                int capacidad = entrada.nextInt();
+                entrada.nextLine();
 
-        }while(opcion!=0);
+                System.out.println("Cantidad de computadoras: ");
+                while (!entrada.hasNextInt()) {
+                    System.out.println("Entrada no válida. Por favor, ingrese un número: ");
+                    entrada.next();
+                }
+                int cantidad = entrada.nextInt();
+                entrada.nextLine();
 
+                System.out.println("¿Con proyector? (true/false): ");
+                while (!entrada.hasNextBoolean()) {
+                    System.out.println("Entrada no válida. Por favor, ingrese true o false: ");
+                    entrada.next();
+                }
+                boolean proyector = entrada.nextBoolean();
+                entrada.nextLine();
+
+                System.out.println("¿Con televisor? (true/false): ");
+                while (!entrada.hasNextBoolean()) {
+                    System.out.println("Entrada no válida. Por favor, ingrese true o false: ");
+                    entrada.next();
+                }
+                boolean tele = entrada.nextBoolean();
+                entrada.nextLine();
+
+                System.out.println("¿El aula estará disponible? (true/false): ");
+                while (!entrada.hasNextBoolean()) {
+                    System.out.println("Entrada no válida. Por favor, ingrese true o false: ");
+                    entrada.next();
+                }
+                boolean disponible = entrada.nextBoolean();
+                entrada.nextLine();
+
+                System.out.println("¿Tiene auriculares? (true/false): ");
+                while (!entrada.hasNextBoolean()) {
+                    System.out.println("Entrada no válida. Por favor, ingrese true o false: ");
+                    entrada.next();
+                }
+                boolean auriculares = entrada.nextBoolean();
+                entrada.nextLine();
+
+                Aula aula = new AulaComputadora(numeroAula, capacidad, proyector, tele, disponible, cantidad, auriculares);
+                universidad.agregarAula(aula);
+
+                do {
+                    System.out.println("¿Desea cargar otra aula? (1: Sí, 0: No): ");
+                    while (!entrada.hasNextInt()) {
+                        System.out.println("Entrada no válida. Por favor, ingrese 1 para Sí o 0 para No: ");
+                        entrada.next();
+                    }
+                    opcion = entrada.nextInt();
+                    entrada.nextLine(); // Consumir el salto de línea
+                    if (opcion != 1 && opcion != 0) {
+                        System.out.println("Entrada no valida. Por favor, ingrese 1 para Sí o 0 para No: ");
+                    }
+                } while (opcion != 1 && opcion != 0);
+            }
+        } while (opcion != 0 && continuar);
+    }
+
+    //===================================================================
+    public static void cargarAulaNormal(Scanner entrada, Universidad universidad) {
+        int opcion;
+        int intentos = 0;
+        boolean continuar = true;
+
+        do {
+            opcion = entrada.nextInt();
+
+            int numeroAula;
+            do {
+                System.out.println("Número de aula: ");
+
+                while (!entrada.hasNextInt()) {
+                    System.out.println("Entrada no válida. Por favor, ingrese un número: ");
+                    entrada.next();
+                }
+                numeroAula = entrada.nextInt();
+                intentos++;
+            } while (universidad.validarExistenciaDeAula(numeroAula) && intentos < 3);
+
+            if (intentos >= 3) {
+                System.out.println("Superó el máximo de intentos permitidos. Por favor intentelo nuevamente.");
+                continuar = false;
+            } else {
+                System.out.println("Capacidad del aula: ");
+                while (!entrada.hasNextInt()) {
+                    System.out.println("Entrada no válida. Por favor, ingrese un número: ");
+                    entrada.next();
+                }
+                int capacidad = entrada.nextInt();
+
+                System.out.println("¿Con proyector? (true/false): ");
+                while (!entrada.hasNextBoolean()) {
+                    System.out.println("Entrada no válida. Por favor, ingrese true o false: ");
+                    entrada.next();
+                }
+                boolean proyector = entrada.nextBoolean();
+
+                System.out.println("¿Con televisor? (true/false): ");
+                while (!entrada.hasNextBoolean()) {
+                    System.out.println("Entrada no válida. Por favor, ingrese true o false: ");
+                    entrada.next();
+                }
+                boolean tele = entrada.nextBoolean();
+
+                System.out.println("¿El aula estará disponible? (true/false): ");
+                while (!entrada.hasNextBoolean()) {
+                    System.out.println("Entrada no válida. Por favor, ingrese true o false: ");
+                    entrada.next();
+                }
+                boolean disponible = entrada.nextBoolean();
+
+                Aula aula = new AulaNormal(numeroAula, capacidad, proyector, tele, disponible);
+                universidad.agregarAula(aula);
+
+                do {
+                    System.out.println("¿Desea cargar otra aula? (1: Sí, 0: No): ");
+                    while (!entrada.hasNextInt()) {
+                        System.out.println("Entrada no válida. Por favor, ingrese 1 para Sí o 0 para No: ");
+                        entrada.next();
+                    }
+                    opcion = entrada.nextInt();
+                    if (opcion != 1 && opcion != 0) {
+                        System.out.println("Entrada no válida. Por favor, ingrese 1 para Sí o 0 para No: ");
+                    }
+                } while (opcion != 1 && opcion != 0);
+            }
+        } while (opcion != 0 && continuar);
     }
 
 
@@ -388,6 +415,36 @@ public static void cargarAulaNormal(Scanner entrada, Universidad universidad)
     //===================================================================
     public static void verReservaDiaDeterminado(Scanner entrada, Universidad universidad)
     {
+        System.out.println("Ingrese el mes (elija una de las siguientes opciones): ");
+        for(EnumMes mesEnum : EnumMes.values())
+        {
+            System.out.println(mesEnum.name());
+        }
+        EnumMes mes = null;
+        while (mes == null) {
+            String mesString = entrada.nextLine();
+            try {
+                mes = EnumMes.valueOf(mesString.toUpperCase());
+            } catch (IllegalArgumentException e) {
+                System.out.println("Día ingresado no válido. Por favor, ingrese un día válido.");
+            }
+        }
+
+        System.out.println("Ingrese el semana (elija una de las siguientes opciones): ");
+        for(EnumSemana semanaEnum : EnumSemana.values())
+        {
+            System.out.println(semanaEnum.name());
+        }
+        EnumSemana semana = null;
+        while (semana == null) {
+            String semanaString = entrada.nextLine();
+            try {
+                semana = EnumSemana.valueOf(semanaString.toUpperCase());
+            } catch (IllegalArgumentException e) {
+                System.out.println("Día ingresado no válido. Por favor, ingrese un día válido.");
+            }
+        }
+
         System.out.println("Ingrese el día (elija una de las siguientes opciones): ");
         for (EnumDia diaEnum : EnumDia.values()) {
             System.out.println(diaEnum.name());
@@ -401,11 +458,27 @@ public static void cargarAulaNormal(Scanner entrada, Universidad universidad)
                 System.out.println("Día ingresado no válido. Por favor, ingrese un día válido.");
             }
         }
-        System.out.println(universidad.verReservasDiaDeterminado(dia));
+        System.out.println(universidad.verReservasDiaDeterminado(mes,semana,dia));
     }
     //===================================================================
     public static void verReservaSemanaDeterminado(Scanner entrada, Universidad universidad)
     {
+
+        System.out.println("Ingrese el mes  (elija una de las siguientes opciones): ");
+        for (EnumMes mes : EnumMes.values()) {
+            System.out.println(mes.name());
+        }
+        EnumMes mes = null;
+        while (mes == null) {
+            String semanaString = entrada.nextLine();
+            try {
+                mes = EnumMes.valueOf(semanaString.toUpperCase());
+            } catch (IllegalArgumentException e) {
+                System.out.println("Día ingresado no válido. Por favor, ingrese un día válido.");
+            }
+        }
+
+
         System.out.println("Ingrese la semana (elija una de las siguientes opciones): ");
         for (EnumSemana semana : EnumSemana.values()) {
             System.out.println(semana.name());
@@ -419,7 +492,7 @@ public static void cargarAulaNormal(Scanner entrada, Universidad universidad)
                 System.out.println("Día ingresado no válido. Por favor, ingrese un día válido.");
             }
         }
-        System.out.println(universidad.verReservaSemanaDeterminada(semana));
+        System.out.println(universidad.verReservaSemanaDeterminada(mes,semana));
     }
     //===================================================================
     public static void reservaMes(Scanner entrada, Universidad universidad) {
@@ -518,7 +591,7 @@ public static void cargarAulaNormal(Scanner entrada, Universidad universidad)
         Aula aula = null;
         int intentos = 0;
         boolean aulaEncontrada = false;
-        while (!aulaEncontrada && intentos < 3) {
+        while (!aulaEncontrada && intentos < 3 ) {
             System.out.println("Ingrese el número de aula: ");
             while (!entrada.hasNextInt()) {
                 System.out.println("Entrada no válida. Por favor, ingrese un número de aula válido: ");
@@ -529,8 +602,19 @@ public static void cargarAulaNormal(Scanner entrada, Universidad universidad)
             if (aula == null) {
                 System.out.println("Aula no encontrada. Por favor, ingrese un número de aula válido.");
                 intentos++;
-            } else {
-                aulaEncontrada = true;
+            }
+            else {
+                if(aula.isDisponible())
+                {
+                    aulaEncontrada = true;
+                }
+                else
+                {
+                    aulaEncontrada = false;
+                    System.out.println("El aula no esta disponible.Por favor ingrese otra aula");
+                    intentos++;
+                }
+
             }
             entrada.nextLine();
         }
