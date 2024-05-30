@@ -139,6 +139,19 @@ public class GestorAula {
             exception.printStackTrace();
         }
     }
+
+    public String eliminarAula(int IDaula){
+        String cadena = "";
+        Aula aux = null;
+        aux = buscarAulaPorNumero(IDaula);
+        if(aux!=null) {
+            cadena = "Se elimina el aula = " + aux.toStringSinMateria();
+        }else {
+            cadena = "Aula no encontrada";
+        }
+        return cadena;
+    }
+
     public void leerArchivoAula(){
 
         try {
