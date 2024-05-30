@@ -65,6 +65,11 @@ public class Universidad {
     {
         gestorAula.agregarAula(aulita.getNumeroAula(),aulita);
     }
+
+    public boolean validarExistenciaDeAula(int numero)
+    {
+        return gestorAula.validarExistenciaAula(numero);
+    }
     /// Veremos las aulas disponibles - Nos devuelve la cadena de caracteres mostrando las aulas libres
     public String verAulasDisponibles()
     {
@@ -89,6 +94,12 @@ public class Universidad {
     public String aulasNoDisponibles()
     {
         return gestorAula.aulaNoDisponible();
+    }
+
+
+    public boolean corroborarSiEstaDisponible()
+    {
+        return gestorAula.verSiEstaDisponible();
     }
 
     // HACER METODO PARA ELEGIR PROFE Y METERLO EN MATERIA
@@ -185,14 +196,14 @@ public class Universidad {
         return  reservaMes.toString();
     }
 
-    public String verReservasDiaDeterminado(EnumDia dia)
+    public String verReservasDiaDeterminado(EnumMes mes,EnumSemana semana, EnumDia dia)
     {
-        return reservaMes.verReservaDiaDeterminado(dia);
+        return reservaMes.verReservaDia(dia,semana,mes);
     }
 
-    public String verReservaSemanaDeterminada(EnumSemana semana)
+    public String verReservaSemanaDeterminada(EnumMes mes,EnumSemana semana)
     {
-        return  reservaMes.verReservaSemana(semana);
+        return  reservaMes.verReservaSemana(mes,semana);
     }
 
 

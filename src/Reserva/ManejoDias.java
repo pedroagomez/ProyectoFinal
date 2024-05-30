@@ -44,16 +44,18 @@ public class ManejoDias {
     ///ACA LAS NUEVAS MODIFICACIONES PARA AGREGAR AL PROFESOR Y LA RESERVA
     public boolean agregarAulaEnHorario(EnumHorarios hora, Aula aula, Materia materia) {
         boolean reservado = false;
-        if (!horarios.containsKey(hora)) {
-            horarios.put(hora, new GestionColeccion<Aula>());
-        }
-        GestionColeccion<Aula> aulasEnHorario = horarios.get(hora);
-        if (!aulasEnHorario.verificarExistenciaElemento(aula) && aula.isDisponible()) {
-            aula.setMateria(materia);
-            aulasEnHorario.agregar(aula);
-            aula.setDisponible(false);
-            reservado = true;
-        }
+
+            if (!horarios.containsKey(hora)) {
+                horarios.put(hora, new GestionColeccion<Aula>());
+            }
+            GestionColeccion<Aula> aulasEnHorario = horarios.get(hora);
+            if (!aulasEnHorario.verificarExistenciaElemento(aula) && aula.isDisponible()) {
+                aula.setMateria(materia);
+                aulasEnHorario.agregar(aula);
+                aula.setDisponible(false);
+                reservado = true;
+            }
+
         return reservado;
     }
 

@@ -53,7 +53,7 @@ public class Reserva {
            }
            else
            {
-               mensaje="El aula ya esta reservada en este horario";
+               mensaje="No se pudo realizar la reserva";
            }
 
             return mensaje;
@@ -89,10 +89,6 @@ public class Reserva {
             if(manejoDias!=null)
             {
                 builder.append(manejoDias.toString()).append("\n");
-            }
-            else
-            {
-                builder.append("No hay reservas para este dia");
             }
 
             return  builder.toString();

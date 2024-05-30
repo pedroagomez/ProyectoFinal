@@ -37,7 +37,20 @@ public class GestorAula {
 
     public void agregarAula(int numeroAula,Aula aula)
     {
-        mapaAula.put(numeroAula,aula);
+        if(!mapaAula.containsKey(numeroAula))
+        {
+            mapaAula.put(numeroAula,aula);
+        }
+    }
+
+    public boolean validarExistenciaAula(int numeroAula)
+    {
+        boolean existencia=false;
+        if(mapaAula.containsKey(numeroAula))
+        {
+            existencia=true;
+        }
+        return existencia;
     }
 
     public String aulaNoDisponible()
@@ -88,6 +101,21 @@ public class GestorAula {
             }
         }
         return builder.toString();
+    }
+
+
+    public boolean verSiEstaDisponible()
+    {
+        boolean disponible= true;
+        for(Map.Entry<Integer,Aula>entry : mapaAula.entrySet())
+        {
+            Aula aula = entry.getValue();
+            if(!aula.isDisponible())
+            {
+                disponible=false;
+            }
+        }
+        return disponible;
     }
 
     public String verAulasNormales() {
