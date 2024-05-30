@@ -1,10 +1,7 @@
 package Reserva;
 
 import Aula.Aula;
-import Enumeradores.EnumDia;
 import Enumeradores.EnumHorarios;
-import Enumeradores.EnumMes;
-import Enumeradores.EnumSemana;
 import GestorColeccion.GestionColeccion;
 import Universidad.net.Materia;
 import Universidad.net.Profesor;
@@ -31,12 +28,12 @@ public class ManejoDias {
         for(Map.Entry<EnumHorarios,GestionColeccion<Aula>>it : horarios.entrySet())
         {
             objeto.put("Hora",it.getKey());
-           JSONArray aulasArray= new JSONArray();
-           for(Aula aula : it.getValue().getConjunto())
-           {
-               aulasArray.put(aula.toJson());
-           }
-           objeto.put("aulas",aulasArray);
+            JSONArray aulasArray= new JSONArray();
+            for(Aula aula : it.getValue().getConjunto())
+            {
+                aulasArray.put(aula.toJson());
+            }
+            objeto.put("aulas",aulasArray);
         }
         array.put(objeto);
 
@@ -90,21 +87,6 @@ public class ManejoDias {
         return cadena;
     }
 
-    public StringBuilder retornarAulasPorMateriaPorHora(Materia materia) {
-        StringBuilder cadena = new StringBuilder();
-        HashSet<Aula> aux = null;
-        for (EnumHorarios hora : horarios.keySet()) {
-            aux = horarios.get(hora).getConjunto();
-            cadena.append(hora).append("\n");
-            for (Aula elemento : aux){
-                if (elemento.getMateria().equals(materia)){
-                    cadena.append(elemento.toString()).append("\n");
-                }
-            }
-        }
-        return cadena;
-    }
-
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
@@ -126,3 +108,4 @@ public class ManejoDias {
         return builder.toString();
     }
 }
+
