@@ -30,11 +30,9 @@ public class Main {
         Universidad universidad = new Universidad();
 
         // Leer los datos de los archivos al iniciar
-<<<<<<< HEAD
 
-=======
         //universidad.cargarArchivoGestores();
->>>>>>> Pruebas
+
         universidad.leerArchivoGestores();
 
         int opcion;
