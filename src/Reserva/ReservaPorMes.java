@@ -36,6 +36,10 @@ public class ReservaPorMes {
 
     }
 
+    public LinkedHashMap<EnumMes, ReservaPorSemana> getReservaMensual() {
+        return reservaMensual;
+    }
+
     public String agregar(EnumMes mes, EnumSemana numSemana, EnumDia dia, EnumHorarios hora, Aula aula, Materia materia){
         String mensaje = "";
 
@@ -76,9 +80,14 @@ public class ReservaPorMes {
     }
     public String accederAMes (EnumMes mes){
         ReservaPorSemana aux = null;
-        if(reservaMensual.containsKey(mes))
+        String mensaje = "";
+        if(reservaMensual.containsKey(mes)){
             aux = reservaMensual.get(mes);
-        return aux.toString();
+            mensaje = aux.toString();
+        }else {
+            mensaje = "No encontrado";
+        }
+        return mensaje;
     }
 
 
@@ -102,6 +111,9 @@ public class ReservaPorMes {
         {
             ReservaPorSemana reservaPorSemana = reservaMensual.get(mes);
             builder.append(reservaPorSemana.accederASemana(semana)).append("\n");
+        }else{
+            builder = new StringBuilder();
+            builder.append("null");
         }
 
         return builder.toString();
@@ -121,6 +133,16 @@ public class ReservaPorMes {
         }
 
         return  builder.toString();
+    }
+
+    public boolean verDisponibilidad(EnumDia dia,EnumSemana semana,EnumMes mes,EnumHorarios hora, Aula aula ){
+        boolean disponibilidad=true;
+        ReservaPorSemana aux = null;
+        aux = reservaMensual.get(mes);
+        if(aux != null){
+            disponibilidad = aux.verDisponibilidad(dia,semana,hora,aula);
+        }
+        return disponibilidad;
     }
 
 

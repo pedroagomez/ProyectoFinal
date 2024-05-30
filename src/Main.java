@@ -599,22 +599,14 @@ public class Main {
             }
             int numeroAula = entrada.nextInt();
             aula = universidad.getGestorAula().buscarAulaPorNumero(numeroAula);
+
+            /// hacer validacion
             if (aula == null) {
                 System.out.println("Aula no encontrada. Por favor, ingrese un número de aula válido.");
                 intentos++;
             }
             else {
-                if(aula.isDisponible())
-                {
                     aulaEncontrada = true;
-                }
-                else
-                {
-                    aulaEncontrada = false;
-                    System.out.println("El aula no esta disponible.Por favor ingrese otra aula");
-                    intentos++;
-                }
-
             }
             entrada.nextLine();
         }
@@ -635,9 +627,10 @@ public class Main {
                     System.out.println("Materia no encontrada. Por favor, ingrese un ID de materia valido.");
                 }
             }
-
-
-            String verReserva = universidad.agregarReserva(mes, semana, dia, hora, aula, materia);
+            String verReserva = "No se pudo realizar la reserva error 404";
+            if(universidad.comprobarDisponibilidad(mes,semana,dia,hora,aula)){
+                verReserva = universidad.agregarReserva(mes, semana, dia, hora, aula, materia);
+            }
             System.out.println(verReserva);
         } else {
             System.out.println("No se pudo realizar la reserva debido a intentos fallidos con el número de aula.");

@@ -89,6 +89,17 @@ public class ManejoDias {
         return cadena;
     }
 
+    public boolean verDisponible(EnumHorarios hora, Aula aula){
+        boolean disponible = true;
+        GestionColeccion<Aula> aux = horarios.get(hora);
+        boolean existe = aux.verificarExistenciaElemento(aula);
+        if (existe){
+            disponible = false;
+        }
+
+        return disponible;
+    }
+
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();

@@ -92,8 +92,18 @@ public class Reserva {
             }
 
             return  builder.toString();
-
         }
+
+        public boolean verDisponiblidad(EnumDia dia,EnumHorarios hora,Aula aula){
+        boolean disponible=true;
+        ManejoDias aux = configurador.get(dia);
+        if(aux!=null){
+           disponible = aux.verDisponible(hora, aula);
+        }
+        return disponible;
+        }
+
+
         @Override
         public String toString() {
             StringBuilder builder = new StringBuilder();

@@ -93,7 +93,16 @@ public class ReservaPorSemana {
         return  builder.toString();
     }
 
+    public boolean verDisponibilidad(EnumDia dia,EnumSemana semana, EnumHorarios hora, Aula aula){
+        boolean disponibilidad=true;
+        Reserva aux = null;
+        aux = reservaPorSemana.get(semana);
+        if(aux != null){
+            disponibilidad = aux.verDisponiblidad(dia,hora,aula);
+        }
 
+        return disponibilidad;
+    }
 
 
 

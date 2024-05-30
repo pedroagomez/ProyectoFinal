@@ -206,7 +206,9 @@ public class Universidad {
         return  reservaMes.verReservaSemana(mes,semana);
     }
 
-
+    public boolean comprobarDisponibilidad(EnumMes mes, EnumSemana semana, EnumDia dia, EnumHorarios hora, Aula aula){
+        return reservaMes.verDisponibilidad(dia,semana,mes,hora,aula);
+    }
 
     public String buscarYretornarProfeYAula(Profesor profe){
         StringBuilder builder =new StringBuilder();
