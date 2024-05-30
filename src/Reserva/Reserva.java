@@ -3,13 +3,6 @@ package Reserva;
 import Aula.*;
 import Enumeradores.EnumDia;
 import Enumeradores.EnumHorarios;
-import Enumeradores.EnumMes;
-import Enumeradores.EnumSemana;
-package Reserva;
-
-import Aula.*;
-import Enumeradores.EnumDia;
-import Enumeradores.EnumHorarios;
 import GestorColeccion.GestionColeccion;
 import Universidad.net.Materia;
 import Universidad.net.Profesor;
