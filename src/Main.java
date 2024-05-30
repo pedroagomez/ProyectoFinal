@@ -29,7 +29,7 @@ public class Main {
         Universidad universidad = new Universidad();
 
         // Leer los datos de los archivos al iniciar
-        universidad.cargarArchivoGestores();
+        //universidad.cargarArchivoGestores();
         universidad.leerArchivoGestores();
 
         int opcion;
