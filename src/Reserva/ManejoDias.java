@@ -49,10 +49,9 @@ public class ManejoDias {
                 horarios.put(hora, new GestionColeccion<Aula>());
             }
             GestionColeccion<Aula> aulasEnHorario = horarios.get(hora);
-            if (!aulasEnHorario.verificarExistenciaElemento(aula) && aula.isDisponible()) {
+            if (!aulasEnHorario.verificarExistenciaElemento(aula)) {
                 aula.setMateria(materia);
                 aulasEnHorario.agregar(aula);
-                aula.setDisponible(false);
                 reservado = true;
             }
 
@@ -67,7 +66,7 @@ public class ManejoDias {
             GestionColeccion<Aula> setAula = horarios.get(hora);
             if (setAula != null && setAula.eliminar(aula))
             {
-                aula.setDisponible(true);
+                //aula.setDisponible(true);
                 darBaja = true;
             }
         }

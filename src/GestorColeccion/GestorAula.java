@@ -53,7 +53,7 @@ public class GestorAula {
         return existencia;
     }
 
-    public String aulaNoDisponible()
+    /*public String aulaNoDisponible()
     {
         StringBuilder builder=new StringBuilder();
         Iterator<Map.Entry<Integer,Aula>>it=mapaAula.entrySet().iterator();
@@ -69,11 +69,11 @@ public class GestorAula {
         }
         return builder.toString();
     }
-
+*/
 
 
     // DEVUELVE CADENA DE STRING QUE MUESTRA TODAS LAS AULAS DISPONIBLES
-    public String verAulasDisponibles()
+   /* public String verAulasDisponibles()
     {
         StringBuilder builder= new StringBuilder();
         Iterator<Map.Entry<Integer,Aula>>it=mapaAula.entrySet().iterator();
@@ -86,7 +86,7 @@ public class GestorAula {
             }
         }
         return builder.toString();
-    }
+    }*/
 
 
 
@@ -104,7 +104,7 @@ public class GestorAula {
     }
 
 
-    public boolean verSiEstaDisponible()
+   /* public boolean verSiEstaDisponible()
     {
         boolean disponible= true;
         for(Map.Entry<Integer,Aula>entry : mapaAula.entrySet())
@@ -116,7 +116,7 @@ public class GestorAula {
             }
         }
         return disponible;
-    }
+    }*/
 
     public String verAulasNormales() {
         StringBuilder builder = new StringBuilder();

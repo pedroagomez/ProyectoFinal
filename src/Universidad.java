@@ -71,10 +71,10 @@ public class Universidad {
         return gestorAula.validarExistenciaAula(numero);
     }
     /// Veremos las aulas disponibles - Nos devuelve la cadena de caracteres mostrando las aulas libres
-    public String verAulasDisponibles()
+   /* public String verAulasDisponibles()
     {
         return gestorAula.verAulasDisponibles();
-    }
+    }*/
     /// Veremos las aulas con computadores disponibles
     public String verAulasComputadoras()
     {
@@ -91,7 +91,7 @@ public class Universidad {
         return gestorAula.listarAulas();
     }
     /// Nos devuelve todas las aulas disponibles en Univerdad
-    public String aulasNoDisponibles()
+   /* public String aulasNoDisponibles()
     {
         return gestorAula.aulaNoDisponible();
     }
@@ -100,7 +100,7 @@ public class Universidad {
     public boolean corroborarSiEstaDisponible()
     {
         return gestorAula.verSiEstaDisponible();
-    }
+    }*/
 
     // HACER METODO PARA ELEGIR PROFE Y METERLO EN MATERIA
 
