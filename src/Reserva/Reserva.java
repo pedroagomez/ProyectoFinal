@@ -59,12 +59,23 @@ public class Reserva {
             return mensaje;
         }
 
-        public boolean cancelarReserva(EnumDia dia, EnumHorarios hora, Aula aula) {
+        public boolean isEmpty()
+        {
+            return configurador.isEmpty();
+        }
+
+        public boolean cancelarReserva(EnumDia dia, EnumHorarios hora) {
             boolean reservaCancelada=false;
             if (configurador.containsKey(dia)) {
                 ManejoDias manejoDias = configurador.get(dia);
-                manejoDias.eliminarAulaEnHorario(hora, aula);
-                reservaCancelada=true;
+                if(manejoDias!=null)
+                {
+                    reservaCancelada= manejoDias.eliminarAulaEnHorario(hora);
+                    if(manejoDias.isEmpty())
+                    {
+                        configurador.remove(dia);
+                    }
+                }
             }
             return reservaCancelada;
         }

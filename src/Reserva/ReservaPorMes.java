@@ -56,13 +56,20 @@ public class ReservaPorMes {
     }
 
 
-    public boolean cancelarReserva(EnumMes mes,EnumSemana numSemana,EnumDia dia, EnumHorarios hora, Aula aula)
+    public boolean cancelarReserva(EnumMes mes,EnumSemana numSemana,EnumDia dia, EnumHorarios hora)
     {
         boolean reservaCancelada=false;
         if (reservaMensual.containsKey(mes)) {
             ReservaPorSemana reservaAux = reservaMensual.get(mes);
-            reservaAux.cancelarReserva(numSemana,dia,hora,aula);
-            reservaCancelada=true;
+            if(reservaAux!=null)
+            {
+                reservaCancelada=reservaAux.cancelarReserva(numSemana,dia,hora);
+                if(reservaAux.isEmpty())
+                {
+                    reservaMensual.remove(mes);
+                }
+            }
+
         }
         return  reservaCancelada;
     }

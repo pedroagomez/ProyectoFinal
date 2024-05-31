@@ -58,15 +58,19 @@ public class ManejoDias {
         return reservado;
     }
 
+    public boolean isEmpty()
+    {
+        return horarios.isEmpty();
+    }
 
-    public boolean eliminarAulaEnHorario(EnumHorarios hora, Aula aula) {
+    public boolean eliminarAulaEnHorario(EnumHorarios hora) {
         boolean darBaja = false;
         if (horarios.containsKey(hora))
         {
             GestionColeccion<Aula> setAula = horarios.get(hora);
-            if (setAula != null && setAula.eliminar(aula))
+            if (setAula != null)
             {
-                //aula.setDisponible(true);
+                horarios.remove(hora);
                 darBaja = true;
             }
         }

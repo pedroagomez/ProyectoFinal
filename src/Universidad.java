@@ -181,9 +181,9 @@ public class Universidad {
         return reservaMes.agregar(mes,numSemana,dia,hora,aula,materia);
     }
 
-    public boolean cancelarReserva(EnumMes mes, EnumSemana numSemana, EnumDia dia, EnumHorarios hora, Aula aula)
+    public boolean cancelarReserva(EnumMes mes, EnumSemana numSemana, EnumDia dia, EnumHorarios hora)
     {
-        return reservaMes.cancelarReserva(mes,numSemana,dia,hora,aula);
+        return reservaMes.cancelarReserva(mes,numSemana,dia,hora);
     }
 
     public String verReservasMes(EnumMes mes)

@@ -370,6 +370,9 @@ public class Main {
             {
                 case 1 -> verReservas(entrada,universidad);
                 case 2 ->agregarReserva(entrada,universidad);
+                case 3 -> cancelarReserva(entrada,universidad);
+                case 0 -> System.out.println("Saliendo ..");
+                default -> System.out.println("Opcion invalida");
             }
         }while(opcion!=0);
 
@@ -651,6 +654,81 @@ public class Main {
         }
     }
 
+    //=======================================================================
+    public static void cancelarReserva(Scanner entrada, Universidad universidad)
+    {
+        System.out.println("Ingrese el mes (elija una de las siguientes opciones): ");
+        for (EnumMes mesEnum : EnumMes.values()) {
+            System.out.println(mesEnum.name());
+        }
+        EnumMes mes = null;
+        while (mes == null) {
+            String mesString = entrada.nextLine();
+            //entrada.nextLine();
+            try {
+                mes = EnumMes.valueOf(mesString.toUpperCase());
+            } catch (IllegalArgumentException e) {
+                System.out.println("Mes ingresado no válido. Por favor, ingrese un mes válido.");
+            }
+        }
+
+
+        System.out.println("Ingrese la semana (elija una de las siguientes opciones): ");
+        for (EnumSemana semanaEnum : EnumSemana.values()) {
+            System.out.println(semanaEnum.name());
+        }
+        EnumSemana semana = null;
+        while (semana == null) {
+            String semanaString = entrada.nextLine();
+            try {
+                semana = EnumSemana.valueOf(semanaString.toUpperCase());
+            } catch (IllegalArgumentException e) {
+                System.out.println("Semana ingresada no válida. Por favor, ingrese una semana válida.");
+            }
+        }
+
+
+        System.out.println("Ingrese el día (elija una de las siguientes opciones): ");
+        for (EnumDia diaEnum : EnumDia.values()) {
+            System.out.println(diaEnum.name());
+        }
+        EnumDia dia = null;
+        while (dia == null) {
+            String diaString = entrada.nextLine();
+            try {
+                dia = EnumDia.valueOf(diaString.toUpperCase());
+            } catch (IllegalArgumentException e) {
+                System.out.println("Día ingresado no válido. Por favor, ingrese un día válido.");
+            }
+        }
+
+
+        System.out.println("Ingrese la hora (elija una de las siguientes opciones): ");
+        for (EnumHorarios horario : EnumHorarios.values()) {
+            System.out.println(horario.ordinal() + 1 + ". " + horario.name() + " (" + horario.getHoraInicio() + "-" + horario.getHoraFin() + ")");
+        }
+        EnumHorarios hora = null;
+        while (hora == null) {
+            while (!entrada.hasNextInt()) {
+                System.out.println("Entrada no válida. Por favor, ingrese un número: ");
+                entrada.next();
+            }
+            int elegirHora = entrada.nextInt();
+            if (elegirHora > 0 && elegirHora <= EnumHorarios.values().length) {  // al hacer un EnumHorarios.values automaticamente se crea un array
+                hora = EnumHorarios.values()[elegirHora - 1];       // accedemos a la pos del array.
+            } else {
+                System.out.println("Hora ingresada no válida. Por favor, ingrese un número válido.");
+            }
+        }
+        if(!universidad.cancelarReserva(mes,semana,dia,hora))
+        {
+            System.out.println("Reserva no encontrada");
+        }
+        else
+        {
+            System.out.println("La reserva ha sido cancelada");
+        }
+    }
 
 
 
