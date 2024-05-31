@@ -103,21 +103,6 @@ public class GestorAula {
         return builder.toString();
     }
 
-
-   /* public boolean verSiEstaDisponible()
-    {
-        boolean disponible= true;
-        for(Map.Entry<Integer,Aula>entry : mapaAula.entrySet())
-        {
-            Aula aula = entry.getValue();
-            if(!aula.isDisponible())
-            {
-                disponible=false;
-            }
-        }
-        return disponible;
-    }*/
-
     public String verAulasNormales() {
         StringBuilder builder = new StringBuilder();
         for (Map.Entry<Integer, Aula> entry : mapaAula.entrySet()) {
