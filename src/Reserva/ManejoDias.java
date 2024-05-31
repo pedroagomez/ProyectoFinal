@@ -5,6 +5,9 @@ import Enumeradores.EnumHorarios;
 import GestorColeccion.GestionColeccion;
 import Universidad.net.Materia;
 import Universidad.net.Profesor;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.*;
 
@@ -17,19 +20,41 @@ public class ManejoDias {
         this.horarios = new HashMap<>();
     }
 
+
+    public JSONArray toJson()  throws JSONException
+    {
+        JSONArray array = new JSONArray();
+        JSONObject objeto = new JSONObject();
+        for(Map.Entry<EnumHorarios,GestionColeccion<Aula>>it : horarios.entrySet())
+        {
+            objeto.put("Hora",it.getKey());
+           JSONArray aulasArray= new JSONArray();
+           for(Aula aula : it.getValue().getConjunto())
+           {
+               aulasArray.put(aula.toJson());
+           }
+           objeto.put("aulas",aulasArray);
+        }
+        array.put(objeto);
+
+        return array;
+
+    }
+
     ///ACA LAS NUEVAS MODIFICACIONES PARA AGREGAR AL PROFESOR Y LA RESERVA
     public boolean agregarAulaEnHorario(EnumHorarios hora, Aula aula, Materia materia) {
         boolean reservado = false;
-        if (!horarios.containsKey(hora)) {
-            horarios.put(hora, new GestionColeccion<Aula>());
-        }
-        GestionColeccion<Aula> aulasEnHorario = horarios.get(hora);
-        if (!aulasEnHorario.verificarExistenciaElemento(aula)) {
-            aula.setMateria(materia);
-            aulasEnHorario.agregar(aula);
-            aula.setDisponible(false);
-            reservado = true;
-        }
+
+            if (!horarios.containsKey(hora)) {
+                horarios.put(hora, new GestionColeccion<Aula>());
+            }
+            GestionColeccion<Aula> aulasEnHorario = horarios.get(hora);
+            if (!aulasEnHorario.verificarExistenciaElemento(aula)) {
+                aula.setMateria(materia);
+                aulasEnHorario.agregar(aula);
+                reservado = true;
+            }
+
         return reservado;
     }
 
@@ -41,7 +66,7 @@ public class ManejoDias {
             GestionColeccion<Aula> setAula = horarios.get(hora);
             if (setAula != null && setAula.eliminar(aula))
             {
-                aula.setDisponible(true);
+                //aula.setDisponible(true);
                 darBaja = true;
             }
         }
@@ -61,6 +86,20 @@ public class ManejoDias {
             }
         }
         return cadena;
+    }
+
+    public boolean verDisponible(EnumHorarios hora, Aula aula){
+        boolean disponible = true;
+        GestionColeccion<Aula> aux = null;
+        aux = horarios.get(hora);
+        Aula aulita = null;
+        if (aux != null){
+            aulita = aux.devolverElementoElemento(aula);
+            if (aulita.getNumeroAula() == aula.getNumeroAula()){
+                disponible = false;
+            }
+        }
+        return disponible;
     }
 
     @Override

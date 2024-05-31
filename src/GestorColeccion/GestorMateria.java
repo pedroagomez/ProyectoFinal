@@ -2,16 +2,33 @@ package GestorColeccion;
 
 import Universidad.net.Materia;
 import Universidad.net.Profesor;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-public class GestorMateria {
+public class GestorMateria implements Serializable {
 
     private GestionColeccion<Materia>conjuntoMaterias;
 
     public GestorMateria() {
         this.conjuntoMaterias = new GestionColeccion<>();
+    }
+
+
+    public JSONArray toJson() throws JSONException
+    {
+        JSONArray array = new JSONArray();
+        JSONObject object = new JSONObject();
+        for(Materia materia : conjuntoMaterias.getConjunto())
+        {
+            array.put(materia.toJson());
+        }
+
+        return array;
     }
 
     public void agregarMateria(Materia materia)
@@ -22,6 +39,20 @@ public class GestorMateria {
     public void eliminarMateria(Materia materia)
     {
         conjuntoMaterias.eliminar(materia);
+    }
+
+    public boolean eliminarMateriaPorId(int id)
+    {
+        boolean eliminado=false;
+        for(Materia materia :conjuntoMaterias.getConjunto())
+        {
+            if(materia.getId()==id)
+            {
+                conjuntoMaterias.eliminar(materia);
+                eliminado=true;
+            }
+        }
+        return  eliminado;
     }
 
     

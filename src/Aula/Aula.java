@@ -3,26 +3,43 @@ package Aula;
 
 import Universidad.net.Materia;
 import Universidad.net.Profesor;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public abstract class Aula {
+public abstract class Aula  implements Serializable {
     private int numeroAula;
     private int capacidad;
     private boolean proyector;
     private boolean tele;
-    private boolean disponible;
+
     private Materia materia;
 
 
-    public Aula(int numeroAula, int capacidad, boolean proyector, boolean tele, boolean disponible) {
+    public Aula(int numeroAula, int capacidad, boolean proyector, boolean tele) {
         this.numeroAula = numeroAula;
         this.capacidad = capacidad;
         this.proyector = proyector;
         this.tele = tele;
-        this.disponible = disponible;
         this.materia = null;
     }
+
+    public JSONObject toJson() throws JSONException {
+        JSONObject obj = new JSONObject();
+        obj.put("numeroAula", this.numeroAula);
+        obj.put("capacidad", this.capacidad);
+        obj.put("proyector", this.proyector);
+        obj.put("tele", this.tele);
+        if (this.materia != null) {
+            obj.put("materia", this.materia.toJson());
+        } else {
+            obj.put("materia", JSONObject.NULL);
+        }
+        return obj;
+    }
+
 
     public int getNumeroAula() {
         return numeroAula;
@@ -52,14 +69,6 @@ public abstract class Aula {
         this.tele = tele;
     }
 
-    public boolean isDisponible() {
-        return disponible;
-    }
-
-    public void setDisponible(boolean disponible) {
-        this.disponible = disponible;
-    }
-
 
     public Materia getMateria() {
         return materia;
@@ -70,7 +79,7 @@ public abstract class Aula {
     }
 
 
-
+    public abstract String toStringSinMateria();
     @Override
     public String toString() {
         return "Aula{" +
@@ -78,7 +87,6 @@ public abstract class Aula {
                 ", capacidad=" + capacidad +
                 ", proyector=" + proyector +
                 ", tele=" + tele +
-                ", disponible=" + disponible +
                 ", materia=" + materia +
                 '}';
     }

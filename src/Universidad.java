@@ -12,6 +12,9 @@ import Aula.*;
 import java.util.HashSet;
 import java.util.LinkedList;
 import Reserva.*;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class Universidad {
     private GestorAula gestorAula;
     private GestorProfesor gestorProfesor;
@@ -26,6 +29,32 @@ public class Universidad {
     }
 
 
+    public JSONObject toJson() throws JSONException
+    {
+        JSONObject objeto= new JSONObject();
+        objeto.put("Reservas",reservaMes.toJson());
+        return objeto;
+    }
+
+    // ============================ GETTERS AND SETTERS
+    public GestorAula getGestorAula() {
+        return gestorAula;
+    }
+
+    public GestorProfesor getGestorProfesor() {
+        return gestorProfesor;
+    }
+
+    public GestorMateria getGestorMateria() {
+        return gestorMateria;
+    }
+
+    public ReservaPorMes getReservaMes() {
+        return reservaMes;
+    }
+
+
+
 
     //============================================
     //              METODOS AULA
@@ -36,11 +65,16 @@ public class Universidad {
     {
         gestorAula.agregarAula(aulita.getNumeroAula(),aulita);
     }
+
+    public boolean validarExistenciaDeAula(int numero)
+    {
+        return gestorAula.validarExistenciaAula(numero);
+    }
     /// Veremos las aulas disponibles - Nos devuelve la cadena de caracteres mostrando las aulas libres
-    public String verAulasDisponibles()
+   /* public String verAulasDisponibles()
     {
         return gestorAula.verAulasDisponibles();
-    }
+    }*/
     /// Veremos las aulas con computadores disponibles
     public String verAulasComputadoras()
     {
@@ -57,10 +91,19 @@ public class Universidad {
         return gestorAula.listarAulas();
     }
     /// Nos devuelve todas las aulas disponibles en Univerdad
-    public String aulasNoDisponibles()
+   /* public String aulasNoDisponibles()
     {
         return gestorAula.aulaNoDisponible();
     }
+
+
+    public boolean corroborarSiEstaDisponible()
+    {
+        return gestorAula.verSiEstaDisponible();
+    }*/
+
+    // HACER METODO PARA ELEGIR PROFE Y METERLO EN MATERIA
+
 
 
 
@@ -79,6 +122,11 @@ public class Universidad {
     {
         return gestorProfesor.listarProfesores();
     }
+
+    public boolean eliminarProfesorPorLegajo(int legajo)
+    {
+       return gestorProfesor.eliminarProfesorPorLegajo(legajo);
+    }
     /// Buscar y retornar un profesor por legajo
     public Profesor buscarProfesorPorLegajo(int legajo){
         return gestorProfesor.buscarProfesorPorLegajo(legajo);
@@ -90,7 +138,7 @@ public class Universidad {
 
 
     /// Cargar una materia nueva
-    public void cargarMaterias(Materia materia)
+    public void agregarMateria(Materia materia)
     {
         gestorMateria.agregarMateria(materia);
     }
@@ -98,6 +146,11 @@ public class Universidad {
     public String listarMaterias()
     {
         return gestorMateria.listarMaterias();
+    }
+
+    public boolean eliminarMateriaPorId( int id)
+    {
+        return gestorMateria.eliminarMateriaPorId(id);
     }
 
 
@@ -133,14 +186,34 @@ public class Universidad {
         return reservaMes.cancelarReserva(mes,numSemana,dia,hora,aula);
     }
 
+    public String verReservasMes(EnumMes mes)
+    {
+        return reservaMes.accederAMes(mes);
+    }
 
-    public String buscarYretornarProfeYAula(Profesor profe, ReservaPorMes reserva){
-        StringBuilder cadena = new StringBuilder();
+    public String verReservas()
+    {
+        return  reservaMes.toString();
+    }
 
+    public String verReservasDiaDeterminado(EnumMes mes,EnumSemana semana, EnumDia dia)
+    {
+        return reservaMes.verReservaDia(dia,semana,mes);
+    }
 
+    public String verReservaSemanaDeterminada(EnumMes mes,EnumSemana semana)
+    {
+        return  reservaMes.verReservaSemana(mes,semana);
+    }
 
+    public boolean comprobarDisponibilidad(EnumMes mes, EnumSemana semana, EnumDia dia, EnumHorarios hora, Aula aula){
+        return reservaMes.verDisponibilidad(dia,semana,mes,hora,aula);
+    }
 
-        return cadena.toString();
+    public String buscarYretornarProfeYAula(Profesor profe){
+        StringBuilder builder =new StringBuilder();
+        builder.append(reservaMes.retornoProfesorPorMes(profe));
+        return builder.toString();
     }
 
 

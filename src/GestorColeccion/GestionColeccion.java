@@ -2,6 +2,9 @@ package GestorColeccion;
 
 
 import Universidad.net.Profesor;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.*;
 import java.util.HashSet;
@@ -16,6 +19,7 @@ public class GestionColeccion<T> implements IGestion<T>{
     public GestionColeccion() {
         this.conjunto = new HashSet<T>();
     }
+
 
 
     //AGREGAR ELEMENTO
@@ -50,6 +54,8 @@ public class GestionColeccion<T> implements IGestion<T>{
         return conjunto;
     }
 
+
+
     public void setConjunto(HashSet<T> conjunto) {
         this.conjunto = conjunto;
     }
@@ -74,6 +80,19 @@ public class GestionColeccion<T> implements IGestion<T>{
         return builder.toString();
     }
 
+    public T devolverElementoElemento(T elemento) {
+
+        boolean encontrado = false;
+        Iterator<T> it = conjunto.iterator();
+        T dato = null;
+        while (it.hasNext() && encontrado == false) {
+            dato = it.next();
+            if (dato.equals(elemento)) {
+                encontrado = true;
+            }
+        }
+        return dato;
+    }
 
 
 
@@ -121,6 +140,7 @@ public class GestionColeccion<T> implements IGestion<T>{
             ObjectInputStream ois=new ObjectInputStream(fis);
             boolean bandera = true;
             while (bandera) {
+
                 agregar((T)ois.readObject());
             }
         } catch (FileNotFoundException e) {
