@@ -44,11 +44,13 @@ public class GestorMateria implements Serializable {
     public boolean eliminarMateriaPorId(int id)
     {
         boolean eliminado=false;
-        for(Materia materia :conjuntoMaterias.getConjunto())
+        Iterator<Materia> it = conjuntoMaterias.getConjuntoIterator();
+        while(it.hasNext())
         {
+            Materia materia = it.next();
             if(materia.getId()==id)
             {
-                conjuntoMaterias.eliminar(materia);
+                it.remove();
                 eliminado=true;
             }
         }

@@ -31,9 +31,17 @@ public class Main {
 
         // Leer los datos de los archivos al iniciar
 
-        //universidad.cargarArchivoGestores();
+        //
 
-        universidad.leerArchivoGestores();
+        try
+        {
+            universidad.leerArchivoGestores();
+        }catch (Exception e)
+        {
+            System.out.println("Error al abrir archivo");
+            universidad.cargarArchivoGestores();
+        }
+
 
         int opcion;
         Scanner entrada = new Scanner(System.in);

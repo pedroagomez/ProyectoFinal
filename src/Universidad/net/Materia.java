@@ -69,8 +69,7 @@ public class Materia implements Serializable {
 
     @Override
     public String toString() {
-        return "Materia{" +
-                "nombre='" + nombre + '\'' +
+        return   "Nombre='" + nombre + '\'' +
                 ", id=" + id +
                 ",\t profesor=" + profesor +
                 '}';
