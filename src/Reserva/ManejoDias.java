@@ -91,9 +91,13 @@ public class ManejoDias {
 
     public boolean verDisponible(EnumHorarios hora, Aula aula){
         boolean disponible = true;
-        GestionColeccion<Aula> aux = horarios.get(hora);
-        boolean existe = aux.verificarExistenciaElemento(aula);
-        if (existe){
+        GestionColeccion<Aula> aux = null;
+        aux = horarios.get(hora);
+        Aula aulita = null;
+        if (aux != null){
+            aulita = aux.devolverElementoElemento(aula);
+        }
+        if (aulita != null){
             disponible = false;
         }
 
