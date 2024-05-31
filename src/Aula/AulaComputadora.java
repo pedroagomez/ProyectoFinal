@@ -4,8 +4,8 @@ public class AulaComputadora extends Aula{
     private int cantidadComputadoras;
     private boolean auriculares;
 
-    public AulaComputadora(int numeroAula, int capacidad, boolean proyector, boolean tele, boolean disponible, int cantidadComputadoras, boolean auriculares) {
-        super(numeroAula, capacidad, proyector, tele, disponible);
+    public AulaComputadora(int numeroAula, int capacidad, boolean proyector, boolean tele, int cantidadComputadoras, boolean auriculares) {
+        super(numeroAula, capacidad, proyector, tele);
         this.cantidadComputadoras = cantidadComputadoras;
         this.auriculares = auriculares;
     }
