@@ -27,6 +27,16 @@ public class AulaComputadora extends Aula{
     }
 
     @Override
+    public String toStringSinMateria() {
+            return   "NumeroAula=" + this.getNumeroAula() +
+                    ", capacidad=" + this.getCapacidad() +
+                    ", computadoras=" + this.getCantidadComputadoras() +
+                    ", proyector=" + this.isProyector() +
+                    ", tele=" + this.isTele() +
+                    ", Auriculares=" + this.isAuriculares();
+    }
+
+    @Override
     public String toString() {
         return  "AulaComputadora{" +
                  "cantidadComputadoras=" + cantidadComputadoras +

@@ -6,6 +6,14 @@ public class AulaNormal extends Aula{
     }
 
     @Override
+    public String toStringSinMateria() {
+        return  "NumeroAula=" + this.getNumeroAula() +
+                ", capacidad=" + this.getCapacidad() +
+                ", proyector=" + this.isProyector() +
+                ", tele=" + this.isTele();
+    }
+
+    @Override
     public String toString() {
         return "Aula normal "+super.toString();
     }

@@ -40,6 +40,7 @@ public abstract class Aula  implements Serializable {
         return obj;
     }
 
+
     public int getNumeroAula() {
         return numeroAula;
     }
@@ -78,12 +79,7 @@ public abstract class Aula  implements Serializable {
     }
 
 
-    public String toStringSinMateria() {
-        return   "NumeroAula=" + numeroAula +
-                ", capacidad=" + capacidad +
-                ", proyector=" + proyector +
-                ", tele=" + tele;
-    }
+    public abstract String toStringSinMateria();
     @Override
     public String toString() {
         return "Aula{" +
