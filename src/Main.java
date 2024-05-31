@@ -151,13 +151,29 @@ public class Main {
                 case 1 -> System.out.println(universidad.verAulasComputadoras());
                 case 2 -> System.out.println(universidad.verAulasNormales());
                // case 3 -> System.out.println(universidad.verAulasDisponibles());
-                case 4 -> System.out.println(universidad.listarAulas());
+                case 4 -> listarAulas(universidad);
                 case 0 -> System.out.println("Saliendo...");
                 default -> System.out.println("Opción inválida");
             }
         } while (opcion != 0);
     }
     //===================================================================
+
+    public static void listarAulas(Universidad universidad)
+    {
+        if(universidad.listarAulas().isEmpty())
+        {
+            System.out.println("No hay aulas cargadas");
+        }
+        else
+        {
+            System.out.println(universidad.listarAulas());
+        }
+
+    }
+
+
+
     public static void menuCargarAula(Scanner entrada, Universidad universidad) {
         int opcion;
         do {
@@ -448,7 +464,15 @@ public class Main {
                 System.out.println("Día ingresado no válido. Por favor, ingrese un día válido.");
             }
         }
-        System.out.println(universidad.verReservasDiaDeterminado(mes,semana,dia));
+        if(universidad.verReservasDiaDeterminado(mes,semana,dia).isEmpty())
+        {
+            System.out.println("No hay reservas para la fecha ingersada");
+        }
+        else
+        {
+            System.out.println(universidad.verReservasDiaDeterminado(mes,semana,dia));
+        }
+
     }
     //===================================================================
     public static void verReservaSemanaDeterminado(Scanner entrada, Universidad universidad)
