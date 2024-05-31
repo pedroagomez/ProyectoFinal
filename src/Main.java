@@ -150,7 +150,7 @@ public class Main {
             switch (opcion) {
                 case 1 -> System.out.println(universidad.verAulasComputadoras());
                 case 2 -> System.out.println(universidad.verAulasNormales());
-                case 3 -> System.out.println(universidad.verAulasDisponibles());
+               // case 3 -> System.out.println(universidad.verAulasDisponibles());
                 case 4 -> System.out.println(universidad.listarAulas());
                 case 0 -> System.out.println("Saliendo...");
                 default -> System.out.println("Opción inválida");
@@ -239,14 +239,6 @@ public class Main {
                 boolean tele = entrada.nextBoolean();
                 entrada.nextLine();
 
-                System.out.println("¿El aula estará disponible? (true/false): ");
-                while (!entrada.hasNextBoolean()) {
-                    System.out.println("Entrada no válida. Por favor, ingrese true o false: ");
-                    entrada.next();
-                }
-                boolean disponible = entrada.nextBoolean();
-                entrada.nextLine();
-
                 System.out.println("¿Tiene auriculares? (true/false): ");
                 while (!entrada.hasNextBoolean()) {
                     System.out.println("Entrada no válida. Por favor, ingrese true o false: ");
@@ -255,7 +247,7 @@ public class Main {
                 boolean auriculares = entrada.nextBoolean();
                 entrada.nextLine();
 
-                Aula aula = new AulaComputadora(numeroAula, capacidad, proyector, tele, disponible, cantidad, auriculares);
+                Aula aula = new AulaComputadora(numeroAula, capacidad, proyector, tele, cantidad, auriculares);
                 universidad.agregarAula(aula);
 
                 do {
@@ -320,14 +312,8 @@ public class Main {
                 }
                 boolean tele = entrada.nextBoolean();
 
-                System.out.println("¿El aula estará disponible? (true/false): ");
-                while (!entrada.hasNextBoolean()) {
-                    System.out.println("Entrada no válida. Por favor, ingrese true o false: ");
-                    entrada.next();
-                }
-                boolean disponible = entrada.nextBoolean();
 
-                Aula aula = new AulaNormal(numeroAula, capacidad, proyector, tele, disponible);
+                Aula aula = new AulaNormal(numeroAula, capacidad, proyector, tele);
                 universidad.agregarAula(aula);
 
                 do {
@@ -410,6 +396,10 @@ public class Main {
     //===================================================================
     public static void verTodasLasReservas(Scanner entrada, Universidad universidad)
     {
+        if(universidad.verReservas().isEmpty())
+        {
+            System.out.println("Aun no hay reservas realizadas");
+        }
         System.out.println(universidad.verReservas());
     }
     //===================================================================
@@ -711,6 +701,10 @@ public class Main {
 
     public static void verListadoProfesores(Universidad universidad)
     {
+        if(universidad.listarProfesores().isEmpty())
+        {
+            System.out.println("Aun no hay profesores cargados");
+        }
         System.out.println(universidad.listarProfesores());
     }
 
@@ -804,7 +798,7 @@ public class Main {
     public static void verListadoDeMaterias(Universidad universidad)
     {
         if(universidad.listarMaterias().isEmpty()){
-            System.out.println("\n\t\tLista de materias cargada no encontrada");
+            System.out.println("\nLista de materias cargada no encontrada");
         }
         System.out.println(universidad.listarMaterias());
     }
