@@ -96,7 +96,6 @@ public class ManejoDias {
         if (aux != null){
             aulita = aux.devolverElementoElemento(aula);
             if (aulita.getNumeroAula() == aula.getNumeroAula()){
-                System.out.println("\t\nEL AULA INGRESADA YA EXISTE"); ///SI FUNCA TODO BORRAR ESTE SOUT
                 disponible = false;
             }
         }

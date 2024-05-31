@@ -617,7 +617,7 @@ public class Main {
                     System.out.println("Materia no encontrada. Por favor, ingrese un ID de materia valido.");
                 }
             }
-            String verReserva = "No se pudo realizar la reserva error 404";
+            String verReserva = "No se pudo realizar";
             if(universidad.comprobarDisponibilidad(mes,semana,dia,hora,aula)){
                 verReserva = universidad.agregarReserva(mes, semana, dia, hora, aula, materia);
             }
