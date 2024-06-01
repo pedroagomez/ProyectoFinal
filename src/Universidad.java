@@ -148,6 +148,13 @@ public class Universidad {
         return gestorMateria.listarMaterias();
     }
 
+    public String verMateriaDetalle()
+
+
+    {
+        return gestorMateria.verMateriaDetalle();
+    }
+
     public boolean eliminarMateriaPorId( int id)
     {
         return gestorMateria.eliminarMateriaPorId(id);

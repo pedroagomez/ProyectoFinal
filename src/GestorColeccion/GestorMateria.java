@@ -78,6 +78,21 @@ public class GestorMateria implements Serializable {
         return builder.toString();
     }
 
+    public String verMateriaDetalle() {
+        StringBuilder builder = new StringBuilder();
+        Iterator<Materia> it = conjuntoMaterias.getConjuntoIterator();
+        if (!it.hasNext()) {
+            return "No hay materias cargadas";
+        }
+        while (it.hasNext()) {
+            Materia materia = it.next();
+            if (materia != null) {
+                builder.append(materia.verMateriaDetalle()).append("\n");
+            }
+        }
+        return builder.toString();
+    }
+
     //devuelve la materia en si
     public Materia devolverMateria(int id)
     {

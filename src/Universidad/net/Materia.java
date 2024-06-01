@@ -75,6 +75,12 @@ public class Materia implements Serializable {
                 '}';
     }
 
+    public String verMateriaDetalle()
+    {
+        return "Materia: " + this.nombre + ", ID: " + id;
+
+    }
+
     public Profesor getProfesor() {
         return profesor;
     }
