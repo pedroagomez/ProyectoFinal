@@ -14,16 +14,15 @@ public abstract class Aula  implements Serializable {
     private int capacidad;
     private boolean proyector;
     private boolean tele;
-    private boolean disponible;
+
     private Materia materia;
 
 
-    public Aula(int numeroAula, int capacidad, boolean proyector, boolean tele, boolean disponible) {
+    public Aula(int numeroAula, int capacidad, boolean proyector, boolean tele) {
         this.numeroAula = numeroAula;
         this.capacidad = capacidad;
         this.proyector = proyector;
         this.tele = tele;
-        this.disponible = disponible;
         this.materia = null;
     }
 
@@ -33,7 +32,6 @@ public abstract class Aula  implements Serializable {
         obj.put("capacidad", this.capacidad);
         obj.put("proyector", this.proyector);
         obj.put("tele", this.tele);
-        obj.put("disponible", this.disponible);
         if (this.materia != null) {
             obj.put("materia", this.materia.toJson());
         } else {
@@ -41,6 +39,7 @@ public abstract class Aula  implements Serializable {
         }
         return obj;
     }
+
 
     public int getNumeroAula() {
         return numeroAula;
@@ -70,14 +69,6 @@ public abstract class Aula  implements Serializable {
         this.tele = tele;
     }
 
-    public boolean isDisponible() {
-        return disponible;
-    }
-
-    public void setDisponible(boolean disponible) {
-        this.disponible = disponible;
-    }
-
 
     public Materia getMateria() {
         return materia;
@@ -88,13 +79,7 @@ public abstract class Aula  implements Serializable {
     }
 
 
-    public String toStringSinMateria() {
-        return   "NumeroAula=" + numeroAula +
-                ", capacidad=" + capacidad +
-                ", proyector=" + proyector +
-                ", tele=" + tele +
-                ", disponible=" + disponible ;
-    }
+    public abstract String toStringSinMateria();
     @Override
     public String toString() {
         return "Aula{" +
@@ -102,7 +87,6 @@ public abstract class Aula  implements Serializable {
                 ", capacidad=" + capacidad +
                 ", proyector=" + proyector +
                 ", tele=" + tele +
-                ", disponible=" + disponible +
                 ", materia=" + materia +
                 '}';
     }
