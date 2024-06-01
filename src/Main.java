@@ -608,6 +608,7 @@ public class Main {
         boolean aulaEncontrada = false;
         while (!aulaEncontrada && intentos < 3) {
             System.out.println("Ingrese el número de aula: ");
+            System.out.println("Usted tiene disponible las siguientes aulas = " + universidad.renotarAulasDisponiblesParaHoraEspecifica(mes,semana,dia,hora));
             while (!entrada.hasNextInt()) {
                 System.out.println("Entrada no válida. Por favor, ingrese un número de aula válido: ");
                 entrada.next();

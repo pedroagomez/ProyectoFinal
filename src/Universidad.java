@@ -217,6 +217,19 @@ public class Universidad {
         return reservaMes.verDisponibilidad(dia,semana,mes,hora,aula);
     }
 
+    public String renotarAulasDisponiblesParaHoraEspecifica (EnumMes mes, EnumSemana semana, EnumDia dia,EnumHorarios hora){
+        LinkedList<Aula> misAulas = new LinkedList<>();
+        LinkedList<Aula> misAulasCargadas = gestorAula.retornoAulas();
+        StringBuilder cadenaAula = new StringBuilder();
+        int iterador = misAulasCargadas.size();
+        for(int i = 0; i<iterador; i++){
+            if (comprobarDisponibilidad(mes,semana,dia,hora,misAulasCargadas.get(i))){
+                cadenaAula.append(misAulasCargadas.get(i));
+            }
+        }
+        return cadenaAula.toString();
+    }
+
     public String buscarYretornarProfeYAula(Profesor profe){
         StringBuilder builder =new StringBuilder();
         builder.append(reservaMes.retornoProfesorPorMes(profe));

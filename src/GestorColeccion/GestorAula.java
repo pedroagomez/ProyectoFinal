@@ -9,6 +9,7 @@ import javax.swing.plaf.basic.BasicButtonUI;
 import java.io.*;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Map;
 
 public class GestorAula {
@@ -88,7 +89,7 @@ public class GestorAula {
         return builder.toString();
     }*/
 
-
+    //LISTA LAS
 
     // LISTA TODAS LAS AULAS QUE TIENEN UNA COMPUTADORA
     public String verAulasConComputadoras() {
@@ -114,6 +115,22 @@ public class GestorAula {
         }
         return builder.toString();
     }
+
+    //Retorno Aulas
+
+    public LinkedList<Aula> retornoAulas()
+    {
+        LinkedList<Aula> aux = new LinkedList<>();
+        Iterator<Map.Entry<Integer,Aula>> it = mapaAula.entrySet().iterator();
+
+        while(it.hasNext())
+        {
+            Map.Entry<Integer,Aula>conjunto = it.next();
+            aux.add(conjunto.getValue());
+        }
+        return aux;
+    }
+
 
     //MUESTRA TODAS LAS AULAS
     public String listarAulas()
