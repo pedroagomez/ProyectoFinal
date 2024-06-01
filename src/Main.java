@@ -606,7 +606,7 @@ public class Main {
         Aula aula = null;
         int intentos = 0;
         boolean aulaEncontrada = false;
-        while (!aulaEncontrada && intentos < 3 ) {
+        while (!aulaEncontrada && intentos < 3) {
             System.out.println("Ingrese el número de aula: ");
             while (!entrada.hasNextInt()) {
                 System.out.println("Entrada no válida. Por favor, ingrese un número de aula válido: ");
@@ -619,35 +619,30 @@ public class Main {
             if (aula == null) {
                 System.out.println("Aula no encontrada. Por favor, ingrese un número de aula válido.");
                 intentos++;
-            }
-            else {
-                    aulaEncontrada = true;
+            } else {
+                aulaEncontrada = true;
             }
             entrada.nextLine();
         }
 
+        Materia materia = null;
         if (aulaEncontrada) {
-
             System.out.println("Ingrese el ID de la materia: ");
-           // System.out.println(universidad.verMateriaDetalle()); // CODIGO AGREGADO
+            // System.out.println(universidad.verMateriaDetalle()); // CODIGO AGREGADO
             while (!entrada.hasNextInt()) {
                 System.out.println("Entrada no valida. Por favor, ingrese un ID de materia válido: ");
                 entrada.next();
             }
             int idMateria = entrada.nextInt();
-            Materia materia = null;
-            while (materia == null) {
-                try {
-                    materia = universidad.getGestorMateria().devolverMateria(idMateria);
-                } catch (IllegalArgumentException e) {
-                    System.out.println("Materia no encontrada. Por favor, ingrese un ID de materia valido.");
-                }
-            }
+            materia = universidad.getGestorMateria().devolverMateria(idMateria);
             String verReserva = "No se pudo realizar";
-            if(universidad.comprobarDisponibilidad(mes,semana,dia,hora,aula)){
+            if (universidad.comprobarDisponibilidad(mes, semana, dia, hora, aula) && materia != null) {
                 verReserva = universidad.agregarReserva(mes, semana, dia, hora, aula, materia);
             }
             System.out.println(verReserva);
+            if (materia == null){
+                System.out.println("\tNo hay materias agregadas o indico una materia que no existe");
+            }
         } else {
             System.out.println("No se pudo realizar la reserva debido a intentos fallidos con el número de aula.");
         }
