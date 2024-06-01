@@ -119,8 +119,10 @@ public class ReservaPorSemana {
 
     @Override
     public String toString() {
-        return "SemanaReserva " +
-                "reservaSemana=" + reservaPorSemana
-                ;
+        StringBuilder builder = new StringBuilder();
+        reservaPorSemana.forEach((semana, manejoDias) -> {
+            builder.append("\t").append(semana).append(":\n").append(manejoDias).append("\n");
+        });
+        return builder.toString();
     }
 }

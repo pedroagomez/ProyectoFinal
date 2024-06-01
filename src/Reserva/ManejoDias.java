@@ -109,21 +109,20 @@ public class ManejoDias {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        Iterator<Map.Entry<EnumHorarios,GestionColeccion<Aula>>> it= horarios.entrySet().iterator();
-        while(it.hasNext())
-        {
-            Map.Entry<EnumHorarios,GestionColeccion<Aula>>conjunto =it.next();
-            builder.append("\tHorario: ").append(conjunto.getKey());
-            builder.append("\t\t\t\t\t\t Aula : ");
-            GestionColeccion<Aula> conjuntoSet=conjunto.getValue();
-            Iterator<Aula> iterator= conjuntoSet.getConjuntoIterator();
-            while(iterator.hasNext())
-            {
-                Aula aula= iterator.next();
-                builder.append(aula.getNumeroAula()).append(aula.getMateria().obtenerInformacionDetallada()).append("\n");
+        Iterator<Map.Entry<EnumHorarios, GestionColeccion<Aula>>> it = horarios.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry<EnumHorarios, GestionColeccion<Aula>> conjunto = it.next();
+            builder.append("\tHorario: ").append(conjunto.getKey()).append("\n");
+            builder.append("\t\tAulas: ");
+            GestionColeccion<Aula> conjuntoSet = conjunto.getValue();
+            Iterator<Aula> iterator = conjuntoSet.getConjuntoIterator();
+            while (iterator.hasNext()) {
+                Aula aula = iterator.next();
+                builder.append("\n\t\t\tAula: ").append(aula.getNumeroAula()).append(", ");
+                builder.append(aula.getMateria().obtenerInformacionDetallada());
             }
+            builder.append("\n");
         }
-
         return builder.toString();
     }
 }

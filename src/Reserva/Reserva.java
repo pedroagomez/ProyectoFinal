@@ -115,14 +115,13 @@ public class Reserva {
         }
 
 
-        @Override
-        public String toString() {
-            StringBuilder builder = new StringBuilder();
-            configurador.forEach((dia, manejoDias) -> {
-                builder.append(dia).append(":\n\t");
-                builder.append(manejoDias).append("\n\t");
-            });
-            return builder.toString();
-        }
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        configurador.forEach((dia, manejoDias) -> {
+            builder.append(dia).append(":\n").append(manejoDias).append("\n");
+        });
+        return builder.toString();
+    }
 }
 

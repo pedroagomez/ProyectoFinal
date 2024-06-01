@@ -153,10 +153,14 @@ public class ReservaPorMes {
     }
 
 
+
     @Override
     public String toString() {
-        return
-                "reservaMensual=" + reservaMensual +
-                '}';
+        StringBuilder builder = new StringBuilder();
+        builder.append("Reserva Mensual:\n");
+        reservaMensual.forEach((mes, semana) -> {
+            builder.append(mes).append(":\n").append(semana).append("\n");
+        });
+        return builder.toString();
     }
 }
