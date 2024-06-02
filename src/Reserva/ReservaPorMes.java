@@ -36,28 +36,40 @@ public class ReservaPorMes {
 
     }
 
+    public LinkedHashMap<EnumMes, ReservaPorSemana> getReservaMensual() {
+        return reservaMensual;
+    }
+
     public String agregar(EnumMes mes, EnumSemana numSemana, EnumDia dia, EnumHorarios hora, Aula aula, Materia materia){
         String mensaje = "";
 
-        ReservaPorSemana reservaAux = reservaMensual.get(mes); // Me trae el mes si hay
-        if(reservaAux == null)                           // Si el mes no existe
-        {
-            reservaAux = new ReservaPorSemana();              // agrega el mes
-            reservaMensual.put(mes,reservaAux);
-        }
-        mensaje = reservaAux.agregar(numSemana,dia,hora,aula,materia);
+
+            ReservaPorSemana reservaAux = reservaMensual.get(mes); // Me trae el mes si hay
+            if(reservaAux == null)                           // Si el mes no existe
+            {
+                reservaAux = new ReservaPorSemana();              // agrega el mes
+                reservaMensual.put(mes,reservaAux);
+            }
+            mensaje = reservaAux.agregar(numSemana,dia,hora,aula,materia);
 
         return mensaje;
     }
 
 
-    public boolean cancelarReserva(EnumMes mes,EnumSemana numSemana,EnumDia dia, EnumHorarios hora, Aula aula)
+    public boolean cancelarReserva(EnumMes mes,EnumSemana numSemana,EnumDia dia, EnumHorarios hora)
     {
         boolean reservaCancelada=false;
         if (reservaMensual.containsKey(mes)) {
             ReservaPorSemana reservaAux = reservaMensual.get(mes);
-            reservaAux.cancelarReserva(numSemana,dia,hora,aula);
-            reservaCancelada=true;
+            if(reservaAux!=null)
+            {
+                reservaCancelada=reservaAux.cancelarReserva(numSemana,dia,hora);
+                if(reservaAux.isEmpty())
+                {
+                    reservaMensual.remove(mes);
+                }
+            }
+
         }
         return  reservaCancelada;
     }
@@ -75,13 +87,18 @@ public class ReservaPorMes {
     }
     public String accederAMes (EnumMes mes){
         ReservaPorSemana aux = null;
-        if(reservaMensual.containsKey(mes))
+        String mensaje = "";
+        if(reservaMensual.containsKey(mes)){
             aux = reservaMensual.get(mes);
-        return aux.toString();
+            mensaje = aux.toString();
+        }else {
+            mensaje = "No encontrado";
+        }
+        return mensaje;
     }
 
 
-    public String verReservaDiaDeterminado(EnumDia dia)
+    /*public String verReservaDiaDeterminado(EnumDia dia)
     {
         StringBuilder builder=new StringBuilder();
         for(EnumMes mes : reservaMensual.keySet())
@@ -92,24 +109,58 @@ public class ReservaPorMes {
         }
 
         return builder.toString();
-    }
+    }*/
 
-    public String verReservaSemana(EnumSemana semana)
+    public String verReservaSemana(EnumMes mes, EnumSemana semana)
     {
         StringBuilder builder=new StringBuilder();
-        for(EnumMes aux : reservaMensual.keySet())
+        if(reservaMensual.containsKey(mes))
         {
-            ReservaPorSemana reservaPorSemana = reservaMensual.get(aux);
-            String sem = reservaPorSemana.accederASemana(semana);
-            builder.append(sem.toString()).append("\n");
+            ReservaPorSemana reservaPorSemana = reservaMensual.get(mes);
+            builder.append(reservaPorSemana.accederASemana(semana)).append("\n");
+        }else{
+            builder = new StringBuilder();
+            builder.append("null");
         }
+
         return builder.toString();
     }
+    public String verReservaDia(EnumDia dia,EnumSemana semana,EnumMes mes)
+    {
+        StringBuilder aux=new StringBuilder();
+        StringBuilder builder=new StringBuilder();
+        if(reservaMensual.containsKey(mes))
+        {
+            ReservaPorSemana reserva = reservaMensual.get(mes);
+            String diaSemana = reserva.verReservaDia(dia,semana);
+            aux=builder.append(reserva.verReservaDia(dia,semana)).append("\n");
+        } else
+        {
+            aux=builder.append("Reserva no encontrada");
+        }
+
+        return  builder.toString();
+    }
+
+    public boolean verDisponibilidad(EnumDia dia,EnumSemana semana,EnumMes mes,EnumHorarios hora, Aula aula ){
+        boolean disponibilidad=true;
+        ReservaPorSemana aux = null;
+        aux = reservaMensual.get(mes);
+        if(aux != null){
+            disponibilidad = aux.verDisponibilidad(dia,semana,hora,aula);
+        }
+        return disponibilidad;
+    }
+
+
 
     @Override
     public String toString() {
-        return
-                "reservaMensual=" + reservaMensual +
-                        '}';
+        StringBuilder builder = new StringBuilder();
+        builder.append("Reserva Mensual:\n");
+        reservaMensual.forEach((mes, semana) -> {
+            builder.append(mes).append(":\n").append(semana).append("\n");
+        });
+        return builder.toString();
     }
 }

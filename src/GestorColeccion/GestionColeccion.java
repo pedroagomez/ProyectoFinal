@@ -80,6 +80,19 @@ public class GestionColeccion<T> implements IGestion<T>{
         return builder.toString();
     }
 
+    public T devolverElementoElemento(T elemento) {
+
+        boolean encontrado = false;
+        Iterator<T> it = conjunto.iterator();
+        T dato = null;
+        while (it.hasNext() && encontrado == false) {
+            dato = it.next();
+            if (dato.equals(elemento)) {
+                encontrado = true;
+            }
+        }
+        return dato;
+    }
 
 
 

@@ -9,6 +9,7 @@ import javax.swing.plaf.basic.BasicButtonUI;
 import java.io.*;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Map;
 
 public class GestorAula {
@@ -37,10 +38,23 @@ public class GestorAula {
 
     public void agregarAula(int numeroAula,Aula aula)
     {
-        mapaAula.put(numeroAula,aula);
+        if(!mapaAula.containsKey(numeroAula))
+        {
+            mapaAula.put(numeroAula,aula);
+        }
     }
 
-    public String aulaNoDisponible()
+    public boolean validarExistenciaAula(int numeroAula)
+    {
+        boolean existencia=false;
+        if(mapaAula.containsKey(numeroAula))
+        {
+            existencia=true;
+        }
+        return existencia;
+    }
+
+    /*public String aulaNoDisponible()
     {
         StringBuilder builder=new StringBuilder();
         Iterator<Map.Entry<Integer,Aula>>it=mapaAula.entrySet().iterator();
@@ -56,11 +70,11 @@ public class GestorAula {
         }
         return builder.toString();
     }
-
+*/
 
 
     // DEVUELVE CADENA DE STRING QUE MUESTRA TODAS LAS AULAS DISPONIBLES
-    public String verAulasDisponibles()
+   /* public String verAulasDisponibles()
     {
         StringBuilder builder= new StringBuilder();
         Iterator<Map.Entry<Integer,Aula>>it=mapaAula.entrySet().iterator();
@@ -73,9 +87,9 @@ public class GestorAula {
             }
         }
         return builder.toString();
-    }
+    }*/
 
-
+    //LISTA LAS
 
     // LISTA TODAS LAS AULAS QUE TIENEN UNA COMPUTADORA
     public String verAulasConComputadoras() {
@@ -101,6 +115,22 @@ public class GestorAula {
         }
         return builder.toString();
     }
+
+    //Retorno Aulas
+
+    public LinkedList<Aula> retornoAulas()
+    {
+        LinkedList<Aula> aux = new LinkedList<>();
+        Iterator<Map.Entry<Integer,Aula>> it = mapaAula.entrySet().iterator();
+
+        while(it.hasNext())
+        {
+            Map.Entry<Integer,Aula>conjunto = it.next();
+            aux.add(conjunto.getValue());
+        }
+        return aux;
+    }
+
 
     //MUESTRA TODAS LAS AULAS
     public String listarAulas()
@@ -139,6 +169,19 @@ public class GestorAula {
             exception.printStackTrace();
         }
     }
+
+    public String eliminarAula(int IDaula){
+        String cadena = "";
+        Aula aux = null;
+        aux = buscarAulaPorNumero(IDaula);
+        if(aux!=null) {
+            cadena = "Se elimina el aula = " + aux.toStringSinMateria();
+        }else {
+            cadena = "Aula no encontrada";
+        }
+        return cadena;
+    }
+
     public void leerArchivoAula(){
 
         try {

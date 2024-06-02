@@ -37,78 +37,91 @@ public class Reserva {
 
     }
 
-    public String agregar(EnumDia dia, EnumHorarios hora, Aula aula, Materia materia)
-    {
-        String mensaje = "";
-        ManejoDias manejoDias = configurador.get(dia); // Me trae todas las reservas del dia
-        if(manejoDias== null)                           // Si el dia pasado no existe
+        public String agregar(EnumDia dia, EnumHorarios hora, Aula aula, Materia materia)
         {
-            manejoDias=new ManejoDias();              // agrega el dia
-            configurador.put(dia,manejoDias);
-        }
-        boolean reserva = manejoDias.agregarAulaEnHorario(hora,aula,materia);
-        if(reserva)
-        {
-            mensaje= "Reserva realizada";
-        }
-        else
-        {
-            mensaje="El aula ya esta reservada en este horario";
+            String mensaje = "";
+            ManejoDias manejoDias = configurador.get(dia); // Me trae todas las reservas del dia
+           if(manejoDias== null)                           // Si el dia pasado no existe
+           {
+               manejoDias=new ManejoDias();              // agrega el dia
+               configurador.put(dia,manejoDias);
+           }
+           boolean reserva = manejoDias.agregarAulaEnHorario(hora,aula,materia);
+           if(reserva)
+           {
+               mensaje= "Reserva realizada";
+           }
+           else
+           {
+               mensaje="No se pudo realizar la reserva";
+           }
+
+            return mensaje;
         }
 
-        return mensaje;
-    }
+        public boolean isEmpty()
+        {
+            return configurador.isEmpty();
+        }
 
-    public boolean cancelarReserva(EnumDia dia, EnumHorarios hora, Aula aula) {
-        boolean reservaCancelada=false;
-        if (configurador.containsKey(dia)) {
+        public boolean cancelarReserva(EnumDia dia, EnumHorarios hora) {
+            boolean reservaCancelada=false;
+            if (configurador.containsKey(dia)) {
+                ManejoDias manejoDias = configurador.get(dia);
+                if(manejoDias!=null)
+                {
+                    reservaCancelada= manejoDias.eliminarAulaEnHorario(hora);
+                    if(manejoDias.isEmpty())
+                    {
+                        configurador.remove(dia);
+                    }
+                }
+            }
+            return reservaCancelada;
+        }
+
+
+
+        public StringBuilder retornoProfesorPorDia (Profesor profesor){
+            StringBuilder cadena = new StringBuilder();
+            ManejoDias aux = null;
+            for(EnumDia dia : configurador.keySet()){
+                cadena.append(dia).append("\n");
+                aux = configurador.get(dia);
+                cadena.append(aux.retornarProfesorPorHora(profesor)).append("\n");
+            }
+            return cadena;
+        }
+
+        public String verReservaDia(EnumDia dia)
+        {
+            StringBuilder builder=new StringBuilder();
             ManejoDias manejoDias = configurador.get(dia);
-            manejoDias.eliminarAulaEnHorario(hora, aula);
-            reservaCancelada=true;
-        }
-        return reservaCancelada;
-    }
+            if(manejoDias!=null)
+            {
+                builder.append(manejoDias.toString()).append("\n");
+            }
 
-
-
-    public StringBuilder retornoProfesorPorDia (Profesor profesor){
-        StringBuilder cadena = new StringBuilder();
-        ManejoDias aux = null;
-        for(EnumDia dia : configurador.keySet()){
-            cadena.append(dia).append("\n");
-            aux = configurador.get(dia);
-            cadena.append(aux.retornarProfesorPorHora(profesor)).append("\n");
-        }
-        return cadena;
-    }
-
-    public String verReservaDia(EnumDia dia)
-    {
-        StringBuilder builder=new StringBuilder();
-        ManejoDias manejoDias = configurador.get(dia);
-        if(manejoDias!=null)
-        {
-            builder.append(manejoDias.toString()).append("\n");
-        }
-        else
-        {
-            builder.append("No hay reservas para este dia");
+            return  builder.toString();
         }
 
-        return  builder.toString();
+        public boolean verDisponiblidad(EnumDia dia,EnumHorarios hora,Aula aula){
+        boolean disponible=true;
+        ManejoDias aux = configurador.get(dia);
+        if(aux!=null){
+           disponible = aux.verDisponible(hora, aula);
+        }
+        return disponible;
+        }
 
-    }
+
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
         configurador.forEach((dia, manejoDias) -> {
-            builder.append(dia).append(":\n\t");
-            builder.append(manejoDias).append("\n\t");
+            builder.append(dia).append(":\n").append(manejoDias).append("\n");
         });
         return builder.toString();
     }
 }
-
-
-
 

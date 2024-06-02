@@ -65,11 +65,16 @@ public class Universidad {
     {
         gestorAula.agregarAula(aulita.getNumeroAula(),aulita);
     }
+
+    public boolean validarExistenciaDeAula(int numero)
+    {
+        return gestorAula.validarExistenciaAula(numero);
+    }
     /// Veremos las aulas disponibles - Nos devuelve la cadena de caracteres mostrando las aulas libres
-    public String verAulasDisponibles()
+   /* public String verAulasDisponibles()
     {
         return gestorAula.verAulasDisponibles();
-    }
+    }*/
     /// Veremos las aulas con computadores disponibles
     public String verAulasComputadoras()
     {
@@ -86,10 +91,16 @@ public class Universidad {
         return gestorAula.listarAulas();
     }
     /// Nos devuelve todas las aulas disponibles en Univerdad
-    public String aulasNoDisponibles()
+   /* public String aulasNoDisponibles()
     {
         return gestorAula.aulaNoDisponible();
     }
+
+
+    public boolean corroborarSiEstaDisponible()
+    {
+        return gestorAula.verSiEstaDisponible();
+    }*/
 
     // HACER METODO PARA ELEGIR PROFE Y METERLO EN MATERIA
 
@@ -137,6 +148,13 @@ public class Universidad {
         return gestorMateria.listarMaterias();
     }
 
+    public String verMateriaDetalle()
+
+
+    {
+        return gestorMateria.verMateriaDetalle();
+    }
+
     public boolean eliminarMateriaPorId( int id)
     {
         return gestorMateria.eliminarMateriaPorId(id);
@@ -170,9 +188,9 @@ public class Universidad {
         return reservaMes.agregar(mes,numSemana,dia,hora,aula,materia);
     }
 
-    public boolean cancelarReserva(EnumMes mes, EnumSemana numSemana, EnumDia dia, EnumHorarios hora, Aula aula)
+    public boolean cancelarReserva(EnumMes mes, EnumSemana numSemana, EnumDia dia, EnumHorarios hora)
     {
-        return reservaMes.cancelarReserva(mes,numSemana,dia,hora,aula);
+        return reservaMes.cancelarReserva(mes,numSemana,dia,hora);
     }
 
     public String verReservasMes(EnumMes mes)
@@ -185,17 +203,33 @@ public class Universidad {
         return  reservaMes.toString();
     }
 
-    public String verReservasDiaDeterminado(EnumDia dia)
+    public String verReservasDiaDeterminado(EnumMes mes,EnumSemana semana, EnumDia dia)
     {
-        return reservaMes.verReservaDiaDeterminado(dia);
+        return reservaMes.verReservaDia(dia,semana,mes);
     }
 
-    public String verReservaSemanaDeterminada(EnumSemana semana)
+    public String verReservaSemanaDeterminada(EnumMes mes,EnumSemana semana)
     {
-        return  reservaMes.verReservaSemana(semana);
+        return  reservaMes.verReservaSemana(mes,semana);
     }
 
+    public boolean comprobarDisponibilidad(EnumMes mes, EnumSemana semana, EnumDia dia, EnumHorarios hora, Aula aula){
+        return reservaMes.verDisponibilidad(dia,semana,mes,hora,aula);
+    }
 
+    public String renotarAulasDisponiblesParaHoraEspecifica (EnumMes mes, EnumSemana semana, EnumDia dia,EnumHorarios hora){
+        LinkedList<Aula> misAulas = new LinkedList<>();
+        LinkedList<Aula> misAulasCargadas = gestorAula.retornoAulas();
+        StringBuilder cadenaAula = new StringBuilder();
+        cadenaAula.append("Aulas sin reservar en este horario = \t\n");
+        int iterador = misAulasCargadas.size();
+        for(int i = 0; i<iterador; i++){
+            if (comprobarDisponibilidad(mes,semana,dia,hora,misAulasCargadas.get(i))){
+                cadenaAula.append("Numero de aula = ").append(misAulasCargadas.get(i).getNumeroAula()).append("\t\n");
+            }
+        }
+        return cadenaAula.toString();
+    }
 
     public String buscarYretornarProfeYAula(Profesor profe){
         StringBuilder builder =new StringBuilder();

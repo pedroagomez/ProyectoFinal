@@ -4,8 +4,8 @@ public class AulaComputadora extends Aula{
     private int cantidadComputadoras;
     private boolean auriculares;
 
-    public AulaComputadora(int numeroAula, int capacidad, boolean proyector, boolean tele, boolean disponible, int cantidadComputadoras, boolean auriculares) {
-        super(numeroAula, capacidad, proyector, tele, disponible);
+    public AulaComputadora(int numeroAula, int capacidad, boolean proyector, boolean tele, int cantidadComputadoras, boolean auriculares) {
+        super(numeroAula, capacidad, proyector, tele);
         this.cantidadComputadoras = cantidadComputadoras;
         this.auriculares = auriculares;
     }
@@ -24,6 +24,16 @@ public class AulaComputadora extends Aula{
 
     public void setAuriculares(boolean auriculares) {
         this.auriculares = auriculares;
+    }
+
+    @Override
+    public String toStringSinMateria() {
+            return   "NumeroAula=" + this.getNumeroAula() +
+                    ", capacidad=" + this.getCapacidad() +
+                    ", computadoras=" + this.getCantidadComputadoras() +
+                    ", proyector=" + this.isProyector() +
+                    ", tele=" + this.isTele() +
+                    ", Auriculares=" + this.isAuriculares();
     }
 
     @Override

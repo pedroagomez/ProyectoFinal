@@ -38,23 +38,34 @@ public class ReservaPorSemana {
     {
         String mensaje = "";
 
-        Reserva reservaAux = reservaPorSemana.get(numSemana); // Me trae todas las reservas de la semana
-        if(reservaAux == null)                           // Si la semana no existe
-        {
-            reservaAux = new Reserva();              // agrega La semana
-            reservaPorSemana.put(numSemana,reservaAux);
-        }
-        mensaje = reservaAux.agregar(dia,hora,aula,materia);
+            Reserva reservaAux = reservaPorSemana.get(numSemana);         // Me trae todas las reservas de la semana
+            if(reservaAux == null)                                       // Si la semana no existe
+            {
+                reservaAux = new Reserva();                               // agrega La semana
+                reservaPorSemana.put(numSemana,reservaAux);
+            }
+            mensaje = reservaAux.agregar(dia,hora,aula,materia);
 
         return mensaje;
     }
 
-    public boolean cancelarReserva(EnumSemana numSemana, EnumDia dia, EnumHorarios hora, Aula aula) {
+    public boolean isEmpty()
+    {
+        return reservaPorSemana.isEmpty();
+    }
+    public boolean cancelarReserva(EnumSemana numSemana, EnumDia dia, EnumHorarios hora) {
         boolean reservaCancelada=false;
         if (reservaPorSemana.containsKey(numSemana)) {
-            Reserva reservaAux = reservaPorSemana.get(dia);
-            reservaAux.cancelarReserva(dia,hora,aula);
-            reservaCancelada=true;
+            Reserva reservaAux = reservaPorSemana.get(numSemana);
+            if(reservaAux!=null)
+            {
+                reservaCancelada=reservaAux.cancelarReserva(dia,hora);
+               if(reservaAux.isEmpty())
+               {
+                   reservaPorSemana.remove(numSemana);
+               }
+            }
+
         }
         return reservaCancelada;
     }
@@ -82,24 +93,36 @@ public class ReservaPorSemana {
     }
 
 
-    public String verReservaDia(EnumDia dia)
+    public String verReservaDia(EnumDia dia,EnumSemana semana)
     {
         StringBuilder builder=new StringBuilder();
-        for(EnumSemana semana : reservaPorSemana.keySet())
+        if(reservaPorSemana.containsKey(semana))
         {
             Reserva reserva = reservaPorSemana.get(semana);
-            String diaSemana = reserva.verReservaDia(dia);
-            builder.append(diaSemana.toString()).append("\n");
+            builder.append(reserva.verReservaDia(dia)).append("\n");
         }
-
         return  builder.toString();
     }
+
+    public boolean verDisponibilidad(EnumDia dia,EnumSemana semana, EnumHorarios hora, Aula aula){
+        boolean disponibilidad=true;
+        Reserva aux = null;
+        aux = reservaPorSemana.get(semana);
+        if(aux != null){
+            disponibilidad = aux.verDisponiblidad(dia,hora,aula);
+        }
+
+        return disponibilidad;
+    }
+
 
 
     @Override
     public String toString() {
-        return "SemanaReserva " +
-                "reservaSemana=" + reservaPorSemana
-                ;
+        StringBuilder builder = new StringBuilder();
+        reservaPorSemana.forEach((semana, manejoDias) -> {
+            builder.append("\t").append(semana).append(":\n").append(manejoDias).append("\n");
+        });
+        return builder.toString();
     }
 }
