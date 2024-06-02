@@ -49,12 +49,23 @@ public class ReservaPorSemana {
         return mensaje;
     }
 
-    public boolean cancelarReserva(EnumSemana numSemana, EnumDia dia, EnumHorarios hora, Aula aula) {
+    public boolean isEmpty()
+    {
+        return reservaPorSemana.isEmpty();
+    }
+    public boolean cancelarReserva(EnumSemana numSemana, EnumDia dia, EnumHorarios hora) {
         boolean reservaCancelada=false;
         if (reservaPorSemana.containsKey(numSemana)) {
-            Reserva reservaAux = reservaPorSemana.get(dia);
-            reservaAux.cancelarReserva(dia,hora,aula);
-            reservaCancelada=true;
+            Reserva reservaAux = reservaPorSemana.get(numSemana);
+            if(reservaAux!=null)
+            {
+                reservaCancelada=reservaAux.cancelarReserva(dia,hora);
+               if(reservaAux.isEmpty())
+               {
+                   reservaPorSemana.remove(numSemana);
+               }
+            }
+
         }
         return reservaCancelada;
     }
@@ -108,8 +119,10 @@ public class ReservaPorSemana {
 
     @Override
     public String toString() {
-        return "SemanaReserva " +
-                "reservaSemana=" + reservaPorSemana
-                ;
+        StringBuilder builder = new StringBuilder();
+        reservaPorSemana.forEach((semana, manejoDias) -> {
+            builder.append("\t").append(semana).append(":\n").append(manejoDias).append("\n");
+        });
+        return builder.toString();
     }
 }

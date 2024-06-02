@@ -59,12 +59,23 @@ public class Reserva {
             return mensaje;
         }
 
-        public boolean cancelarReserva(EnumDia dia, EnumHorarios hora, Aula aula) {
+        public boolean isEmpty()
+        {
+            return configurador.isEmpty();
+        }
+
+        public boolean cancelarReserva(EnumDia dia, EnumHorarios hora) {
             boolean reservaCancelada=false;
             if (configurador.containsKey(dia)) {
                 ManejoDias manejoDias = configurador.get(dia);
-                manejoDias.eliminarAulaEnHorario(hora, aula);
-                reservaCancelada=true;
+                if(manejoDias!=null)
+                {
+                    reservaCancelada= manejoDias.eliminarAulaEnHorario(hora);
+                    if(manejoDias.isEmpty())
+                    {
+                        configurador.remove(dia);
+                    }
+                }
             }
             return reservaCancelada;
         }
@@ -104,14 +115,13 @@ public class Reserva {
         }
 
 
-        @Override
-        public String toString() {
-            StringBuilder builder = new StringBuilder();
-            configurador.forEach((dia, manejoDias) -> {
-                builder.append(dia).append(":\n\t");
-                builder.append(manejoDias).append("\n\t");
-            });
-            return builder.toString();
-        }
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        configurador.forEach((dia, manejoDias) -> {
+            builder.append(dia).append(":\n").append(manejoDias).append("\n");
+        });
+        return builder.toString();
+    }
 }
 
