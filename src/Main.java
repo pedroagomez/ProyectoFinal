@@ -132,9 +132,8 @@ public class Main {
             String cadena = """
                 \tMenú aula
                 \t[1] Ver aulas con computadora
-                \t[2] Ver aulas normales
-                \t[3] Ver aulas disponibles
-                \t[4] Ver todas las aulas
+                \t[2] Ver aulas normales               
+                \t[3] Ver todas las aulas
            
                 \t[0] Salir
                 """;
@@ -282,13 +281,13 @@ public class Main {
 
     //===================================================================
     public static void cargarAulaNormal(Scanner entrada, Universidad universidad) {
-        int opcion;
-        int intentos = 0;
+
         boolean continuar = true;
+        int opcion=0;
 
         do {
-            opcion = entrada.nextInt();
 
+            int intentos = 0;
             int numeroAula;
             do {
                 System.out.println("Número de aula: ");
@@ -302,7 +301,7 @@ public class Main {
             } while (universidad.validarExistenciaDeAula(numeroAula) && intentos < 3);
 
             if (intentos >= 3) {
-                System.out.println("Superó el máximo de intentos permitidos. Por favor intentelo nuevamente.");
+                System.out.println("Superó el máximo de intentos permitidos. Por favor inténtelo nuevamente.");
                 continuar = false;
             } else {
                 System.out.println("Capacidad del aula: ");
@@ -326,7 +325,6 @@ public class Main {
                 }
                 boolean tele = entrada.nextBoolean();
 
-
                 Aula aula = new AulaNormal(numeroAula, capacidad, proyector, tele);
                 universidad.agregarAula(aula);
 
@@ -344,7 +342,6 @@ public class Main {
             }
         } while (opcion != 0 && continuar);
     }
-
 
     //==============================METODOS RESERVA========================================
     public static void menuReservas(Scanner entrada, Universidad universidad)
@@ -629,7 +626,7 @@ public class Main {
         Materia materia = null;
         if (aulaEncontrada) {
             System.out.println("Ingrese el ID de la materia: ");
-            // System.out.println(universidad.verMateriaDetalle()); // CODIGO AGREGADO
+             System.out.println(universidad.verMateriaDetalle()); // CODIGO AGREGADO
             while (!entrada.hasNextInt()) {
                 System.out.println("Entrada no valida. Por favor, ingrese un ID de materia válido: ");
                 entrada.next();
