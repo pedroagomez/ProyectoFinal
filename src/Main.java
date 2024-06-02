@@ -629,7 +629,7 @@ public class Main {
         Materia materia = null;
         if (aulaEncontrada) {
             System.out.println("Ingrese el ID de la materia: ");
-            // System.out.println(universidad.verMateriaDetalle()); // CODIGO AGREGADO
+            System.out.println(universidad.verMateriaDetalle()); // CODIGO AGREGADO
             while (!entrada.hasNextInt()) {
                 System.out.println("Entrada no valida. Por favor, ingrese un ID de materia válido: ");
                 entrada.next();
