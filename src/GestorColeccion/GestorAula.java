@@ -183,23 +183,34 @@ public class GestorAula {
     }
 
     public void leerArchivoAula(){
-
+        DataInputStream dis=null;
+        ObjectInputStream ois=null;
         try {
             FileInputStream fis = new FileInputStream("Aulas.bin");
-            DataInputStream dis = new DataInputStream(fis);
-            ObjectInputStream ois = new ObjectInputStream(fis);
-            boolean bandera = true;
-            while (bandera) {
+            dis = new DataInputStream(fis);
+            ois = new ObjectInputStream(fis);
+            while (true) {
                 agregarAula(dis.readInt(), (Aula) ois.readObject());
             }
-            fis.close();
         } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+            cargarArchivoAula();
         } catch (IOException e) {
 
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
+        }finally {
+            try {
+                if (ois != null) {
+                    ois.close();
+                }
+                if (dis != null) {
+                    dis.close();
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
+
 
 
     }

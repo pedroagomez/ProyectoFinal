@@ -169,12 +169,12 @@ public class Universidad {
     public void cargarArchivoGestores(){
         gestorAula.cargarArchivoAula();
         gestorMateria.cargarArchivoMateria();
-        gestorProfesor.cargarArchivoMateria();
+        gestorProfesor.cargarArchivoProfesor();
     }
     public void leerArchivoGestores(){
         gestorAula.leerArchivoAula();
         gestorMateria.leerArchivoMateria();
-        gestorProfesor.leerArchivoMateria();
+        gestorProfesor.leerArchivoProfesor();
     }
 
 

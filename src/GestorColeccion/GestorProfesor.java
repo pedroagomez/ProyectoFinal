@@ -80,10 +80,11 @@ public class GestorProfesor implements  Serializable  {
         }
         return aux;
     }
-    public void cargarArchivoMateria(){
+    public void cargarArchivoProfesor(){
         conjuntoProfesores.cargarArchivoConjunto("Profesores.bin");
     }
-    public void leerArchivoMateria(){
+    public void leerArchivoProfesor(){
         conjuntoProfesores.leerArchivoConjunto("Profesores.bin");
     }
+
 }
