@@ -107,6 +107,8 @@ public class Main {
                 \tSeleccione una opción
                 \t[1] Ver aulas
                 \t[2] Cargar aulas
+                \t[3] Eliminar aulas
+                \t[4] Modificar aulas
                 \t[0] Menú anterior
                 """;
             System.out.println(cadena);
@@ -119,6 +121,7 @@ public class Main {
             switch (opcion) {
                 case 1 -> verAulas(entrada, universidad);
                 case 2 -> menuCargarAula(entrada, universidad);
+                case 3 -> eliminarAula(entrada,universidad);
                 case 0 -> System.out.println("Volviendo al menú anterior...");
                 default -> System.out.println("Opción inválida");
             }
@@ -341,6 +344,20 @@ public class Main {
                 } while (opcion != 1 && opcion != 0);
             }
         } while (opcion != 0 && continuar);
+    }
+
+
+    public static void eliminarAula(Scanner entrada, Universidad universidad)
+    {
+        System.out.println(universidad.listarAulas());
+        System.out.println("Ingrese el numero de aula a eliminar: ");
+        while(!entrada.hasNextInt())
+        {
+            System.out.println("Entrada no valida");
+            entrada.next();
+        }
+        int numeroAula = entrada.nextInt();
+        System.out.println(universidad.eliminarAula(numeroAula));
     }
 
     //==============================METODOS RESERVA========================================

@@ -176,6 +176,7 @@ public class GestorAula {
         aux = buscarAulaPorNumero(IDaula);
         if(aux!=null) {
             cadena = "Se elimina el aula = " + aux.toStringSinMateria();
+            mapaAula.remove(aux.getNumeroAula());
         }else {
             cadena = "Aula no encontrada";
         }

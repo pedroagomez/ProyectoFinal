@@ -70,6 +70,10 @@ public class Universidad {
     {
         return gestorAula.validarExistenciaAula(numero);
     }
+    public String eliminarAula(int numero)
+    {
+        return gestorAula.eliminarAula(numero);
+    }
     /// Veremos las aulas disponibles - Nos devuelve la cadena de caracteres mostrando las aulas libres
    /* public String verAulasDisponibles()
     {
