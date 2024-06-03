@@ -24,6 +24,9 @@ public class Main {
 
     }
 
+
+    //===================================================================
+
     public static void menu() {
         Universidad universidad = new Universidad();
 
@@ -70,7 +73,7 @@ public class Main {
 
     }
 
-
+    //===================================================================
     public static void mostrarJson(Universidad universidad)
     {
         try
@@ -84,6 +87,7 @@ public class Main {
 
     }
 
+    //===================================================================
     public static void cargarJson(Universidad universidad)
     {
         try
@@ -218,6 +222,7 @@ public class Main {
 
     }
 
+    //===================================================================
     public static void modificarAulaNormal(Scanner entrada, Universidad universidad) {
         boolean aulasCargadas = true;
         String aulasListado = universidad.verAulasNormales();
@@ -269,7 +274,7 @@ public class Main {
             }
         }
     }
-
+    //===================================================================
     public static void modificarAulaComputadora(Scanner entrada, Universidad universidad) {
         boolean aulasCargadas = true;
         String aulasListado = universidad.verAulasComputadoras();
@@ -345,6 +350,7 @@ public class Main {
         }
     }
 
+    //===================================================================
     public static void cargarAulaComputadora(Scanner entrada, Universidad universidad) {
         int opcion=-1;
         int intentos = 0;
@@ -491,7 +497,7 @@ public class Main {
         } while (opcion != 0 && continuar);
     }
 
-
+    //===================================================================
     public static void eliminarAula(Scanner entrada, Universidad universidad)
     {
         System.out.println(universidad.listarAulas());

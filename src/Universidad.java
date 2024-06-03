@@ -36,31 +36,24 @@ public class Universidad {
         return objeto;
     }
 
-    // ============================ GETTERS AND SETTERS
+    // ============================ GETTERS AND SETTERS =================================
     public GestorAula getGestorAula() {
         return gestorAula;
     }
 
-    public GestorProfesor getGestorProfesor() {
-        return gestorProfesor;
-    }
 
     public GestorMateria getGestorMateria() {
         return gestorMateria;
     }
 
-    public ReservaPorMes getReservaMes() {
-        return reservaMes;
-    }
 
 
 
+    //=================================== METODOS AULA =======================================
 
-    //============================================
-    //              METODOS AULA
-    //============================================
 
-    /// Agregar un aular a la coleccion
+
+    /// Agregar un aula a la coleccion
     public void agregarAula(Aula aulita)
     {
         gestorAula.agregarAula(aulita.getNumeroAula(),aulita);
@@ -74,11 +67,7 @@ public class Universidad {
     {
         return gestorAula.eliminarAula(numero);
     }
-    /// Veremos las aulas disponibles - Nos devuelve la cadena de caracteres mostrando las aulas libres
-   /* public String verAulasDisponibles()
-    {
-        return gestorAula.verAulasDisponibles();
-    }*/
+
     /// Veremos las aulas con computadores disponibles
     public String verAulasComputadoras()
     {
@@ -136,34 +125,17 @@ public class Universidad {
     {
         return gestorAula.modificarAulaComputadora(idAula,capacidad,cantidadCompus,tele,proyector,auriculares);
     }
-    /// Nos devuelve todas las aulas disponibles en Univerdad
-   /* public String aulasNoDisponibles()
-    {
-        return gestorAula.aulaNoDisponible();
-    }
 
 
-    public boolean corroborarSiEstaDisponible()
-    {
-        return gestorAula.verSiEstaDisponible();
-    }*/
-
-    // HACER METODO PARA ELEGIR PROFE Y METERLO EN MATERIA
+    //=================================== METODOS PROFESOR =======================================
 
 
-
-
-    //============================================
-    //              METODOS PROFESOR
-    //============================================
-
-
-    /// Cargar un profesor
+    // Cargar un profesor
     public void cargarProfesor(Profesor profe)
     {
         gestorProfesor.agregarProfesor(profe);
     }
-    /// Mostrar los profesores
+    // Mostrar los profesores
     public String listarProfesores()
     {
         return gestorProfesor.listarProfesores();
@@ -182,10 +154,7 @@ public class Universidad {
         return gestorProfesor.buscarProfesorPorLegajo(legajo);
     }
 
-    //============================================
-    //              METODOS MATERIA
-    //============================================
-
+    //=================================== METODOS MATERIA =======================================
 
     /// Cargar una materia nueva
     public void agregarMateria(Materia materia)
@@ -211,10 +180,7 @@ public class Universidad {
     }
 
 
-    //============================================
-    //              METODOS ARCHIVOS
-    //============================================
-
+    //=================================== METODOS ARCHIVOS =======================================
 
     public void cargarArchivoGestores(){
         gestorAula.cargarArchivoAula();
@@ -228,11 +194,7 @@ public class Universidad {
     }
 
 
-    //============================================
-    //              METODOS RESERVA
-    //============================================
-
-
+    //=================================== METODOS RESERVA =======================================
     public String agregarReserva(EnumMes mes, EnumSemana numSemana, EnumDia dia, EnumHorarios hora, Aula aula, Materia materia)
     {
         return reservaMes.agregar(mes,numSemana,dia,hora,aula,materia);
