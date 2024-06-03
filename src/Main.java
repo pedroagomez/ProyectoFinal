@@ -122,6 +122,7 @@ public class Main {
                 case 1 -> verAulas(entrada, universidad);
                 case 2 -> menuCargarAula(entrada, universidad);
                 case 3 -> eliminarAula(entrada,universidad);
+                case 4 -> modificarAula(entrada,universidad);
                 case 0 -> System.out.println("Volviendo al menú anterior...");
                 default -> System.out.println("Opción inválida");
             }
@@ -136,8 +137,7 @@ public class Main {
                 \tMenú aula
                 \t[1] Ver aulas con computadora
                 \t[2] Ver aulas normales               
-                \t[3] Ver todas las aulas
-           
+                \t[3] Ver todas las aula
                 \t[0] Salir
                 """;
             System.out.println(cadena);
@@ -150,8 +150,7 @@ public class Main {
             switch (opcion) {
                 case 1 -> System.out.println(universidad.verAulasComputadoras());
                 case 2 -> System.out.println(universidad.verAulasNormales());
-               // case 3 -> System.out.println(universidad.verAulasDisponibles());
-                case 4 -> listarAulas(universidad);
+                case 3 -> System.out.println(universidad.listarAulas());
                 case 0 -> System.out.println("Saliendo...");
                 default -> System.out.println("Opción inválida");
             }
@@ -159,18 +158,7 @@ public class Main {
     }
     //===================================================================
 
-    public static void listarAulas(Universidad universidad)
-    {
-        if(universidad.listarAulas().isEmpty())
-        {
-            System.out.println("No hay aulas cargadas");
-        }
-        else
-        {
-            System.out.println(universidad.listarAulas());
-        }
 
-    }
 
 
 
@@ -200,6 +188,163 @@ public class Main {
         } while (opcion != 0);
     }
     //===================================================================
+
+    public static void modificarAula(Scanner entrada ,Universidad universidad)
+    {
+        int opcion;
+        do {
+            String cadena = """
+                Ingrese el tipo de aula que desea modificar 
+                \t[1]Aulas con computadora
+                \t[2]Aulas normales
+                \t[0]Salir
+                """;
+            System.out.println(cadena);
+            while(!entrada.hasNextInt())
+            {
+                System.out.println("Entrada no valida");
+                entrada.next();
+            }
+            opcion=entrada.nextInt();
+            switch (opcion)
+            {
+                case 1 -> modificarAulaComputadora(entrada,universidad);
+                case 2 -> modificarAulaNormal(entrada,universidad);
+                case 0 -> System.out.println("Volviendo al menu anterior..");
+                default -> System.out.println("Opcion invalida");
+            }
+        }while(opcion!=0);
+
+
+    }
+
+    public static void modificarAulaNormal(Scanner entrada, Universidad universidad) {
+        boolean aulasCargadas = true;
+        String aulasListado = universidad.verAulasNormales();
+        System.out.println(aulasListado);
+
+        if (aulasListado.contains("No hay aulas normales cargadas")) {
+            System.out.println("Volviendo al menú anterior...");
+            aulasCargadas = false;
+        }
+
+        if (aulasCargadas) {
+            boolean aulaValida = false;
+            while (!aulaValida) {
+                System.out.println("Ingrese el id del aula: ");
+                while (!entrada.hasNextInt()) {
+                    System.out.println("Entrada no válida");
+                    entrada.next();
+                }
+                int id = entrada.nextInt();
+                boolean existencia = universidad.validarExistenciaDeAula(id);
+
+                if (!existencia) {
+                    System.out.println("El aula no se encontró");
+                } else {
+                    aulaValida = true;
+                    System.out.println("Ingrese la capacidad: ");
+                    while (!entrada.hasNextInt()) {
+                        System.out.println("Entrada no válida");
+                        entrada.next();
+                    }
+                    int capacidad = entrada.nextInt();
+
+                    System.out.println("Televisor (true/false): ");
+                    while (!entrada.hasNextBoolean()) {
+                        System.out.println("Entrada no válida");
+                        entrada.next();
+                    }
+                    boolean tele = entrada.nextBoolean();
+
+                    System.out.println("Proyector (true/false): ");
+                    while (!entrada.hasNextBoolean()) {
+                        System.out.println("Entrada no válida");
+                        entrada.next();
+                    }
+                    boolean proyector = entrada.nextBoolean();
+
+                    System.out.println(universidad.modificarAulaNormal(id, capacidad, tele, proyector));
+                }
+            }
+        }
+    }
+
+    public static void modificarAulaComputadora(Scanner entrada, Universidad universidad) {
+        boolean aulasCargadas = true;
+        String aulasListado = universidad.verAulasComputadoras();
+        System.out.println(aulasListado);
+
+        if (aulasListado.contains("No hay aulas con computadoras cargadas")) {
+            System.out.println("Volviendo al menú anterior...");
+            aulasCargadas = false;
+        }
+
+        if (aulasCargadas) {
+            int intentos = 0; // Contador de intentos
+            boolean aulaValida = false;
+            while (!aulaValida && intentos < 3) { // Mientras no se encuentre un aula válida y no se hayan superado 3 intentos
+                System.out.println("Ingrese el id del aula de computadoras que desea modificar: ");
+                while (!entrada.hasNextInt()) {
+                    System.out.println("Entrada no válida");
+                    entrada.next();
+                }
+                int id = entrada.nextInt();
+
+                // Verificar si el aula es realmente un aula de computadoras
+                boolean esAulaComputadora = universidad.validarAulaComputadora(id);
+
+                if (!esAulaComputadora) {
+                    System.out.println("El aula no es un aula de computadoras");
+                    intentos++; // Incrementar el contador de intentos
+                } else {
+                    aulaValida = true;
+                    // Continuar con la modificación del aula de computadoras
+                    System.out.println("Ingrese la capacidad: ");
+                    while (!entrada.hasNextInt()) {
+                        System.out.println("Entrada no válida");
+                        entrada.next();
+                    }
+                    int capacidad = entrada.nextInt();
+
+                    System.out.println("Ingrese cantidad de computadoras: ");
+                    while (!entrada.hasNextInt()) {
+                        System.out.println("Entrada no válida");
+                        entrada.next();
+                    }
+                    int cantidadCompus = entrada.nextInt();
+
+                    System.out.println("Televisor (true/false): ");
+                    while (!entrada.hasNextBoolean()) {
+                        System.out.println("Entrada no válida");
+                        entrada.next();
+                    }
+                    boolean tele = entrada.nextBoolean();
+
+                    System.out.println("Proyector (true/false): ");
+                    while (!entrada.hasNextBoolean()) {
+                        System.out.println("Entrada no válida");
+                        entrada.next();
+                    }
+                    boolean proyector = entrada.nextBoolean();
+
+                    System.out.println("Auriculares (true/false): ");
+                    while (!entrada.hasNextBoolean()) {
+                        System.out.println("Entrada no válida");
+                        entrada.next();
+                    }
+                    boolean auriculares = entrada.nextBoolean();
+
+                    System.out.println(universidad.modificarAulaComputadora(id, capacidad, cantidadCompus, tele, proyector, auriculares));
+                }
+            }
+
+            if (intentos >= 3) {
+                System.out.println("Se supero el número máximo de intentos. Volviendo al menú anterior...");
+            }
+        }
+    }
+
     public static void cargarAulaComputadora(Scanner entrada, Universidad universidad) {
         int opcion=-1;
         int intentos = 0;
@@ -416,6 +561,7 @@ public class Main {
                 case 2 -> verReservaDiaDeterminado(entrada,universidad);
                 case 3 -> verReservaSemanaDeterminado(entrada,universidad);
                 case 4 -> reservaMes(entrada,universidad);
+                case 5 -> verReservasProfesor(entrada,universidad);
                 case 0 -> System.out.println("Volviendo al menu anterior");
                 default -> System.out.println("Opcion invalida");
 
@@ -544,7 +690,15 @@ public class Main {
     //===================================================================
     public static void verReservasProfesor(Scanner entrada, Universidad universidad)
     {
-
+        System.out.println(universidad.listarProfesores());
+        System.out.println("Ingrese el ID del profesor : ");
+        while (!entrada.hasNextInt())
+        {
+            System.out.println("Entrada no valida");
+            entrada.next();
+        }
+        int idProfesor= entrada.nextInt();
+        System.out.println(universidad.buscarYretornarProfeYAula(idProfesor));
 
     }
 

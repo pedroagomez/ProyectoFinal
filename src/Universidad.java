@@ -82,17 +82,59 @@ public class Universidad {
     /// Veremos las aulas con computadores disponibles
     public String verAulasComputadoras()
     {
-        return gestorAula.verAulasConComputadoras();
+        StringBuilder builder= new StringBuilder();
+        if(gestorAula.verAulasConComputadoras().isEmpty())
+        {
+            builder.append("No hay aulas con computadoras cargadas");
+        }
+        else
+        {
+            builder.append(gestorAula.verAulasConComputadoras()).append("\n");
+        }
+        return builder.toString();
+    }
+    public boolean validarAulaComputadora(int id)
+    {
+        return gestorAula.validarAulaComputadora(id);
     }
     /// Vemos las aulas normales (La clase hija de Aula)
     public String verAulasNormales()
     {
-        return gestorAula.verAulasNormales();
+        StringBuilder builder= new StringBuilder();
+        if(gestorAula.verAulasNormales().isEmpty())
+        {
+            builder.append("No hay aulas normales cargadas");
+        }
+        else
+        {
+            builder.append(gestorAula.verAulasNormales()).append("\n");
+        }
+        return builder.toString();
+
     }
     /// Nos devuelve las aulas disponibles en cadena de String
     public String listarAulas()
     {
-        return gestorAula.listarAulas();
+        StringBuilder builder= new StringBuilder();
+        if(gestorAula.listarAulas().isEmpty())
+        {
+            builder.append("No hay aulas cargadas");
+        }
+        else
+        {
+            builder.append(gestorAula.listarAulas()).append("\n");
+        }
+        return builder.toString();
+    }
+
+    public String modificarAulaNormal(int idAula,int capacidad,boolean tele,boolean proyector)
+    {
+        return gestorAula.modificarAula(idAula,capacidad,tele,proyector);
+    }
+
+    public String modificarAulaComputadora(int idAula, int cantidadCompus,int capacidad, boolean tele, boolean proyector,boolean auriculares)
+    {
+        return gestorAula.modificarAulaComputadora(idAula,capacidad,cantidadCompus,tele,proyector,auriculares);
     }
     /// Nos devuelve todas las aulas disponibles en Univerdad
    /* public String aulasNoDisponibles()
@@ -235,9 +277,18 @@ public class Universidad {
         return cadenaAula.toString();
     }
 
-    public String buscarYretornarProfeYAula(Profesor profe){
+    public String buscarYretornarProfeYAula(int idProfesor){
         StringBuilder builder =new StringBuilder();
-        builder.append(reservaMes.retornoProfesorPorMes(profe));
+        Profesor profesor = buscarProfesorPorLegajo(idProfesor);
+        if(profesor== null)
+        {
+            builder.append("No hay reservas del profesor "+profesor.getNombre());
+        }
+        else
+        {
+            builder.append(reservaMes.retornoProfesorPorMes(profesor));
+        }
+
         return builder.toString();
     }
 
