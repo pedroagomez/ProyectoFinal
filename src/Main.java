@@ -949,18 +949,37 @@ public class Main {
             entrada.nextLine();
         }
         String apellido=entrada.nextLine();
-
-        System.out.println("Ingrese el numero de legajo : ");
-        while(!entrada.hasNextLine())
+        int intentos=0;
+        boolean existe=true;
+        while(intentos<3 && existe)
         {
-            System.out.println("Entrada no valida. Por favor ingrese un entero");
-            entrada.nextLine();
+            System.out.println("Ingrese el numero de legajo : ");
+            while(!entrada.hasNextLine())
+            {
+                System.out.println("Entrada no valida. Por favor ingrese un entero");
+                entrada.nextLine();
+            }
+            int numeroLegajo=entrada.nextInt();
+            if(universidad.verificarExistenciaProfesor(numeroLegajo))
+            {
+                System.out.println("El numero de legajo ya existe ");
+                intentos++;
+            }
+            else {
+
+                Profesor profesor= new Profesor(nombre,apellido,numeroLegajo);
+                universidad.cargarProfesor(profesor);
+                existe=false;
+            }
+
         }
-        int numeroLegajo=entrada.nextInt();
+        if(intentos >= 3 )
+        {
+            System.out.println("Volviendo al menu");
+        }
 
-        Profesor profesor= new Profesor(nombre,apellido,numeroLegajo);
 
-        universidad.cargarProfesor(profesor);
+
     }
     //===================================================================
 
@@ -977,18 +996,26 @@ public class Main {
     public static void darDeBajaProfesor(Scanner entrada, Universidad universidad) {
 
         verListadoProfesores(universidad);
-        System.out.println("\n \nIngrese el legajo del profesor que desea dar de baja: ");
-        while (!entrada.hasNextInt()) {
-            System.out.println("Entrada no válida. Por favor, ingrese un número entero.");
-            entrada.nextLine();
+        if(universidad.listarProfesores().isEmpty())
+        {
+            System.out.println("Volviendo al menu anterior...");
         }
-        int legajo = entrada.nextInt();
-        boolean eliminado = universidad.eliminarProfesorPorLegajo(legajo);
-        if (eliminado) {
-            System.out.println("Profesor dado de baja correctamente.");
-        } else {
-            System.out.println("No se encontró ningún profesor con ese legajo.");
+        else
+        {
+            System.out.println("\n \nIngrese el legajo del profesor que desea dar de baja: ");
+            while (!entrada.hasNextInt()) {
+                System.out.println("Entrada no válida. Por favor, ingrese un número entero.");
+                entrada.nextLine();
+            }
+            int legajo = entrada.nextInt();
+            boolean eliminado = universidad.eliminarProfesorPorLegajo(legajo);
+            if (eliminado) {
+                System.out.println("Profesor dado de baja correctamente.");
+            } else {
+                System.out.println("No se encontró ningún profesor con ese legajo.");
+            }
         }
+
     }
 
 
@@ -1032,11 +1059,17 @@ public class Main {
         String nombre = entrada.nextLine();
 
         System.out.println("Profesores disponibles:");
-        System.out.println(universidad.listarProfesores());
-        int legajoProfesor;
-        while (comprobante == 0){
-            System.out.println("Ingrese el número de legajo del profesor para esta materia: ");
-            //legajoProfesor = entrada.nextInt();
+
+        if(universidad.listarProfesores().isEmpty())
+        {
+            System.out.println("No hay profesores cargados . Volviendo al menu anterior...");
+        }
+        else {
+            System.out.println(universidad.listarProfesores());
+            int legajoProfesor;
+            while (comprobante == 0){
+                System.out.println("Ingrese el número de legajo del profesor para esta materia: ");
+                //legajoProfesor = entrada.nextInt();
 
                 while(!entrada.hasNextInt()){
                     System.out.println("Entrada no válida. Por favor, ingrese un número de legajo: ");
@@ -1044,17 +1077,19 @@ public class Main {
                 }
                 legajoProfesor = entrada.nextInt();
 
-            Profesor profesor = universidad.buscarProfesorPorLegajo(legajoProfesor);
-            if (profesor != null){
-                Materia materia = new Materia(nombre, profesor);
-                universidad.agregarMateria(materia);
-                System.out.println("Materia cargada correctamente.");
-                comprobante=1;
-            } else {
-                System.out.println("No se encontro ningun profesor con el numero de legajo proporcionado.");
-                System.out.println("Aprete 1 para voler al menu o 0 para ingresar otro legajo");
-                comprobante = entrada.nextInt();
-            }
+                Profesor profesor = universidad.buscarProfesorPorLegajo(legajoProfesor);
+                if (profesor != null){
+                    Materia materia = new Materia(nombre, profesor);
+                    universidad.agregarMateria(materia);
+                    System.out.println("Materia cargada correctamente.");
+                    comprobante=1;
+                } else {
+                    System.out.println("No se encontro ningun profesor con el numero de legajo proporcionado.");
+                    System.out.println("Aprete 1 para voler al menu o 0 para ingresar otro legajo");
+                    comprobante = entrada.nextInt();
+                }
+        }
+
         }
 
     }
@@ -1072,17 +1107,25 @@ public class Main {
     public static void darDeBajaMateria(Scanner entrada, Universidad universidad) {
 
         verListadoDeMaterias(universidad);
-        System.out.println("\n \nIngrese el ID de la materia  que desea dar de baja: ");
-        while (!entrada.hasNextInt()) {
-            System.out.println("Entrada no válida. Por favor, ingrese un número entero.");
-            entrada.nextLine();
+        if(universidad.listarMaterias().isEmpty())
+        {
+            System.out.println("Volviendo al menu anterior ...");
         }
-        int id = entrada.nextInt();
-        boolean eliminado = universidad.eliminarMateriaPorId(id);
-        if (eliminado) {
-            System.out.println("Profesor dado de baja correctamente.");
-        } else {
-            System.out.println("No se encontró ningún profesor con ese legajo.");
+        else
+        {
+            System.out.println("\n \nIngrese el ID de la materia  que desea dar de baja: ");
+            while (!entrada.hasNextInt()) {
+                System.out.println("Entrada no válida. Por favor, ingrese un número entero.");
+                entrada.nextLine();
+            }
+            int id = entrada.nextInt();
+            boolean eliminado = universidad.eliminarMateriaPorId(id);
+            if (eliminado) {
+                System.out.println("Profesor dado de baja correctamente.");
+            } else {
+                System.out.println("No se encontró ningún profesor con ese legajo.");
+            }
         }
+
     }
 }

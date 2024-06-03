@@ -169,6 +169,10 @@ public class Universidad {
         return gestorProfesor.listarProfesores();
     }
 
+    public boolean verificarExistenciaProfesor(int id)
+    {
+        return gestorProfesor.verificarExistenciaProfesor(id);
+    }
     public boolean eliminarProfesorPorLegajo(int legajo)
     {
        return gestorProfesor.eliminarProfesorPorLegajo(legajo);
