@@ -68,10 +68,9 @@ public class Profesor implements Serializable {
 
     @Override
     public String toString() {
-        return "Profesor{" +
-                "nombre=" + nombre +
-                ", apellido=" + apellido +
-                ", legajo=" + legajo +
-                '}';
+        return   nombre + " "+
+                 apellido +
+                " ,Numero de legajo = " + legajo ;
+
     }
 }
