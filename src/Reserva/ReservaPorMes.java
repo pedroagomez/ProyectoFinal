@@ -120,7 +120,7 @@ public class ReservaPorMes {
             builder.append(reservaPorSemana.accederASemana(semana)).append("\n");
         }else{
             builder = new StringBuilder();
-            builder.append("null");
+            builder.append("No hay reservas");
         }
 
         return builder.toString();
@@ -155,10 +155,18 @@ public class ReservaPorMes {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        builder.append("Reserva Mensual:\n");
-        reservaMensual.forEach((mes, semana) -> {
-            builder.append(mes).append(":\n").append(semana).append("\n");
-        });
+        if(reservaMensual.isEmpty())
+        {
+            builder.append("No hay reservas");
+        }
+        else
+        {
+            builder.append("Reserva Mensual:\n");
+            reservaMensual.forEach((mes, semana) -> {
+                builder.append(mes).append(":\n").append(semana).append("\n");
+            });
+        }
+
         return builder.toString();
     }
 }

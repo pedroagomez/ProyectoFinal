@@ -753,7 +753,6 @@ public class Main {
             }
         }
 
-
         System.out.println("Ingrese la semana (elija una de las siguientes opciones): ");
         for (EnumSemana semanaEnum : EnumSemana.values()) {
             System.out.println(semanaEnum.name());
@@ -801,8 +800,7 @@ public class Main {
                 System.out.println("Hora ingresada no válida. Por favor, ingrese un número válido.");
             }
         }
-
-
+        
         Aula aula = null;
         int intentos = 0;
         boolean aulaEncontrada = false;
