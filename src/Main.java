@@ -703,21 +703,22 @@ public class Main {
     }
     //===================================================================
     public static void reservaMes(Scanner entrada, Universidad universidad) {
-        System.out.println("Ingrese el mes: ");
-        entrada.nextLine();
-        while (!entrada.hasNextLine()) {
-            System.out.println("Opcion invalida. Por favor, ingrese el mes: ");
-            entrada.nextLine();
+        System.out.println("Ingrese el mes (elija una de las siguientes opciones): ");
+        for(EnumMes mesEnum : EnumMes.values())
+        {
+            System.out.println(mesEnum.name());
         }
-        String mesString = entrada.nextLine();
-        try {
-            EnumMes mes = EnumMes.valueOf(mesString.toUpperCase());
-            System.out.println(universidad.verReservasMes(mes));
-
-        } catch (IllegalArgumentException e) {
-            System.out.println("Mes ingresado no valido. Por favor, ingrese un mes valido.");
-
+        EnumMes mes = null;
+        while (mes == null) {
+            String mesString = entrada.nextLine();
+            try {
+                mes = EnumMes.valueOf(mesString.toUpperCase());
+                System.out.println(universidad.verReservasMes(mes));
+            } catch (IllegalArgumentException e) {
+                System.out.println("Día ingresado no válido. Por favor, ingrese un día válido.");
+            }
         }
+
     }
     //===================================================================
     public static void verReservasProfesor(Scanner entrada, Universidad universidad)
@@ -800,7 +801,7 @@ public class Main {
                 System.out.println("Hora ingresada no válida. Por favor, ingrese un número válido.");
             }
         }
-        
+
         Aula aula = null;
         int intentos = 0;
         boolean aulaEncontrada = false;

@@ -92,7 +92,7 @@ public class ReservaPorMes {
             aux = reservaMensual.get(mes);
             mensaje = aux.toString();
         }else {
-            mensaje = "No encontrado";
+            mensaje = "No se encontro reservas";
         }
         return mensaje;
     }
