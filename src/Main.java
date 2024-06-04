@@ -374,12 +374,21 @@ public class Main {
                 continuar = false;
             } else {
                 System.out.println("Capacidad del aula: ");
-                while (!entrada.hasNextInt()) {
-                    System.out.println("Entrada no válida. Por favor, ingrese un número: ");
-                    entrada.next();
+                int validador1 = 0;
+                int capacidad = 0;
+                while (validador1 == 0){
+                    while (!entrada.hasNextInt()) {
+                        System.out.println("Entrada no válida. Por favor, ingrese un número: ");
+                        entrada.next();
+                    }
+                    capacidad = entrada.nextInt();
+                    if (capacidad>=0){
+                        validador1=1;
+                    }else {
+                        System.out.println("Ingrese un numero entero valido");
+                    }
+
                 }
-                int capacidad = entrada.nextInt();
-                entrada.nextLine();
 
                 System.out.println("Cantidad de computadoras: ");
                 int validador = 0;
@@ -469,11 +478,22 @@ public class Main {
                 continuar = false;
             } else {
                 System.out.println("Capacidad del aula: ");
-                while (!entrada.hasNextInt()) {
-                    System.out.println("Entrada no válida. Por favor, ingrese un número: ");
-                    entrada.next();
+                int validador = 0;
+                int capacidad = 0;
+                while (validador == 0){
+                    while (!entrada.hasNextInt()) {
+                        System.out.println("Entrada no válida. Por favor, ingrese un número: ");
+                        entrada.next();
+                    }
+                    capacidad = entrada.nextInt();
+                    if (capacidad>=0){
+                        validador=1;
+                    }else {
+                        System.out.println("Ingrese un numero entero valido");
+                    }
+
                 }
-                int capacidad = entrada.nextInt();
+
 
                 System.out.println("¿Con proyector? (true/false): ");
                 while (!entrada.hasNextBoolean()) {
