@@ -170,36 +170,100 @@ public class GestorAula {
         }
     }
 
-    public String eliminarAula(int IDaula){
+    public String eliminarAula(int idAula){
         String cadena = "";
         Aula aux = null;
-        aux = buscarAulaPorNumero(IDaula);
+        aux = buscarAulaPorNumero(idAula);
         if(aux!=null) {
             cadena = "Se elimina el aula = " + aux.toStringSinMateria();
+            mapaAula.remove(aux.getNumeroAula());
         }else {
             cadena = "Aula no encontrada";
         }
         return cadena;
     }
 
-    public void leerArchivoAula(){
+    public boolean validarAulaComputadora(int id )
+    {
+        boolean existe=false;
+        Aula aula = mapaAula.get(id);
+        if(aula !=null)
+        {
+            if(aula instanceof AulaComputadora)
+            {
+                existe=true;
+            }
+        }
+        return existe;
+    }
 
+    public String modificarAula(int idAula,int capacidad,boolean tele,boolean proyector)
+    {
+        StringBuilder builder= new StringBuilder();
+        if(mapaAula.containsKey(idAula))
+        {
+            Aula aula = mapaAula.get(idAula);
+            aula.setCapacidad(capacidad);
+            aula.setTele(tele);
+            aula.setProyector(proyector);
+            builder.append("Aula modificada con exito");
+        }
+        else
+        {
+            builder.append("Aula no encontrada");
+        }
+        return builder.toString();
+    }
+
+    public String modificarAulaComputadora(int idAula,int capacidad,int cantidadCompus,boolean tele,boolean proyector,boolean auriculares)
+    {
+        StringBuilder builder= new StringBuilder();
+        if(mapaAula.containsKey(idAula))
+        {
+            Aula aula = mapaAula.get(idAula);
+            aula.setCapacidad(capacidad);
+            ((AulaComputadora)aula).setCantidadComputadoras(cantidadCompus);
+            ((AulaComputadora)aula).setAuriculares(auriculares);
+            aula.setTele(tele);
+            aula.setProyector(proyector);
+            builder.append("Aula modificada con exito");
+        }
+        else
+        {
+            builder.append("Aula no encontrada");
+        }
+        return builder.toString();
+    }
+
+    public void leerArchivoAula(){
+        DataInputStream dis=null;
+        ObjectInputStream ois=null;
         try {
             FileInputStream fis = new FileInputStream("Aulas.bin");
-            DataInputStream dis = new DataInputStream(fis);
-            ObjectInputStream ois = new ObjectInputStream(fis);
-            boolean bandera = true;
-            while (bandera) {
+            dis = new DataInputStream(fis);
+            ois = new ObjectInputStream(fis);
+            while (true) {
                 agregarAula(dis.readInt(), (Aula) ois.readObject());
             }
-            fis.close();
         } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+            cargarArchivoAula();
         } catch (IOException e) {
 
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
+        }finally {
+            try {
+                if (ois != null) {
+                    ois.close();
+                }
+                if (dis != null) {
+                    dis.close();
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
+
 
 
     }

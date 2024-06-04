@@ -80,10 +80,26 @@ public class GestorProfesor implements  Serializable  {
         }
         return aux;
     }
-    public void cargarArchivoMateria(){
+
+    public boolean verificarExistenciaProfesor(int id)
+    {
+        boolean existe=false;
+        Iterator<Profesor>it= conjuntoProfesores.getConjuntoIterator();
+        while(it.hasNext())
+        {
+            Profesor profe = it.next();
+            if(profe.getLegajo()== id)
+            {
+                existe=true;
+            }
+        }
+        return existe;
+    }
+    public void cargarArchivoProfesor(){
         conjuntoProfesores.cargarArchivoConjunto("Profesores.bin");
     }
-    public void leerArchivoMateria(){
+    public void leerArchivoProfesor(){
         conjuntoProfesores.leerArchivoConjunto("Profesores.bin");
     }
+
 }

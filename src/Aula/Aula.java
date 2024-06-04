@@ -40,6 +40,9 @@ public abstract class Aula  implements Serializable {
         return obj;
     }
 
+    public void setNumeroAula(int numeroAula) {
+        this.numeroAula = numeroAula;
+    }
 
     public int getNumeroAula() {
         return numeroAula;

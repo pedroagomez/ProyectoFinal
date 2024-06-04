@@ -135,20 +135,29 @@ public class GestionColeccion<T> implements IGestion<T>{
         }
     }
     public void leerArchivoConjunto(String nombreA){
+        ObjectInputStream ois=null;
         try {
             FileInputStream fis=new FileInputStream(nombreA);
-            ObjectInputStream ois=new ObjectInputStream(fis);
+            ois=new ObjectInputStream(fis);
             boolean bandera = true;
             while (bandera) {
 
                 agregar((T)ois.readObject());
             }
         } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+            cargarArchivoConjunto(nombreA);
         } catch (IOException e) {
 
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
+        }finally {
+            try {
+                if (ois != null) {
+                    ois.close();
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
 
     }
