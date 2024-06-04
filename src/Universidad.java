@@ -36,31 +36,24 @@ public class Universidad {
         return objeto;
     }
 
-    // ============================ GETTERS AND SETTERS
+    // ============================ GETTERS AND SETTERS =================================
     public GestorAula getGestorAula() {
         return gestorAula;
     }
 
-    public GestorProfesor getGestorProfesor() {
-        return gestorProfesor;
-    }
 
     public GestorMateria getGestorMateria() {
         return gestorMateria;
     }
 
-    public ReservaPorMes getReservaMes() {
-        return reservaMes;
-    }
 
 
 
+    //=================================== METODOS AULA =======================================
 
-    //============================================
-    //              METODOS AULA
-    //============================================
 
-    /// Agregar un aular a la coleccion
+
+    /// Agregar un aula a la coleccion
     public void agregarAula(Aula aulita)
     {
         gestorAula.agregarAula(aulita.getNumeroAula(),aulita);
@@ -70,59 +63,88 @@ public class Universidad {
     {
         return gestorAula.validarExistenciaAula(numero);
     }
-    /// Veremos las aulas disponibles - Nos devuelve la cadena de caracteres mostrando las aulas libres
-   /* public String verAulasDisponibles()
+    public String eliminarAula(int numero)
     {
-        return gestorAula.verAulasDisponibles();
-    }*/
+        return gestorAula.eliminarAula(numero);
+    }
+
     /// Veremos las aulas con computadores disponibles
     public String verAulasComputadoras()
     {
-        return gestorAula.verAulasConComputadoras();
+        StringBuilder builder= new StringBuilder();
+        if(gestorAula.verAulasConComputadoras().isEmpty())
+        {
+            builder.append("No hay aulas con computadoras cargadas");
+        }
+        else
+        {
+            builder.append(gestorAula.verAulasConComputadoras()).append("\n");
+        }
+        return builder.toString();
+    }
+    public boolean validarAulaComputadora(int id)
+    {
+        return gestorAula.validarAulaComputadora(id);
     }
     /// Vemos las aulas normales (La clase hija de Aula)
     public String verAulasNormales()
     {
-        return gestorAula.verAulasNormales();
+        StringBuilder builder= new StringBuilder();
+        if(gestorAula.verAulasNormales().isEmpty())
+        {
+            builder.append("No hay aulas normales cargadas");
+        }
+        else
+        {
+            builder.append(gestorAula.verAulasNormales()).append("\n");
+        }
+        return builder.toString();
+
     }
     /// Nos devuelve las aulas disponibles en cadena de String
     public String listarAulas()
     {
-        return gestorAula.listarAulas();
+        StringBuilder builder= new StringBuilder();
+        if(gestorAula.listarAulas().isEmpty())
+        {
+            builder.append("No hay aulas cargadas");
+        }
+        else
+        {
+            builder.append(gestorAula.listarAulas()).append("\n");
+        }
+        return builder.toString();
     }
-    /// Nos devuelve todas las aulas disponibles en Univerdad
-   /* public String aulasNoDisponibles()
+
+    public String modificarAulaNormal(int idAula,int capacidad,boolean tele,boolean proyector)
     {
-        return gestorAula.aulaNoDisponible();
+        return gestorAula.modificarAula(idAula,capacidad,tele,proyector);
+    }
+
+    public String modificarAulaComputadora(int idAula, int cantidadCompus,int capacidad, boolean tele, boolean proyector,boolean auriculares)
+    {
+        return gestorAula.modificarAulaComputadora(idAula,capacidad,cantidadCompus,tele,proyector,auriculares);
     }
 
 
-    public boolean corroborarSiEstaDisponible()
-    {
-        return gestorAula.verSiEstaDisponible();
-    }*/
-
-    // HACER METODO PARA ELEGIR PROFE Y METERLO EN MATERIA
+    //=================================== METODOS PROFESOR =======================================
 
 
-
-
-    //============================================
-    //              METODOS PROFESOR
-    //============================================
-
-
-    /// Cargar un profesor
+    // Cargar un profesor
     public void cargarProfesor(Profesor profe)
     {
         gestorProfesor.agregarProfesor(profe);
     }
-    /// Mostrar los profesores
+    // Mostrar los profesores
     public String listarProfesores()
     {
         return gestorProfesor.listarProfesores();
     }
 
+    public boolean verificarExistenciaProfesor(int id)
+    {
+        return gestorProfesor.verificarExistenciaProfesor(id);
+    }
     public boolean eliminarProfesorPorLegajo(int legajo)
     {
         return gestorProfesor.eliminarProfesorPorLegajo(legajo);
@@ -132,10 +154,7 @@ public class Universidad {
         return gestorProfesor.buscarProfesorPorLegajo(legajo);
     }
 
-    //============================================
-    //              METODOS MATERIA
-    //============================================
-
+    //=================================== METODOS MATERIA =======================================
 
     /// Cargar una materia nueva
     public void agregarMateria(Materia materia)
@@ -161,10 +180,7 @@ public class Universidad {
     }
 
 
-    //============================================
-    //              METODOS ARCHIVOS
-    //============================================
-
+    //=================================== METODOS ARCHIVOS =======================================
 
     public void cargarArchivoGestores(){
         gestorAula.cargarArchivoAula();
@@ -178,11 +194,7 @@ public class Universidad {
     }
 
 
-    //============================================
-    //              METODOS RESERVA
-    //============================================
-
-
+    //=================================== METODOS RESERVA =======================================
     public String agregarReserva(EnumMes mes, EnumSemana numSemana, EnumDia dia, EnumHorarios hora, Aula aula, Materia materia)
     {
         return reservaMes.agregar(mes,numSemana,dia,hora,aula,materia);
@@ -231,9 +243,18 @@ public class Universidad {
         return cadenaAula.toString();
     }
 
-    public String buscarYretornarProfeYAula(Profesor profe){
+    public String buscarYretornarProfeYAula(int idProfesor){
         StringBuilder builder =new StringBuilder();
-        builder.append(reservaMes.retornoProfesorPorMes(profe));
+        Profesor profesor = buscarProfesorPorLegajo(idProfesor);
+        if(profesor== null)
+        {
+            builder.append("No hay reservas del profesor "+profesor.getNombre());
+        }
+        else
+        {
+            builder.append(reservaMes.retornoProfesorPorMes(profesor));
+        }
+
         return builder.toString();
     }
 }

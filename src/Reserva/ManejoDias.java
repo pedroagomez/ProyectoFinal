@@ -92,6 +92,8 @@ public class ManejoDias {
         return cadena;
     }
 
+
+
     public boolean verDisponible(EnumHorarios hora, Aula aula){
         boolean disponible = true;
         GestionColeccion<Aula> aux = null;
