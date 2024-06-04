@@ -30,9 +30,7 @@ public class Main {
     public static void menu() {
         Universidad universidad = new Universidad();
 
-        // Leer los datos de los archivos al iniciar
 
-        //
         //universidad.cargarArchivoGestores();
         universidad.leerArchivoGestores();
 
@@ -500,15 +498,25 @@ public class Main {
     //===================================================================
     public static void eliminarAula(Scanner entrada, Universidad universidad)
     {
-        System.out.println(universidad.listarAulas());
-        System.out.println("Ingrese el numero de aula a eliminar: ");
-        while(!entrada.hasNextInt())
-        {
-            System.out.println("Entrada no valida");
-            entrada.next();
-        }
-        int numeroAula = entrada.nextInt();
-        System.out.println(universidad.eliminarAula(numeroAula));
+            if(universidad.listarAulas().contains("No hay aulas cargadas"))
+            {
+                System.out.println("No hay aulas cargadas");
+            }
+            else
+            {
+                System.out.println(universidad.listarAulas());
+                System.out.println("Ingrese el numero de aula a eliminar: ");
+                while(!entrada.hasNextInt())
+                {
+                    System.out.println("Entrada no valida");
+                    entrada.next();
+                }
+                int numeroAula = entrada.nextInt();
+                System.out.println(universidad.eliminarAula(numeroAula));
+            }
+
+
+
     }
 
     //==============================METODOS RESERVA========================================
