@@ -74,6 +74,7 @@ public class Main {
     //===================================================================
     public static void mostrarJson(Universidad universidad)
     {
+
         try
         {
             System.out.println(universidad.toJson().toString());
@@ -810,22 +811,30 @@ public class Main {
 
         Materia materia = null;
         if (aulaEncontrada) {
-            System.out.println("Ingrese el ID de la materia: ");
-             System.out.println(universidad.verMateriaDetalle()); // CODIGO AGREGADO
-            while (!entrada.hasNextInt()) {
-                System.out.println("Entrada no valida. Por favor, ingrese un ID de materia válido: ");
-                entrada.next();
+            if(universidad.getGestorMateria().listarMaterias().isEmpty())
+            {
+                System.out.println("No hay materias cargadas ");
             }
-            int idMateria = entrada.nextInt();
-            materia = universidad.getGestorMateria().devolverMateria(idMateria);
-            String verReserva = "No se pudo realizar";
-            if (universidad.comprobarDisponibilidad(mes, semana, dia, hora, aula) && materia != null) {
-                verReserva = universidad.agregarReserva(mes, semana, dia, hora, aula, materia);
+            else
+            {
+                System.out.println("Ingrese el ID de la materia: ");
+                System.out.println(universidad.verMateriaDetalle()); // CODIGO AGREGADO
+                while (!entrada.hasNextInt()) {
+                    System.out.println("Entrada no valida. Por favor, ingrese un ID de materia válido: ");
+                    entrada.next();
+                }
+                int idMateria = entrada.nextInt();
+                materia = universidad.getGestorMateria().devolverMateria(idMateria);
+                String verReserva = "No se pudo realizar";
+                if (universidad.comprobarDisponibilidad(mes, semana, dia, hora, aula) && materia != null) {
+                    verReserva = universidad.agregarReserva(mes, semana, dia, hora, aula, materia);
+                }
+                System.out.println(verReserva);
+                if (materia == null){
+                    System.out.println("\tNo hay materias agregadas o indico una materia que no existe");
+                }
             }
-            System.out.println(verReserva);
-            if (materia == null){
-                System.out.println("\tNo hay materias agregadas o indico una materia que no existe");
-            }
+
         } else {
             System.out.println("No se pudo realizar la reserva debido a intentos fallidos con el número de aula.");
         }
