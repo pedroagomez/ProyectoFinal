@@ -549,6 +549,12 @@ public class Main {
                 entrada.next();
             }
             opcion = entrada.nextInt();
+            if (opcion == 2){
+                if (universidad.isAulas()){
+                    opcion=5;
+                    System.out.println("No se puede realizar una reserva si no hay aulas cargadas previamente, porfavor ingrese al menu de aulas y cree una para realizar la reserva");
+                }
+            }
             switch (opcion)
             {
                 case 1 -> verReservas(entrada,universidad);

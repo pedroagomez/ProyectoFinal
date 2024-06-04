@@ -131,6 +131,9 @@ public class GestorAula {
         return aux;
     }
 
+    public boolean tengoDatos (){
+        return mapaAula.isEmpty();
+    }
 
     //MUESTRA TODAS LAS AULAS
     public String listarAulas()

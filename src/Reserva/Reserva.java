@@ -114,7 +114,6 @@ public class Reserva {
         return disponible;
         }
 
-
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();

@@ -126,6 +126,9 @@ public class Universidad {
         return gestorAula.modificarAulaComputadora(idAula,capacidad,cantidadCompus,tele,proyector,auriculares);
     }
 
+    public boolean isAulas(){
+        return gestorAula.tengoDatos();
+    }
 
     //=================================== METODOS PROFESOR =======================================
 
