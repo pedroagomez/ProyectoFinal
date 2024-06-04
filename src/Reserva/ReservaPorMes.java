@@ -127,16 +127,14 @@ public class ReservaPorMes {
     }
     public String verReservaDia(EnumDia dia,EnumSemana semana,EnumMes mes)
     {
-        StringBuilder aux=new StringBuilder();
         StringBuilder builder=new StringBuilder();
         if(reservaMensual.containsKey(mes))
         {
             ReservaPorSemana reserva = reservaMensual.get(mes);
-            String diaSemana = reserva.verReservaDia(dia,semana);
-            aux=builder.append(reserva.verReservaDia(dia,semana)).append("\n");
+            builder.append(reserva.verReservaDia(dia,semana)).append("\n");
         } else
         {
-            aux=builder.append("Reserva no encontrada");
+            builder.append("Reserva no encontrada");
         }
 
         return  builder.toString();
