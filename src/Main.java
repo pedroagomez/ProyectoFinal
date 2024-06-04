@@ -409,7 +409,6 @@ public class Main {
                     }else{
                         System.out.println("El numero ("+ cantidad + ") es un numero no valido, porfavor ingrese un numero enero positivo");
                     }
-
                     entrada.nextLine();
                 }
 
