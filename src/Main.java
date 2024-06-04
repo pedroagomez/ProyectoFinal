@@ -382,12 +382,23 @@ public class Main {
                 entrada.nextLine();
 
                 System.out.println("Cantidad de computadoras: ");
-                while (!entrada.hasNextInt()) {
-                    System.out.println("Entrada no válida. Por favor, ingrese un número: ");
-                    entrada.next();
+                int validador = 0;
+                int cantidad = 0;
+                while (validador == 0){
+                    while (!entrada.hasNextInt()) {
+                        System.out.println("Entrada no válida. Por favor, ingrese un número: ");
+                        entrada.next();
+                    }
+                    cantidad = entrada.nextInt();
+                    if (cantidad>0){
+                        validador=1;
+                    }else{
+                        System.out.println("El numero ("+ cantidad + ") es un numero no valido, porfavor ingrese un numero enero positivo");
+                    }
+
+                    entrada.nextLine();
                 }
-                int cantidad = entrada.nextInt();
-                entrada.nextLine();
+
 
                 System.out.println("¿Con proyector? (true/false): ");
                 while (!entrada.hasNextBoolean()) {
