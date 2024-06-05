@@ -31,7 +31,7 @@ public class AulaComputadora extends Aula{
 
 
 
-    
+
 
     public int getCantidadComputadoras() {
         return cantidadComputadoras;
