@@ -26,19 +26,9 @@ public abstract class Aula  implements Serializable {
         this.materia = null;
     }
 
-    public JSONObject toJson() throws JSONException {
-        JSONObject obj = new JSONObject();
-        obj.put("numeroAula", this.numeroAula);
-        obj.put("capacidad", this.capacidad);
-        obj.put("proyector", this.proyector);
-        obj.put("tele", this.tele);
-        if (this.materia != null) {
-            obj.put("materia", this.materia.toJson());
-        } else {
-            obj.put("materia", JSONObject.NULL);
-        }
-        return obj;
-    }
+    public  abstract JSONObject toJson( ) throws JSONException;
+
+
 
     public void setNumeroAula(int numeroAula) {
         this.numeroAula = numeroAula;
