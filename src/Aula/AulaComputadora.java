@@ -28,6 +28,11 @@ public class AulaComputadora extends Aula{
         return obj;
     }
 
+
+
+
+    
+
     public int getCantidadComputadoras() {
         return cantidadComputadoras;
     }
