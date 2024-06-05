@@ -359,6 +359,7 @@ public class Main {
 
             int numeroAula;
             boolean comprobante = false;
+            intentos=0;
             do {
                 System.out.println("Número de aula: ");
                 while (!entrada.hasNextInt()) {
@@ -372,9 +373,9 @@ public class Main {
                 if (comprobante == true){
                     System.out.println("El numero de aula que intenta crear ya existe");
                 }
-            } while (universidad.validarExistenciaDeAula(numeroAula) && intentos < 3 && comprobante == true );
+            } while (intentos <3 && comprobante == true );
 
-            if (intentos >= 3) {
+            if (intentos ==3 && comprobante) {
                 System.out.println("Supero el máximo de intentos permitidos. Por favor, intentelo nuevamente");
                 continuar = false;
             } else {
