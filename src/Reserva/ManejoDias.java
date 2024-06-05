@@ -80,14 +80,20 @@ public class ManejoDias {
     public StringBuilder retornarProfesorPorHora(Profesor profesor) {
         StringBuilder cadena = new StringBuilder();
         HashSet<Aula> aux = null;
+        int flag = 0;
         for (EnumHorarios hora : horarios.keySet()) {
             aux = horarios.get(hora).getConjunto();
             cadena.append(hora).append("\n");
             for (Aula elemento : aux){
                 if (elemento.getMateria().getProfesor().equals(profesor)){
                     cadena.append(elemento.toString()).append("\n");
+                    flag=1;
                 }
             }
+        }
+        if (flag == 0){
+            cadena = new StringBuilder();
+            cadena.append("No hay reservas encontradas para este profesor");
         }
         return cadena;
     }
