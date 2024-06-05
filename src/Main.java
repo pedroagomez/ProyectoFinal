@@ -75,6 +75,7 @@ public class Main {
     {
         try
         {
+            universidad.byJson();
             System.out.println(universidad.toJson().toString());
         }
         catch (JSONException e)

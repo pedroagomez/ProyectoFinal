@@ -5,6 +5,7 @@ import Enumeradores.EnumSemana;
 import GestorColeccion.GestorAula;
 import GestorColeccion.GestorMateria;
 import GestorColeccion.GestorProfesor;
+import JsonUtil.JsonUtil;
 import Reserva.*;
 import Universidad.net.*;
 import Aula.*;
@@ -12,6 +13,7 @@ import Aula.*;
 import java.util.HashSet;
 import java.util.LinkedList;
 import Reserva.*;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -35,7 +37,55 @@ public class Universidad {
         objeto.put("Reservas",reservaMes.toJson());
         return objeto;
     }
+    public void byJson() throws  JSONException{
+        JSONObject reserva =new JSONObject(JsonUtil.leer("ArchivoJson"));
+        JSONArray arrayR = new JSONArray();
+        EnumMes mes;
+        EnumSemana semana;
+        EnumDia dia;
+        EnumHorarios hora;
+        arrayR=reserva.getJSONArray("Reservas");
+        for(int i=0;i<arrayR.length();i++){
+                JSONObject objeto1=arrayR.getJSONObject(i);
+                mes=EnumMes.valueOf(objeto1.getString("Mes").toUpperCase());;
+                JSONArray arrayS=objeto1.getJSONArray("Semana");
+                for(int j=0;j<arrayS.length();j++){
+                    JSONObject object2=arrayS.getJSONObject(j);
+                    semana=EnumSemana.valueOf(object2.getString("Semana").toUpperCase());
+                    JSONArray arrayD=object2.getJSONArray("Dias");
+                    for(int f=0;f<arrayD.length();f++){
+                        JSONObject object3=arrayD.getJSONObject(f);
+                        dia=EnumDia.valueOf(object3.getString("Dia").toUpperCase());
+                        JSONArray arrayH = object3.getJSONArray("Horarios");
+                        for(int k=0;k<arrayH.length();k++){
+                            JSONObject object4=arrayH.getJSONObject(k);
+                            hora=EnumHorarios.valueOf(object4.getString("Hora").toUpperCase());
+                            JSONArray arrayA = object4.getJSONArray("aulas");
+                            for (int l=0;l<arrayA.length();l++){
+                                JSONObject objectA=arrayA.getJSONObject(l);
+                                JSONObject objetoM=objectA.getJSONObject("materia");
+                                JSONObject objetoP=objetoM.getJSONObject("profesor");
+                                if(objectA.has("auriculares")){
+                                    Aula auxA=new AulaComputadora(objectA.getInt("numeroAula"),objectA.getInt("capacidad"),objectA.getBoolean("proyector"),
+                                            objectA.getBoolean("tele"),objectA.getInt("cantidad computadoras"),objectA.getBoolean("auriculares"));
+                                    Profesor auxP=new Profesor(objetoP.getString("nombre"),objetoP.getString("apellido"),objetoP.getInt("legajo"));
+                                    Materia auxM=new Materia(objetoM.getString("nombre"),auxP);
+                                    agregarReserva(mes,semana,dia,hora,auxA,auxM);
+                                }else {
+                                    Aula auxA=new AulaNormal(objectA.getInt("numeroAula"),objectA.getInt("capacidad"),objectA.getBoolean("proyector"),
+                                            objectA.getBoolean("tele"));
+                                    Profesor auxP=new Profesor(objetoP.getString("nombre"),objetoP.getString("apellido"),objetoP.getInt("legajo"));
+                                    Materia auxM=new Materia(objetoM.getString("nombre"),auxP);
+                                    agregarReserva(mes,semana,dia,hora,auxA,auxM);
+                                }
+                            }
+                        }
+                    }
+                }
 
+        }
+
+    }
     // ============================ GETTERS AND SETTERS
     public GestorAula getGestorAula() {
         return gestorAula;
