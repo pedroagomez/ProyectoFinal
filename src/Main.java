@@ -77,7 +77,7 @@ public class Main {
 
         try
         {
-            universidad.byJson();
+            //universidad.byJson();
             System.out.println(universidad.toJson().toString());
         }
         catch (JSONException e)
@@ -86,6 +86,7 @@ public class Main {
         }
 
     }
+    
 
     //===================================================================
     public static void cargarJson(Universidad universidad)
