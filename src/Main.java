@@ -133,11 +133,7 @@ public class Main {
     }
 
     //===================================================================
-    public static void lala()
-    {
-
-    }
-    
+       
     public static void verAulas(Scanner entrada, Universidad universidad) {
         int opcion;
         do {
