@@ -110,6 +110,25 @@ public class GestorMateria implements Serializable {
         }
         return aux;
     }
+
+    public boolean compararMateriaPorString(Materia asignatura, Profesor profe){
+        boolean retorno = true;
+        Iterator<Materia> it=  conjuntoMaterias.getConjuntoIterator();
+        while(it.hasNext() && retorno)
+        {
+            Materia materia = it.next();
+            if(materia.getNombre().equalsIgnoreCase(asignatura.getNombre()))
+            {
+                if (materia.getProfesor().getNombre().equalsIgnoreCase(profe.getNombre()) && materia.getProfesor().getApellido().equalsIgnoreCase(profe.getApellido())){
+                    retorno = false;
+                    System.out.println("IASJDHANDBAKSJDHJALSHDLJKSAHDJKASHNDJKABNDOUQBWIJBJKCBPBDCHBSADCLQBE");
+                }
+            }
+        }
+
+        return retorno;
+    }
+
     public String listarMaterias()
     {
         return conjuntoMaterias.listarConjunto();

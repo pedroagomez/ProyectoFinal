@@ -77,7 +77,7 @@ public class Main {
 
         try
         {
-            universidad.byJson();
+            universidad.toJson();
             System.out.println(universidad.toJson().toString());
         }
         catch (JSONException e)
@@ -1127,7 +1127,7 @@ public class Main {
         System.out.println("Ingrese el nombre de la materia: ");
         entrada.nextLine();
         String nombre = entrada.nextLine();
-
+        Materia materia;
         System.out.println("Profesores disponibles:");
 
         if(universidad.listarProfesores().isEmpty())
@@ -1149,9 +1149,13 @@ public class Main {
 
                 Profesor profesor = universidad.buscarProfesorPorLegajo(legajoProfesor);
                 if (profesor != null){
-                    Materia materia = new Materia(nombre, profesor);
-                    universidad.agregarMateria(materia);
-                    System.out.println("Materia cargada correctamente.");
+                    materia = new Materia(nombre, profesor);
+                    if (universidad.comprobarExistenciaMateriaYprofe(materia,profesor)){
+                        universidad.agregarMateria(materia);
+                        System.out.println("Materia cargada correctamente.");
+                    }else{
+                        System.out.println("Usted tiene una materia cargada con el mismo nombre y mismo profesor");
+                    }
                     comprobante=1;
                 } else {
                     System.out.println("No se encontro ningun profesor con el numero de legajo proporcionado.");
