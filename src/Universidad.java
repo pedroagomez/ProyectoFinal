@@ -38,7 +38,7 @@ public class Universidad {
         return objeto;
     }
 
-
+    /// LEE EL ARCHIVO JSON Y CARGA LA RESEÑA CON LO ANTERIOR GUARDADO
     public void byJson() throws  JSONException{
         JSONObject reserva =new JSONObject(JsonUtil.leer("ArchivoJson"));
         JSONArray arrayR = new JSONArray();
