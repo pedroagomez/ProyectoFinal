@@ -22,12 +22,10 @@ public class GestorMateria implements Serializable {
     public JSONArray toJson() throws JSONException
     {
         JSONArray array = new JSONArray();
-        JSONObject object = new JSONObject();
         for(Materia materia : conjuntoMaterias.getConjunto())
         {
             array.put(materia.toJson());
         }
-
         return array;
     }
 
@@ -136,8 +134,19 @@ public class GestorMateria implements Serializable {
 
     public void cargarArchivoMateria(){
         conjuntoMaterias.cargarArchivoConjunto("Materias.bin");
+
+    }
+    public int contador()
+    {
+        int contador=0;
+        contador= conjuntoMaterias.leerArchivoConjunto("Materias.bin");
+        return contador;
     }
     public void leerArchivoMateria(){
         conjuntoMaterias.leerArchivoConjunto("Materias.bin");
+        Materia nombre = new Materia(contador());
     }
+
+
+
 }
