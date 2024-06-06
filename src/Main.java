@@ -834,56 +834,64 @@ public class Main {
 
         Aula aula = null;
         int intentos = 0;
-        boolean aulaEncontrada = false;
-        while (!aulaEncontrada && intentos < 3) {
-            System.out.println("Ingrese el número de aula: ");
-            System.out.println("Usted tiene disponible las siguientes aulas = " + universidad.renotarAulasDisponiblesParaHoraEspecifica(mes,semana,dia,hora));
-            while (!entrada.hasNextInt()) {
-                System.out.println("Entrada no válida. Por favor, ingrese un número de aula válido: ");
-                entrada.next();
-            }
-            int numeroAula = entrada.nextInt();
-            aula = universidad.getGestorAula().buscarAulaPorNumero(numeroAula);
-
-            /// hacer validacion
-            if (aula == null) {
-                System.out.println("Aula no encontrada. Por favor, ingrese un número de aula válido.");
-                intentos++;
-            } else {
-                aulaEncontrada = true;
-            }
-            entrada.nextLine();
+        if(universidad.renotarAulasDisponiblesParaHoraEspecifica(mes,semana,dia,hora).contains("No hay aulas disponibles para este horario"))
+        {
+            System.out.println("No hay aulas disponibles para este horario");
         }
-
-        Materia materia = null;
-        if (aulaEncontrada) {
-            if(universidad.getGestorMateria().listarMaterias().isEmpty())
-            {
-                System.out.println("No hay materias cargadas ");
-            }
-            else
-            {
-                System.out.println("Ingrese el ID de la materia: ");
-                System.out.println(universidad.verMateriaDetalle()); // CODIGO AGREGADO
+        else
+        {
+            boolean aulaEncontrada = false;
+            while (!aulaEncontrada && intentos < 3) {
+                System.out.println("Ingrese el número de aula: ");
+                System.out.println("Usted tiene disponible las siguientes aulas = " + universidad.renotarAulasDisponiblesParaHoraEspecifica(mes,semana,dia,hora));
                 while (!entrada.hasNextInt()) {
-                    System.out.println("Entrada no valida. Por favor, ingrese un ID de materia válido: ");
+                    System.out.println("Entrada no válida. Por favor, ingrese un número de aula válido: ");
                     entrada.next();
                 }
-                int idMateria = entrada.nextInt();
-                materia = universidad.getGestorMateria().devolverMateria(idMateria);
-                String verReserva = "No se pudo realizar";
-                if (universidad.comprobarDisponibilidad(mes, semana, dia, hora, aula) && materia != null) {
-                    verReserva = universidad.agregarReserva(mes, semana, dia, hora, aula, materia);
+                int numeroAula = entrada.nextInt();
+                aula = universidad.getGestorAula().buscarAulaPorNumero(numeroAula);
+
+                /// hacer validacion
+                if (aula == null) {
+                    System.out.println("Aula no encontrada. Por favor, ingrese un número de aula válido.");
+                    intentos++;
+                } else {
+                    aulaEncontrada = true;
                 }
-                System.out.println(verReserva);
-                if (materia == null){
-                    System.out.println("\tNo hay materias agregadas o indico una materia que no existe");
-                }
+                entrada.nextLine();
             }
 
-        } else {
-            System.out.println("No se pudo realizar la reserva debido a intentos fallidos con el número de aula.");
+            Materia materia = null;
+            if (aulaEncontrada) {
+                if(universidad.getGestorMateria().listarMaterias().isEmpty())
+                {
+                    System.out.println("No hay materias cargadas ");
+                }
+                else
+                {
+                    System.out.println("Ingrese el ID de la materia: ");
+                    System.out.println(universidad.verMateriaDetalle()); // CODIGO AGREGADO
+                    while (!entrada.hasNextInt()) {
+                        System.out.println("Entrada no valida. Por favor, ingrese un ID de materia válido: ");
+                        entrada.next();
+                    }
+                    int idMateria = entrada.nextInt();
+                    materia = universidad.getGestorMateria().devolverMateria(idMateria);
+                    String verReserva = "No se pudo realizar";
+                    if (universidad.comprobarDisponibilidad(mes, semana, dia, hora, aula) && materia != null) {
+                        verReserva = universidad.agregarReserva(mes, semana, dia, hora, aula, materia);
+                    }
+                    System.out.println(verReserva);
+                    if (materia == null){
+                        System.out.println("\tNo hay materias agregadas o indico una materia que no existe");
+                    }
+                }
+
+            } else {
+                System.out.println("No se pudo realizar la reserva debido a intentos fallidos con el número de aula.");
+            }
         }
+
     }
 
     //=======================================================================

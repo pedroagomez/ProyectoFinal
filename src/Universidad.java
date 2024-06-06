@@ -300,11 +300,17 @@ public class Universidad {
         LinkedList<Aula> misAulasCargadas = gestorAula.retornoAulas();
         StringBuilder cadenaAula = new StringBuilder();
         cadenaAula.append("Aulas sin reservar en este horario = \t\n");
+        int disponibles = 0;
         int iterador = misAulasCargadas.size();
         for(int i = 0; i<iterador; i++){
             if (comprobarDisponibilidad(mes,semana,dia,hora,misAulasCargadas.get(i))){
                 cadenaAula.append("Numero de aula = ").append(misAulasCargadas.get(i).getNumeroAula()).append("\t\n");
+                disponibles++;
             }
+        }
+        if (disponibles == 0) {
+            cadenaAula.setLength(0);
+            cadenaAula.append("No hay aulas disponibles para este horario");
         }
         return cadenaAula.toString();
     }
