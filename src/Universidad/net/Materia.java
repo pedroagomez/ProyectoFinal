@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class Materia implements Serializable {
     private String nombre;
     private int id;
-    private static int iDSatic = 0 ;
+    private static int iDSatic=0;
     private Profesor profesor;
 
 
@@ -18,6 +18,10 @@ public class Materia implements Serializable {
         this.id = iDSatic++;
         this.profesor = profesor;
     }
+    public Materia( int id) {
+        iDSatic = id;
+    }
+
 
 
     public JSONObject toJson() throws JSONException
@@ -39,6 +43,10 @@ public class Materia implements Serializable {
 
     public int getId() {
         return id;
+    }
+
+    public static void setiDSatic(int iDSatic) {
+        Materia.iDSatic = iDSatic;
     }
 
     //PROFESOR LO PODEMOS MOVER?
