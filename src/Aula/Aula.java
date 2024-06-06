@@ -28,6 +28,9 @@ public abstract class Aula  implements Serializable {
 
     public abstract JSONObject toJson() throws JSONException;
 
+    public void setNumeroAula(int numeroAula) {
+        this.numeroAula = numeroAula;
+    }
 
     public int getNumeroAula() {
         return numeroAula;

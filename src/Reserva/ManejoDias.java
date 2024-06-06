@@ -28,12 +28,12 @@ public class ManejoDias {
         for(Map.Entry<EnumHorarios,GestionColeccion<Aula>>it : horarios.entrySet())
         {
             objeto.put("Hora",it.getKey());
-           JSONArray aulasArray= new JSONArray();
-           for(Aula aula : it.getValue().getConjunto())
-           {
-               aulasArray.put(aula.toJson());
-           }
-           objeto.put("aulas",aulasArray);
+            JSONArray aulasArray= new JSONArray();
+            for(Aula aula : it.getValue().getConjunto())
+            {
+                aulasArray.put(aula.toJson());
+            }
+            objeto.put("aulas",aulasArray);
         }
         array.put(objeto);
 
@@ -57,12 +57,12 @@ public class ManejoDias {
 
         return reservado;
     }
-
+    /// FUNCION PARA COMPROBAR SI ESTA VACIO
     public boolean isEmpty()
     {
         return horarios.isEmpty();
     }
-
+    /// FUNCION PARA ELIMINAR UN HORARIO EN PARTICULAR
     public boolean eliminarAulaEnHorario(EnumHorarios hora) {
         boolean darBaja = false;
         if (horarios.containsKey(hora))
@@ -76,22 +76,30 @@ public class ManejoDias {
         }
         return darBaja;
     }
-
+    /// RETORNAMOS EL PROFESOR QUE SE ENCUENTRA EN CIERTO HORARIO
     public StringBuilder retornarProfesorPorHora(Profesor profesor) {
         StringBuilder cadena = new StringBuilder();
         HashSet<Aula> aux = null;
+        int flag = 0;
         for (EnumHorarios hora : horarios.keySet()) {
             aux = horarios.get(hora).getConjunto();
             cadena.append(hora).append("\n");
             for (Aula elemento : aux){
                 if (elemento.getMateria().getProfesor().equals(profesor)){
                     cadena.append(elemento.toString()).append("\n");
+                    flag=1;
                 }
             }
+        }
+        if (flag == 0){
+            cadena = new StringBuilder();
+            cadena.append("No hay reservas encontradas para este profesor");
         }
         return cadena;
     }
 
+
+    /// FUNCION PARA VER LAS AULAS DISPONIBLES EN ESE HORARIO
     public boolean verDisponible(EnumHorarios hora, Aula aula){
         boolean disponible = true;
         GestionColeccion<Aula> aux = null;
@@ -126,3 +134,4 @@ public class ManejoDias {
         return builder.toString();
     }
 }
+

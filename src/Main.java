@@ -24,12 +24,13 @@ public class Main {
 
     }
 
+
+    //===================================================================
+
     public static void menu() {
         Universidad universidad = new Universidad();
 
-        // Leer los datos de los archivos al iniciar
 
-        //
         //universidad.cargarArchivoGestores();
         universidad.leerArchivoGestores();
 
@@ -70,13 +71,13 @@ public class Main {
 
     }
 
-
+    //=================================================================== MOSTRAMOS EL JSON
     public static void mostrarJson(Universidad universidad)
     {
+
         try
         {
-            System.out.println(universidad.mostrarArchvoCargadoJson());
-            universidad.byJson();
+            universidad.toJson();
             System.out.println(universidad.toJson().toString());
         }
         catch (JSONException e)
@@ -86,6 +87,7 @@ public class Main {
 
     }
 
+    //=================================================================== CARGAMOS EL JSON SI EXISTE
     public static void cargarJson(Universidad universidad)
     {
         try
@@ -101,7 +103,7 @@ public class Main {
 
 
     //========================== METODOS AULA =============================================
-
+    /// FUNCION PARA EL MENU DE LAS AULAS
     public static void menuAulas(Scanner entrada, Universidad universidad) {
         int opcion;
         do {
@@ -109,6 +111,8 @@ public class Main {
                 \tSeleccione una opción
                 \t[1] Ver aulas
                 \t[2] Cargar aulas
+                \t[3] Eliminar aulas
+                \t[4] Modificar aulas
                 \t[0] Menú anterior
                 """;
             System.out.println(cadena);
@@ -121,6 +125,8 @@ public class Main {
             switch (opcion) {
                 case 1 -> verAulas(entrada, universidad);
                 case 2 -> menuCargarAula(entrada, universidad);
+                case 3 -> eliminarAula(entrada,universidad);
+                case 4 -> modificarAula(entrada,universidad);
                 case 0 -> System.out.println("Volviendo al menú anterior...");
                 default -> System.out.println("Opción inválida");
             }
@@ -134,10 +140,8 @@ public class Main {
             String cadena = """
                 \tMenú aula
                 \t[1] Ver aulas con computadora
-                \t[2] Ver aulas normales
-                \t[3] Ver aulas disponibles
-                \t[4] Ver todas las aulas
-           
+                \t[2] Ver aulas normales               
+                \t[3] Ver todas las aula
                 \t[0] Salir
                 """;
             System.out.println(cadena);
@@ -150,8 +154,7 @@ public class Main {
             switch (opcion) {
                 case 1 -> System.out.println(universidad.verAulasComputadoras());
                 case 2 -> System.out.println(universidad.verAulasNormales());
-               // case 3 -> System.out.println(universidad.verAulasDisponibles());
-                case 4 -> listarAulas(universidad);
+                case 3 -> System.out.println(universidad.listarAulas());
                 case 0 -> System.out.println("Saliendo...");
                 default -> System.out.println("Opción inválida");
             }
@@ -159,18 +162,7 @@ public class Main {
     }
     //===================================================================
 
-    public static void listarAulas(Universidad universidad)
-    {
-        if(universidad.listarAulas().isEmpty())
-        {
-            System.out.println("No hay aulas cargadas");
-        }
-        else
-        {
-            System.out.println(universidad.listarAulas());
-        }
 
-    }
 
 
 
@@ -200,6 +192,165 @@ public class Main {
         } while (opcion != 0);
     }
     //===================================================================
+
+    public static void modificarAula(Scanner entrada ,Universidad universidad)
+    {
+        int opcion;
+        do {
+            String cadena = """
+                Ingrese el tipo de aula que desea modificar 
+                \t[1]Aulas con computadora
+                \t[2]Aulas normales
+                \t[0]Salir
+                """;
+            System.out.println(cadena);
+            while(!entrada.hasNextInt())
+            {
+                System.out.println("Entrada no valida");
+                entrada.next();
+            }
+            opcion=entrada.nextInt();
+            switch (opcion)
+            {
+                case 1 -> modificarAulaComputadora(entrada,universidad);
+                case 2 -> modificarAulaNormal(entrada,universidad);
+                case 0 -> System.out.println("Volviendo al menu anterior..");
+                default -> System.out.println("Opcion invalida");
+            }
+        }while(opcion!=0);
+
+
+    }
+
+    //===================================================================
+    public static void modificarAulaNormal(Scanner entrada, Universidad universidad) {
+        boolean aulasCargadas = true;
+        String aulasListado = universidad.verAulasNormales();
+        System.out.println(aulasListado);
+
+        if (aulasListado.contains("No hay aulas normales cargadas")) {
+            System.out.println("Volviendo al menú anterior...");
+            aulasCargadas = false;
+        }
+
+        if (aulasCargadas) {
+            boolean aulaValida = false;
+            while (!aulaValida) {
+                System.out.println("Ingrese el id del aula: ");
+                while (!entrada.hasNextInt()) {
+                    System.out.println("Entrada no válida");
+                    entrada.next();
+                }
+                int id = entrada.nextInt();
+                boolean existencia = universidad.validarExistenciaDeAula(id);
+
+                if (!existencia) {
+                    System.out.println("El aula no se encontró");
+                } else {
+                    aulaValida = true;
+                    System.out.println("Ingrese la capacidad: ");
+                    while (!entrada.hasNextInt()) {
+                        System.out.println("Entrada no válida");
+                        entrada.next();
+                    }
+                    int capacidad = entrada.nextInt();
+
+                    System.out.println("Televisor (true/false): ");
+                    while (!entrada.hasNextBoolean()) {
+                        System.out.println("Entrada no válida");
+                        entrada.next();
+                    }
+                    boolean tele = entrada.nextBoolean();
+
+                    System.out.println("Proyector (true/false): ");
+                    while (!entrada.hasNextBoolean()) {
+                        System.out.println("Entrada no válida");
+                        entrada.next();
+                    }
+                    boolean proyector = entrada.nextBoolean();
+
+                    System.out.println(universidad.modificarAulaNormal(id, capacidad, tele, proyector));
+                }
+            }
+        }
+    }
+    //===================================================================
+    public static void modificarAulaComputadora(Scanner entrada, Universidad universidad) {
+        boolean aulasCargadas = true;
+        String aulasListado = universidad.verAulasComputadoras();
+        System.out.println(aulasListado);
+
+        if (aulasListado.contains("No hay aulas con computadoras cargadas")) {
+            System.out.println("Volviendo al menú anterior...");
+            aulasCargadas = false;
+        }
+
+        if (aulasCargadas) {
+            int intentos = 0; // Contador de intentos
+            boolean aulaValida = false;
+            while (!aulaValida && intentos < 3) { // Mientras no se encuentre un aula válida y no se hayan superado 3 intentos
+                System.out.println("Ingrese el id del aula de computadoras que desea modificar: ");
+                while (!entrada.hasNextInt()) {
+                    System.out.println("Entrada no válida");
+                    entrada.next();
+                }
+                int id = entrada.nextInt();
+
+                // Verificar si el aula es realmente un aula de computadoras
+                boolean esAulaComputadora = universidad.validarAulaComputadora(id);
+
+                if (!esAulaComputadora) {
+                    System.out.println("El aula no es un aula de computadoras");
+                    intentos++; // Incrementar el contador de intentos
+                } else {
+                    aulaValida = true;
+                    // Continuar con la modificación del aula de computadoras
+                    System.out.println("Ingrese la capacidad: ");
+                    while (!entrada.hasNextInt()) {
+                        System.out.println("Entrada no válida");
+                        entrada.next();
+                    }
+                    int capacidad = entrada.nextInt();
+
+                    System.out.println("Ingrese cantidad de computadoras: ");
+                    while (!entrada.hasNextInt()) {
+                        System.out.println("Entrada no válida");
+                        entrada.next();
+                    }
+                    int cantidadCompus = entrada.nextInt();
+
+                    System.out.println("Televisor (true/false): ");
+                    while (!entrada.hasNextBoolean()) {
+                        System.out.println("Entrada no válida");
+                        entrada.next();
+                    }
+                    boolean tele = entrada.nextBoolean();
+
+                    System.out.println("Proyector (true/false): ");
+                    while (!entrada.hasNextBoolean()) {
+                        System.out.println("Entrada no válida");
+                        entrada.next();
+                    }
+                    boolean proyector = entrada.nextBoolean();
+
+                    System.out.println("Auriculares (true/false): ");
+                    while (!entrada.hasNextBoolean()) {
+                        System.out.println("Entrada no válida");
+                        entrada.next();
+                    }
+                    boolean auriculares = entrada.nextBoolean();
+
+                    System.out.println(universidad.modificarAulaComputadora(id, capacidad, cantidadCompus, tele, proyector, auriculares));
+                }
+            }
+
+            if (intentos >= 3) {
+                System.out.println("Se supero el número máximo de intentos. Volviendo al menú anterior...");
+            }
+        }
+    }
+
+    //===================================================================
     public static void cargarAulaComputadora(Scanner entrada, Universidad universidad) {
         int opcion=-1;
         int intentos = 0;
@@ -208,6 +359,8 @@ public class Main {
         do {
 
             int numeroAula;
+            boolean comprobante = false;
+            intentos=0;
             do {
                 System.out.println("Número de aula: ");
                 while (!entrada.hasNextInt()) {
@@ -217,27 +370,50 @@ public class Main {
                 numeroAula = entrada.nextInt();
                 entrada.nextLine();
                 intentos++;
-            } while (universidad.validarExistenciaDeAula(numeroAula) && intentos < 3);
+                comprobante = universidad.validarExistenciaDeAula(numeroAula);
+                if (comprobante == true){
+                    System.out.println("El numero de aula que intenta crear ya existe");
+                }
+            } while (intentos <3 && comprobante == true );
 
-            if (intentos >= 3) {
+            if (intentos ==3 && comprobante) {
                 System.out.println("Supero el máximo de intentos permitidos. Por favor, intentelo nuevamente");
                 continuar = false;
             } else {
                 System.out.println("Capacidad del aula: ");
-                while (!entrada.hasNextInt()) {
-                    System.out.println("Entrada no válida. Por favor, ingrese un número: ");
-                    entrada.next();
+                int validador1 = 0;
+                int capacidad = 0;
+                while (validador1 == 0){
+                    while (!entrada.hasNextInt()) {
+                        System.out.println("Entrada no válida. Por favor, ingrese un número: ");
+                        entrada.next();
+                    }
+                    capacidad = entrada.nextInt();
+                    if (capacidad>=0){
+                        validador1=1;
+                    }else {
+                        System.out.println("Ingrese un numero entero valido");
+                    }
+
                 }
-                int capacidad = entrada.nextInt();
-                entrada.nextLine();
 
                 System.out.println("Cantidad de computadoras: ");
-                while (!entrada.hasNextInt()) {
-                    System.out.println("Entrada no válida. Por favor, ingrese un número: ");
-                    entrada.next();
+                int validador = 0;
+                int cantidad = 0;
+                while (validador == 0){
+                    while (!entrada.hasNextInt()) {
+                        System.out.println("Entrada no válida. Por favor, ingrese un número: ");
+                        entrada.next();
+                    }
+                    cantidad = entrada.nextInt();
+                    if (cantidad>0){
+                        validador=1;
+                    }else{
+                        System.out.println("El numero ("+ cantidad + ") es un numero no valido, porfavor ingrese un numero enero positivo");
+                    }
+                    entrada.nextLine();
                 }
-                int cantidad = entrada.nextInt();
-                entrada.nextLine();
+
 
                 System.out.println("¿Con proyector? (true/false): ");
                 while (!entrada.hasNextBoolean()) {
@@ -284,13 +460,13 @@ public class Main {
 
     //===================================================================
     public static void cargarAulaNormal(Scanner entrada, Universidad universidad) {
-        int opcion;
-        int intentos = 0;
+
         boolean continuar = true;
+        int opcion=0;
 
         do {
-            opcion = entrada.nextInt();
-
+            boolean comprobante = false;
+            int intentos = 0;
             int numeroAula;
             do {
                 System.out.println("Número de aula: ");
@@ -301,18 +477,33 @@ public class Main {
                 }
                 numeroAula = entrada.nextInt();
                 intentos++;
-            } while (universidad.validarExistenciaDeAula(numeroAula) && intentos < 3);
+                comprobante=universidad.validarExistenciaDeAula(numeroAula);
+                if (comprobante == true){
+                    System.out.println("El numero de aula que intenta crear ya existe");
+                }
+            } while (comprobante && intentos < 3);
 
-            if (intentos >= 3) {
-                System.out.println("Superó el máximo de intentos permitidos. Por favor intentelo nuevamente.");
+            if (intentos == 3 && comprobante) {
+                System.out.println("Superó el máximo de intentos permitidos. Por favor inténtelo nuevamente.");
                 continuar = false;
             } else {
                 System.out.println("Capacidad del aula: ");
-                while (!entrada.hasNextInt()) {
-                    System.out.println("Entrada no válida. Por favor, ingrese un número: ");
-                    entrada.next();
+                int validador = 0;
+                int capacidad = 0;
+                while (validador == 0){
+                    while (!entrada.hasNextInt()) {
+                        System.out.println("Entrada no válida. Por favor, ingrese un número: ");
+                        entrada.next();
+                    }
+                    capacidad = entrada.nextInt();
+                    if (capacidad>=0){
+                        validador=1;
+                    }else {
+                        System.out.println("Ingrese un numero entero valido");
+                    }
+
                 }
-                int capacidad = entrada.nextInt();
+
 
                 System.out.println("¿Con proyector? (true/false): ");
                 while (!entrada.hasNextBoolean()) {
@@ -327,7 +518,6 @@ public class Main {
                     entrada.next();
                 }
                 boolean tele = entrada.nextBoolean();
-
 
                 Aula aula = new AulaNormal(numeroAula, capacidad, proyector, tele);
                 universidad.agregarAula(aula);
@@ -347,6 +537,29 @@ public class Main {
         } while (opcion != 0 && continuar);
     }
 
+    //===================================================================
+    public static void eliminarAula(Scanner entrada, Universidad universidad)
+    {
+            if(universidad.listarAulas().contains("No hay aulas cargadas"))
+            {
+                System.out.println("No hay aulas cargadas");
+            }
+            else
+            {
+                System.out.println(universidad.listarAulas());
+                System.out.println("Ingrese el numero de aula a eliminar: ");
+                while(!entrada.hasNextInt())
+                {
+                    System.out.println("Entrada no valida");
+                    entrada.next();
+                }
+                int numeroAula = entrada.nextInt();
+                System.out.println(universidad.eliminarAula(numeroAula));
+            }
+
+
+
+    }
 
     //==============================METODOS RESERVA========================================
     public static void menuReservas(Scanner entrada, Universidad universidad)
@@ -366,6 +579,12 @@ public class Main {
                 entrada.next();
             }
             opcion = entrada.nextInt();
+            if (opcion == 2){
+                if (universidad.isAulas()){
+                    opcion=5;
+                    System.out.println("No se puede realizar una reserva si no hay aulas cargadas previamente, porfavor ingrese al menu de aulas y cree una para realizar la reserva");
+                }
+            }
             switch (opcion)
             {
                 case 1 -> verReservas(entrada,universidad);
@@ -404,6 +623,7 @@ public class Main {
                 case 2 -> verReservaDiaDeterminado(entrada,universidad);
                 case 3 -> verReservaSemanaDeterminado(entrada,universidad);
                 case 4 -> reservaMes(entrada,universidad);
+                case 5 -> verReservasProfesor(entrada,universidad);
                 case 0 -> System.out.println("Volviendo al menu anterior");
                 default -> System.out.println("Opcion invalida");
 
@@ -513,26 +733,35 @@ public class Main {
     }
     //===================================================================
     public static void reservaMes(Scanner entrada, Universidad universidad) {
-        System.out.println("Ingrese el mes: ");
-        entrada.nextLine();
-        while (!entrada.hasNextLine()) {
-            System.out.println("Opcion invalida. Por favor, ingrese el mes: ");
-            entrada.nextLine();
+        System.out.println("Ingrese el mes (elija una de las siguientes opciones): ");
+        for(EnumMes mesEnum : EnumMes.values())
+        {
+            System.out.println(mesEnum.name());
         }
-        String mesString = entrada.nextLine();
-        try {
-            EnumMes mes = EnumMes.valueOf(mesString.toUpperCase());
-            System.out.println(universidad.verReservasMes(mes));
-
-        } catch (IllegalArgumentException e) {
-            System.out.println("Mes ingresado no valido. Por favor, ingrese un mes valido.");
-
+        EnumMes mes = null;
+        while (mes == null) {
+            String mesString = entrada.nextLine();
+            try {
+                mes = EnumMes.valueOf(mesString.toUpperCase());
+                System.out.println(universidad.verReservasMes(mes));
+            } catch (IllegalArgumentException e) {
+                System.out.println("Día ingresado no válido. Por favor, ingrese un día válido.");
+            }
         }
+
     }
     //===================================================================
     public static void verReservasProfesor(Scanner entrada, Universidad universidad)
     {
-
+        System.out.println(universidad.listarProfesores());
+        System.out.println("Ingrese el ID del profesor : ");
+        while (!entrada.hasNextInt())
+        {
+            System.out.println("Entrada no valida");
+            entrada.next();
+        }
+        int idProfesor= entrada.nextInt();
+        System.out.println(universidad.buscarYretornarProfeYAula(idProfesor));
 
     }
 
@@ -554,7 +783,6 @@ public class Main {
                 System.out.println("Mes ingresado no válido. Por favor, ingrese un mes válido.");
             }
         }
-
 
         System.out.println("Ingrese la semana (elija una de las siguientes opciones): ");
         for (EnumSemana semanaEnum : EnumSemana.values()) {
@@ -604,7 +832,6 @@ public class Main {
             }
         }
 
-
         Aula aula = null;
         int intentos = 0;
         boolean aulaEncontrada = false;
@@ -630,22 +857,30 @@ public class Main {
 
         Materia materia = null;
         if (aulaEncontrada) {
-            System.out.println("Ingrese el ID de la materia: ");
-            // System.out.println(universidad.verMateriaDetalle()); // CODIGO AGREGADO
-            while (!entrada.hasNextInt()) {
-                System.out.println("Entrada no valida. Por favor, ingrese un ID de materia válido: ");
-                entrada.next();
+            if(universidad.getGestorMateria().listarMaterias().isEmpty())
+            {
+                System.out.println("No hay materias cargadas ");
             }
-            int idMateria = entrada.nextInt();
-            materia = universidad.getGestorMateria().devolverMateria(idMateria);
-            String verReserva = "No se pudo realizar";
-            if (universidad.comprobarDisponibilidad(mes, semana, dia, hora, aula) && materia != null) {
-                verReserva = universidad.agregarReserva(mes, semana, dia, hora, aula, materia);
+            else
+            {
+                System.out.println("Ingrese el ID de la materia: ");
+                System.out.println(universidad.verMateriaDetalle()); // CODIGO AGREGADO
+                while (!entrada.hasNextInt()) {
+                    System.out.println("Entrada no valida. Por favor, ingrese un ID de materia válido: ");
+                    entrada.next();
+                }
+                int idMateria = entrada.nextInt();
+                materia = universidad.getGestorMateria().devolverMateria(idMateria);
+                String verReserva = "No se pudo realizar";
+                if (universidad.comprobarDisponibilidad(mes, semana, dia, hora, aula) && materia != null) {
+                    verReserva = universidad.agregarReserva(mes, semana, dia, hora, aula, materia);
+                }
+                System.out.println(verReserva);
+                if (materia == null){
+                    System.out.println("\tNo hay materias agregadas o indico una materia que no existe");
+                }
             }
-            System.out.println(verReserva);
-            if (materia == null){
-                System.out.println("\tNo hay materias agregadas o indico una materia que no existe");
-            }
+
         } else {
             System.out.println("No se pudo realizar la reserva debido a intentos fallidos con el número de aula.");
         }
@@ -783,18 +1018,37 @@ public class Main {
             entrada.nextLine();
         }
         String apellido=entrada.nextLine();
-
-        System.out.println("Ingrese el numero de legajo : ");
-        while(!entrada.hasNextLine())
+        int intentos=0;
+        boolean existe=true;
+        while(intentos<3 && existe)
         {
-            System.out.println("Entrada no valida. Por favor ingrese un entero");
-            entrada.nextLine();
+            System.out.println("Ingrese el numero de legajo : ");
+            while(!entrada.hasNextLine())
+            {
+                System.out.println("Entrada no valida. Por favor ingrese un entero");
+                entrada.nextLine();
+            }
+            int numeroLegajo=entrada.nextInt();
+            if(universidad.verificarExistenciaProfesor(numeroLegajo))
+            {
+                System.out.println("El numero de legajo ya existe ");
+                intentos++;
+            }
+            else {
+
+                Profesor profesor= new Profesor(nombre,apellido,numeroLegajo);
+                universidad.cargarProfesor(profesor);
+                existe=false;
+            }
+
         }
-        int numeroLegajo=entrada.nextInt();
+        if(intentos >= 3 )
+        {
+            System.out.println("Volviendo al menu");
+        }
 
-        Profesor profesor= new Profesor(nombre,apellido,numeroLegajo);
 
-        universidad.cargarProfesor(profesor);
+
     }
     //===================================================================
 
@@ -811,18 +1065,26 @@ public class Main {
     public static void darDeBajaProfesor(Scanner entrada, Universidad universidad) {
 
         verListadoProfesores(universidad);
-        System.out.println("\n \nIngrese el legajo del profesor que desea dar de baja: ");
-        while (!entrada.hasNextInt()) {
-            System.out.println("Entrada no válida. Por favor, ingrese un número entero.");
-            entrada.nextLine();
+        if(universidad.listarProfesores().isEmpty())
+        {
+            System.out.println("Volviendo al menu anterior...");
         }
-        int legajo = entrada.nextInt();
-        boolean eliminado = universidad.eliminarProfesorPorLegajo(legajo);
-        if (eliminado) {
-            System.out.println("Profesor dado de baja correctamente.");
-        } else {
-            System.out.println("No se encontró ningún profesor con ese legajo.");
+        else
+        {
+            System.out.println("\n \nIngrese el legajo del profesor que desea dar de baja: ");
+            while (!entrada.hasNextInt()) {
+                System.out.println("Entrada no válida. Por favor, ingrese un número entero.");
+                entrada.nextLine();
+            }
+            int legajo = entrada.nextInt();
+            boolean eliminado = universidad.eliminarProfesorPorLegajo(legajo);
+            if (eliminado) {
+                System.out.println("Profesor dado de baja correctamente.");
+            } else {
+                System.out.println("No se encontró ningún profesor con ese legajo.");
+            }
         }
+
     }
 
 
@@ -864,13 +1126,19 @@ public class Main {
         System.out.println("Ingrese el nombre de la materia: ");
         entrada.nextLine();
         String nombre = entrada.nextLine();
-
+        Materia materia;
         System.out.println("Profesores disponibles:");
-        System.out.println(universidad.listarProfesores());
-        int legajoProfesor;
-        while (comprobante == 0){
-            System.out.println("Ingrese el número de legajo del profesor para esta materia: ");
-            //legajoProfesor = entrada.nextInt();
+
+        if(universidad.listarProfesores().isEmpty())
+        {
+            System.out.println("No hay profesores cargados . Volviendo al menu anterior...");
+        }
+        else {
+            System.out.println(universidad.listarProfesores());
+            int legajoProfesor;
+            while (comprobante == 0){
+                System.out.println("Ingrese el número de legajo del profesor para esta materia: ");
+                //legajoProfesor = entrada.nextInt();
 
                 while(!entrada.hasNextInt()){
                     System.out.println("Entrada no válida. Por favor, ingrese un número de legajo: ");
@@ -878,17 +1146,23 @@ public class Main {
                 }
                 legajoProfesor = entrada.nextInt();
 
-            Profesor profesor = universidad.buscarProfesorPorLegajo(legajoProfesor);
-            if (profesor != null){
-                Materia materia = new Materia(nombre, profesor);
-                universidad.agregarMateria(materia);
-                System.out.println("Materia cargada correctamente.");
-                comprobante=1;
-            } else {
-                System.out.println("No se encontro ningun profesor con el numero de legajo proporcionado.");
-                System.out.println("Aprete 1 para voler al menu o 0 para ingresar otro legajo");
-                comprobante = entrada.nextInt();
-            }
+                Profesor profesor = universidad.buscarProfesorPorLegajo(legajoProfesor);
+                if (profesor != null){
+                    materia = new Materia(nombre, profesor);
+                    if (universidad.comprobarExistenciaMateriaYprofe(materia,profesor)){
+                        universidad.agregarMateria(materia);
+                        System.out.println("Materia cargada correctamente.");
+                    }else{
+                        System.out.println("Usted tiene una materia cargada con el mismo nombre y mismo profesor");
+                    }
+                    comprobante=1;
+                } else {
+                    System.out.println("No se encontro ningun profesor con el numero de legajo proporcionado.");
+                    System.out.println("Aprete 1 para voler al menu o 0 para ingresar otro legajo");
+                    comprobante = entrada.nextInt();
+                }
+        }
+
         }
 
     }
@@ -906,17 +1180,25 @@ public class Main {
     public static void darDeBajaMateria(Scanner entrada, Universidad universidad) {
 
         verListadoDeMaterias(universidad);
-        System.out.println("\n \nIngrese el ID de la materia  que desea dar de baja: ");
-        while (!entrada.hasNextInt()) {
-            System.out.println("Entrada no válida. Por favor, ingrese un número entero.");
-            entrada.nextLine();
+        if(universidad.listarMaterias().isEmpty())
+        {
+            System.out.println("Volviendo al menu anterior ...");
         }
-        int id = entrada.nextInt();
-        boolean eliminado = universidad.eliminarMateriaPorId(id);
-        if (eliminado) {
-            System.out.println("Profesor dado de baja correctamente.");
-        } else {
-            System.out.println("No se encontró ningún profesor con ese legajo.");
+        else
+        {
+            System.out.println("\n \nIngrese el ID de la materia  que desea dar de baja: ");
+            while (!entrada.hasNextInt()) {
+                System.out.println("Entrada no válida. Por favor, ingrese un número entero.");
+                entrada.nextLine();
+            }
+            int id = entrada.nextInt();
+            boolean eliminado = universidad.eliminarMateriaPorId(id);
+            if (eliminado) {
+                System.out.println("Profesor dado de baja correctamente.");
+            } else {
+                System.out.println("No se encontró ningún profesor con ese legajo.");
+            }
         }
+
     }
 }

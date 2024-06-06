@@ -28,17 +28,13 @@ public class GestorProfesor implements  Serializable  {
         }
         return array;
     }
-
+    /// FUNCION PARA AGREGAR UN PROFESOR
     public void agregarProfesor(Profesor profe)
     {
         conjuntoProfesores.agregar(profe);
     }
 
-    public void eliminarProfesor(Profesor profe)
-    {
-        conjuntoProfesores.eliminar(profe);
-    }
-
+    /// FUNCION PARA ELIMINAR UN PROFESOR POR LEGAJO
     public boolean eliminarProfesorPorLegajo(int legajo)
     {
         boolean eliminado=false;
@@ -56,7 +52,7 @@ public class GestorProfesor implements  Serializable  {
     }
 
 
-
+    /// FUNCION PARA LISTAR LOS PROFESORES
     public String listarProfesores()
     {
         return conjuntoProfesores.listarConjunto();
@@ -80,6 +76,22 @@ public class GestorProfesor implements  Serializable  {
         }
         return aux;
     }
+    /// VERIFICACION SI UN PROFESOR YA EXISTE
+    public boolean verificarExistenciaProfesor(int id)
+    {
+        boolean existe=false;
+        Iterator<Profesor>it= conjuntoProfesores.getConjuntoIterator();
+        while(it.hasNext())
+        {
+            Profesor profe = it.next();
+            if(profe.getLegajo()== id)
+            {
+                existe=true;
+            }
+        }
+        return existe;
+    }
+    /// FUNCIONES DE CARGA Y LECTURA DE ARCHIVOS
     public void cargarArchivoProfesor(){
         conjuntoProfesores.cargarArchivoConjunto("Profesores.bin");
     }
