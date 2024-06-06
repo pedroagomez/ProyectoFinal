@@ -67,19 +67,17 @@ public class Universidad {
                             JSONObject objectA=arrayA.getJSONObject(l);
                             JSONObject objetoM=objectA.getJSONObject("materia");
                             JSONObject objetoP=objetoM.getJSONObject("profesor");
+                            Profesor auxP=new Profesor(objetoP.getString("nombre"),objetoP.getString("apellido"),objetoP.getInt("legajo"));
+                            Materia auxM=new Materia(objetoM.getString("nombre"),auxP);
+                            Aula auxA;
                             if(objectA.has("auriculares")){
-                                Aula auxA=new AulaComputadora(objectA.getInt("numeroAula"),objectA.getInt("capacidad"),objectA.getBoolean("proyector"),
+                                auxA=new AulaComputadora(objectA.getInt("numeroAula"),objectA.getInt("capacidad"),objectA.getBoolean("proyector"),
                                         objectA.getBoolean("tele"),objectA.getInt("cantidad computadoras"),objectA.getBoolean("auriculares"));
-                                Profesor auxP=new Profesor(objetoP.getString("nombre"),objetoP.getString("apellido"),objetoP.getInt("legajo"));
-                                Materia auxM=new Materia(objetoM.getString("nombre"),auxP);
-                                agregarReserva(mes,semana,dia,hora,auxA,auxM);
                             }else {
-                                Aula auxA=new AulaNormal(objectA.getInt("numeroAula"),objectA.getInt("capacidad"),objectA.getBoolean("proyector"),
+                                auxA=new AulaNormal(objectA.getInt("numeroAula"),objectA.getInt("capacidad"),objectA.getBoolean("proyector"),
                                         objectA.getBoolean("tele"));
-                                Profesor auxP=new Profesor(objetoP.getString("nombre"),objetoP.getString("apellido"),objetoP.getInt("legajo"));
-                                Materia auxM=new Materia(objetoM.getString("nombre"),auxP);
-                                agregarReserva(mes,semana,dia,hora,auxA,auxM);
                             }
+                            agregarReserva(mes,semana,dia,hora,auxA,auxM);
                         }
                     }
                 }
