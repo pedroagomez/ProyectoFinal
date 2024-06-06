@@ -37,6 +37,10 @@ public class Universidad {
         objeto.put("Reservas",reservaMes.toJson());
         return objeto;
     }
+    public String mostrarArchvoCargadoJson() throws JSONException {
+        JSONObject reserva =new JSONObject(JsonUtil.leer("ArchivoJson"));
+        return reserva.toString();
+    }
     public void byJson() throws  JSONException{
         JSONObject reserva =new JSONObject(JsonUtil.leer("ArchivoJson"));
         JSONArray arrayR = new JSONArray();

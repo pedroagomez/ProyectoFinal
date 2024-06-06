@@ -75,6 +75,7 @@ public class Main {
     {
         try
         {
+            System.out.println(universidad.mostrarArchvoCargadoJson());
             universidad.byJson();
             System.out.println(universidad.toJson().toString());
         }
