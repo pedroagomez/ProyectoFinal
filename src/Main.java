@@ -1169,7 +1169,11 @@ public class Main {
         if(universidad.listarMaterias().isEmpty()){
             System.out.println("\nLista de materias cargada no encontrada");
         }
-        System.out.println(universidad.listarMaterias());
+        else
+        {
+            System.out.println(universidad.listarMaterias());
+        }
+
     }
 
     //===================================================================

@@ -115,10 +115,20 @@ public class GestorMateria implements Serializable {
         return conjuntoMaterias.listarConjunto();
     }
 
+    public int contador()
+    {
+        int contador=0;
+        contador = conjuntoMaterias.leerArchivoConjunto("Materias.bin");
+        return contador;
+    }
     public void cargarArchivoMateria(){
         conjuntoMaterias.cargarArchivoConjunto("Materias.bin");
     }
     public void leerArchivoMateria(){
         conjuntoMaterias.leerArchivoConjunto("Materias.bin");
+        Materia materia = new Materia(contador());
+
     }
+
+
 }
