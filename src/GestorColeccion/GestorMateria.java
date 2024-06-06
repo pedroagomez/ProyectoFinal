@@ -22,12 +22,10 @@ public class GestorMateria implements Serializable {
     public JSONArray toJson() throws JSONException
     {
         JSONArray array = new JSONArray();
-        JSONObject object = new JSONObject();
         for(Materia materia : conjuntoMaterias.getConjunto())
         {
             array.put(materia.toJson());
         }
-
         return array;
     }
 
@@ -110,6 +108,25 @@ public class GestorMateria implements Serializable {
         }
         return aux;
     }
+
+    public boolean compararMateriaPorString(Materia asignatura, Profesor profe){
+        boolean retorno = true;
+        Iterator<Materia> it=  conjuntoMaterias.getConjuntoIterator();
+        while(it.hasNext() && retorno)
+        {
+            Materia materia = it.next();
+            if(materia.getNombre().equalsIgnoreCase(asignatura.getNombre()))
+            {
+                if (materia.getProfesor().getNombre().equalsIgnoreCase(profe.getNombre()) && materia.getProfesor().getApellido().equalsIgnoreCase(profe.getApellido())){
+                    retorno = false;
+                    System.out.println("IASJDHANDBAKSJDHJALSHDLJKSAHDJKASHNDJKABNDOUQBWIJBJKCBPBDCHBSADCLQBE");
+                }
+            }
+        }
+
+        return retorno;
+    }
+
     public String listarMaterias()
     {
         return conjuntoMaterias.listarConjunto();
@@ -117,8 +134,19 @@ public class GestorMateria implements Serializable {
 
     public void cargarArchivoMateria(){
         conjuntoMaterias.cargarArchivoConjunto("Materias.bin");
+
+    }
+    public int contador()
+    {
+        int contador=0;
+        contador= conjuntoMaterias.leerArchivoConjunto("Materias.bin");
+        return contador;
     }
     public void leerArchivoMateria(){
         conjuntoMaterias.leerArchivoConjunto("Materias.bin");
+        Materia nombre = new Materia(contador());
     }
+
+
+
 }

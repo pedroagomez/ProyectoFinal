@@ -134,15 +134,18 @@ public class GestionColeccion<T> implements IGestion<T>{
 
         }
     }
-    public void leerArchivoConjunto(String nombreA){
+    public int leerArchivoConjunto(String nombreA){
         ObjectInputStream ois=null;
+        int contador = 0;
         try {
             FileInputStream fis=new FileInputStream(nombreA);
             ois=new ObjectInputStream(fis);
             boolean bandera = true;
+
             while (bandera) {
 
                 agregar((T)ois.readObject());
+                contador++;
             }
         } catch (FileNotFoundException e) {
             cargarArchivoConjunto(nombreA);
@@ -159,6 +162,6 @@ public class GestionColeccion<T> implements IGestion<T>{
                 throw new RuntimeException(e);
             }
         }
-
+        return contador;
     }
 }

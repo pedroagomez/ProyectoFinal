@@ -19,6 +19,9 @@ public class Materia implements Serializable {
         this.profesor = profesor;
     }
 
+    public Materia(int id){
+        iDSatic = id;
+    }
 
     public JSONObject toJson() throws JSONException
     {
