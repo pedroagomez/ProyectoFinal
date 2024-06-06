@@ -74,12 +74,18 @@ public class ReservaPorSemana {
 
     /// FUNCION PARA ACCEDER A UNA SEMANA EN PARTICULAR
     public String accederASemana (EnumSemana semana){
+        StringBuilder builder= new StringBuilder();
         Reserva aux = null;
         if(reservaPorSemana.containsKey(semana)){
             aux = reservaPorSemana.get(semana);
+            builder.append(aux).append("\n");
+        }
+        else
+        {
+            builder.append("No hay reservas");
         }
 
-        return aux.toString();
+        return builder.toString();
     }
     /// FUNCION PARA RETORNAR POR STRING QUE PROFESOR ESTA EN ESA SEMANA
     public StringBuilder retornoProfesorPorSemana (Profesor profesor){
@@ -101,6 +107,10 @@ public class ReservaPorSemana {
         {
             Reserva reserva = reservaPorSemana.get(semana);
             builder.append(reserva.verReservaDia(dia)).append("\n");
+        }
+        else
+        {
+            builder.append("No se encontro reserva");
         }
         return  builder.toString();
     }

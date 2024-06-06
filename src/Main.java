@@ -1227,9 +1227,9 @@ public class Main {
             int id = entrada.nextInt();
             boolean eliminado = universidad.eliminarMateriaPorId(id);
             if (eliminado) {
-                System.out.println("Profesor dado de baja correctamente.");
+                System.out.println("Materia dada de baja correctamente.");
             } else {
-                System.out.println("No se encontró ningún profesor con ese legajo.");
+                System.out.println("No se encontró ningúna materia con ese id.");
             }
         }
 
