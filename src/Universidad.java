@@ -111,11 +111,12 @@ public class Universidad {
     {
         gestorAula.agregarAula(aulita.getNumeroAula(),aulita);
     }
-
+    /// FUNCION PARA COMPROBAR LA EXISTENCIA DE UN AULA
     public boolean validarExistenciaDeAula(int numero)
     {
         return gestorAula.validarExistenciaAula(numero);
     }
+    /// FUNCION PARA ELIMINAR UN AULA
     public String eliminarAula(int numero)
     {
         return gestorAula.eliminarAula(numero);
@@ -135,6 +136,7 @@ public class Universidad {
         }
         return builder.toString();
     }
+    /// COMPROMAOS LA EXISTENCIA DE UN AULA POR ID
     public boolean validarAulaComputadora(int id)
     {
         return gestorAula.validarAulaComputadora(id);
@@ -168,17 +170,17 @@ public class Universidad {
         }
         return builder.toString();
     }
-
+    /// MODIFICAR UN AULA NORMAL
     public String modificarAulaNormal(int idAula,int capacidad,boolean tele,boolean proyector)
     {
         return gestorAula.modificarAula(idAula,capacidad,tele,proyector);
     }
-
+    /// MODIFICAR UN AULA CON COMPUTADORA
     public String modificarAulaComputadora(int idAula, int cantidadCompus,int capacidad, boolean tele, boolean proyector,boolean auriculares)
     {
         return gestorAula.modificarAulaComputadora(idAula,capacidad,cantidadCompus,tele,proyector,auriculares);
     }
-
+    /// FUNCION PARA VER SI TENGO AULAS CARGADAS
     public boolean isAulas(){
         return gestorAula.tengoDatos();
     }
@@ -196,11 +198,12 @@ public class Universidad {
     {
         return gestorProfesor.listarProfesores();
     }
-
+    /// VERIFICAR SI EXISTE EL PROFESOR CARGADO
     public boolean verificarExistenciaProfesor(int id)
     {
         return gestorProfesor.verificarExistenciaProfesor(id);
     }
+    /// ELIMINAR UN PROFESOR POR LEGAJO
     public boolean eliminarProfesorPorLegajo(int legajo)
     {
         return gestorProfesor.eliminarProfesorPorLegajo(legajo);
@@ -222,33 +225,34 @@ public class Universidad {
     {
         return gestorMateria.listarMaterias();
     }
-
+    // VEMOS UNA MATERIA EN PARTICULAR
     public String verMateriaDetalle()
 
 
     {
         return gestorMateria.verMateriaDetalle();
     }
-
+    // ELIMINAMOS UNA MATERIA POR ID
     public boolean eliminarMateriaPorId( int id)
     {
         return gestorMateria.eliminarMateriaPorId(id);
     }
 
     //=================================== METODOS PROFE Y MATERIA ================================
-
+    // VEMOS SI EXISTE EL PROFE Y MATERIA CARGADOS
     public boolean comprobarExistenciaMateriaYprofe(Materia materia, Profesor profesor){
         return  gestorMateria.compararMateriaPorString(materia,profesor);
     }
 
 
     //=================================== METODOS ARCHIVOS =======================================
-
+    // CARGAMOS EL ARCHIVO CON LOS DATOS
     public void cargarArchivoGestores(){
         gestorAula.cargarArchivoAula();
         gestorMateria.cargarArchivoMateria();
         gestorProfesor.cargarArchivoProfesor();
     }
+    // LEEMOS EL ARCHIVO CON LOS DATOS
     public void leerArchivoGestores(){
         gestorAula.leerArchivoAula();
         gestorMateria.leerArchivoMateria();
@@ -257,16 +261,17 @@ public class Universidad {
 
 
     //=================================== METODOS RESERVA =======================================
+    /// AGREGAMOS LA RESERVA
     public String agregarReserva(EnumMes mes, EnumSemana numSemana, EnumDia dia, EnumHorarios hora, Aula aula, Materia materia)
     {
         return reservaMes.agregar(mes,numSemana,dia,hora,aula,materia);
     }
-
+    /// CANCELAMOS UNA RESERVA
     public boolean cancelarReserva(EnumMes mes, EnumSemana numSemana, EnumDia dia, EnumHorarios hora)
     {
         return reservaMes.cancelarReserva(mes,numSemana,dia,hora);
     }
-
+    /// VEMOS LAS RESERVAS DEL MES
     public String verReservasMes(EnumMes mes)
     {
         return reservaMes.accederAMes(mes);
@@ -276,23 +281,22 @@ public class Universidad {
     {
         return  reservaMes.toString();
     }
-
+    // VEMOS LA RESERVA X DIA
     public String verReservasDiaDeterminado(EnumMes mes,EnumSemana semana, EnumDia dia)
     {
         return reservaMes.verReservaDia(dia,semana,mes);
     }
-
+    // VEMOS LAS RESERVAS DE LA SEMANA
     public String verReservaSemanaDeterminada(EnumMes mes,EnumSemana semana)
     {
         return  reservaMes.verReservaSemana(mes,semana);
     }
-
+    /// COMPROBAMOS DISPONIBILIDAD DEL AULA
     public boolean comprobarDisponibilidad(EnumMes mes, EnumSemana semana, EnumDia dia, EnumHorarios hora, Aula aula){
         return reservaMes.verDisponibilidad(dia,semana,mes,hora,aula);
     }
-
+    // RETORNAMOS LAS AULAS DISPONIBLES PARA UN HORARIO QUE SE LE PASE
     public String renotarAulasDisponiblesParaHoraEspecifica (EnumMes mes, EnumSemana semana, EnumDia dia,EnumHorarios hora){
-        LinkedList<Aula> misAulas = new LinkedList<>();
         LinkedList<Aula> misAulasCargadas = gestorAula.retornoAulas();
         StringBuilder cadenaAula = new StringBuilder();
         cadenaAula.append("Aulas sin reservar en este horario = \t\n");
@@ -304,7 +308,7 @@ public class Universidad {
         }
         return cadenaAula.toString();
     }
-
+    /// BUSCAMOS UN PROFESOR Y VEMOS EN QUE AULA DA CLASES
     public String buscarYretornarProfeYAula(int idProfesor){
         StringBuilder builder =new StringBuilder();
         Profesor profesor = buscarProfesorPorLegajo(idProfesor);

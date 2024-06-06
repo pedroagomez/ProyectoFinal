@@ -71,7 +71,7 @@ public class Main {
 
     }
 
-    //===================================================================
+    //=================================================================== MOSTRAMOS EL JSON
     public static void mostrarJson(Universidad universidad)
     {
 
@@ -87,7 +87,7 @@ public class Main {
 
     }
 
-    //===================================================================
+    //=================================================================== CARGAMOS EL JSON SI EXISTE
     public static void cargarJson(Universidad universidad)
     {
         try
@@ -103,7 +103,7 @@ public class Main {
 
 
     //========================== METODOS AULA =============================================
-
+    /// FUNCION PARA EL MENU DE LAS AULAS
     public static void menuAulas(Scanner entrada, Universidad universidad) {
         int opcion;
         do {
