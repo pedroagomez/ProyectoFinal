@@ -314,11 +314,10 @@ public class Universidad {
         Profesor profesor = buscarProfesorPorLegajo(idProfesor);
         if(profesor== null)
         {
-            builder.append("No hay reservas del profesor "+profesor.getNombre());
+            builder.append("No hay reservas del profesor " + profesor.getNombre());
         }
         else
         {
-
             builder.append(reservaMes.retornoProfesorPorMes(profesor));
         }
 

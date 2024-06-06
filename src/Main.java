@@ -140,7 +140,7 @@ public class Main {
             String cadena = """
                 \tMenú aula
                 \t[1] Ver aulas con computadora
-                \t[2] Ver aulas normales               
+                \t[2] Ver aulas normales
                 \t[3] Ver todas las aula
                 \t[0] Salir
                 """;

@@ -79,9 +79,12 @@ public class ReservaPorMes {
         StringBuilder cadena = new StringBuilder();
         ReservaPorSemana aux = null;
         for(EnumMes mes : reservaMensual.keySet()){
-            cadena.append(mes).append("\n");
             aux = reservaMensual.get(mes);
-            cadena.append(aux.retornoProfesorPorSemana(profesor).append("\n"));
+            if(aux!=null){
+                cadena.append(mes).append("\n");
+                cadena.append(aux.retornoProfesorPorSemana(profesor).append("\n"));
+            }
+
         }
         return cadena;
     }
