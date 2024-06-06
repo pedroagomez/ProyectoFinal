@@ -182,6 +182,12 @@ public class Universidad {
         return gestorMateria.eliminarMateriaPorId(id);
     }
 
+    //=================================== METODOS PROFE Y MATERIA ================================
+
+    public boolean comprobarExistenciaMateriaYprofe(Materia materia, Profesor profesor){
+        return  gestorMateria.compararMateriaPorString(materia,profesor);
+    }
+
 
     //=================================== METODOS ARCHIVOS =======================================
 
@@ -255,6 +261,7 @@ public class Universidad {
         }
         else
         {
+
             builder.append(reservaMes.retornoProfesorPorMes(profesor));
         }
 
