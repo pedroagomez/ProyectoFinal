@@ -36,7 +36,7 @@ public class Reserva {
         return array;
 
     }
-
+        ///FUNCION PARA AGREGAR LA RESERVA
         public String agregar(EnumDia dia, EnumHorarios hora, Aula aula, Materia materia)
         {
             String mensaje = "";
@@ -58,12 +58,12 @@ public class Reserva {
 
             return mensaje;
         }
-
+        /// FUNCION PARA VER SI ESTA VACIO EL MAP
         public boolean isEmpty()
         {
             return configurador.isEmpty();
         }
-
+        /// FUNCION PARA CANCELAR LA RESERVA
         public boolean cancelarReserva(EnumDia dia, EnumHorarios hora) {
             boolean reservaCancelada=false;
             if (configurador.containsKey(dia)) {
@@ -81,7 +81,7 @@ public class Reserva {
         }
 
 
-
+        /// FUNCION PARA VER QUE PROFESOR SE ENCUENTRA ESE DIA
         public StringBuilder retornoProfesorPorDia (Profesor profesor){
             StringBuilder cadena = new StringBuilder();
             ManejoDias aux = null;
@@ -92,7 +92,7 @@ public class Reserva {
             }
             return cadena;
         }
-
+        /// FUNCION PARA VER LA RESERVA DE UN DIA DETERMINADO
         public String verReservaDia(EnumDia dia)
         {
             StringBuilder builder=new StringBuilder();
@@ -104,7 +104,7 @@ public class Reserva {
 
             return  builder.toString();
         }
-
+        /// FUNCION PARA VER LA DISPONIBLIDAD DEL DIA Y HORA
         public boolean verDisponiblidad(EnumDia dia,EnumHorarios hora,Aula aula){
         boolean disponible=true;
         ManejoDias aux = configurador.get(dia);

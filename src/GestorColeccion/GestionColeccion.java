@@ -79,7 +79,7 @@ public class GestionColeccion<T> implements IGestion<T>{
         }
         return builder.toString();
     }
-
+    // DEVOLVEMOS UN ELEMENTO
     public T devolverElementoElemento(T elemento) {
 
         boolean encontrado = false;

@@ -28,17 +28,17 @@ public class GestorMateria implements Serializable {
         }
         return array;
     }
-
+    /// AGREGAMOS UNA MATERIA
     public void agregarMateria(Materia materia)
     {
         conjuntoMaterias.agregar(materia);
     }
-
+    /// ELIMINAMOS UNA MATERIA
     public void eliminarMateria(Materia materia)
     {
         conjuntoMaterias.eliminar(materia);
     }
-
+    /// ELIMINAMOS UNA MATERIA POR LA ID
     public boolean eliminarMateriaPorId(int id)
     {
         boolean eliminado=false;
@@ -75,7 +75,7 @@ public class GestorMateria implements Serializable {
         }
         return builder.toString();
     }
-
+    /// VEMOS VEMOS LOS CONTENIDOS DE LA MATERIA
     public String verMateriaDetalle() {
         StringBuilder builder = new StringBuilder();
         Iterator<Materia> it = conjuntoMaterias.getConjuntoIterator();
@@ -108,7 +108,7 @@ public class GestorMateria implements Serializable {
         }
         return aux;
     }
-
+    /// FUNCION PARA COMPARAR UNA MATERIA Y UN PROFESOR ASIGANDO A LA MATERIA
     public boolean compararMateriaPorString(Materia asignatura, Profesor profe){
         boolean retorno = true;
         Iterator<Materia> it=  conjuntoMaterias.getConjuntoIterator();
@@ -126,12 +126,12 @@ public class GestorMateria implements Serializable {
 
         return retorno;
     }
-
+    /// FUNCION PARA VER LAS MATERIAS
     public String listarMaterias()
     {
         return conjuntoMaterias.listarConjunto();
     }
-
+    /// FUNCION PARA CARGAR EL ARCHIVO GUARDADO CON LAS MATERIAS
     public void cargarArchivoMateria(){
         conjuntoMaterias.cargarArchivoConjunto("Materias.bin");
 
@@ -142,6 +142,7 @@ public class GestorMateria implements Serializable {
         contador= conjuntoMaterias.leerArchivoConjunto("Materias.bin");
         return contador;
     }
+    /// FUNCION PARA LEER EL ARCHIVO DE MATERIAS
     public void leerArchivoMateria(){
         conjuntoMaterias.leerArchivoConjunto("Materias.bin");
         Materia nombre = new Materia(contador());

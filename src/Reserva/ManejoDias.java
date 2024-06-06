@@ -57,12 +57,12 @@ public class ManejoDias {
 
         return reservado;
     }
-
+    /// FUNCION PARA COMPROBAR SI ESTA VACIO
     public boolean isEmpty()
     {
         return horarios.isEmpty();
     }
-
+    /// FUNCION PARA ELIMINAR UN HORARIO EN PARTICULAR
     public boolean eliminarAulaEnHorario(EnumHorarios hora) {
         boolean darBaja = false;
         if (horarios.containsKey(hora))
@@ -76,7 +76,7 @@ public class ManejoDias {
         }
         return darBaja;
     }
-
+    /// RETORNAMOS EL PROFESOR QUE SE ENCUENTRA EN CIERTO HORARIO
     public StringBuilder retornarProfesorPorHora(Profesor profesor) {
         StringBuilder cadena = new StringBuilder();
         HashSet<Aula> aux = null;
@@ -99,7 +99,7 @@ public class ManejoDias {
     }
 
 
-
+    /// FUNCION PARA VER LAS AULAS DISPONIBLES EN ESE HORARIO
     public boolean verDisponible(EnumHorarios hora, Aula aula){
         boolean disponible = true;
         GestionColeccion<Aula> aux = null;
