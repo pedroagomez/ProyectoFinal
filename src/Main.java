@@ -1141,9 +1141,24 @@ public class Main {
     //===================================================================
     public static void cargarMateria(Scanner entrada, Universidad universidad) {
         int comprobante = 0;
+
+        String nombre= " ";
         System.out.println("Ingrese el nombre de la materia: ");
+        boolean correcto=false;
         entrada.nextLine();
-        String nombre = entrada.nextLine();
+        while(!correcto)
+        {
+            nombre=entrada.nextLine();
+            if(nombre.matches("[a-zA-Z]+"))
+            {
+                correcto=true;
+            }
+            else
+            {
+                System.out.println("Entrada no valida ");
+            }
+        }
+
         Materia materia;
         System.out.println("Profesores disponibles:");
 
