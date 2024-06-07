@@ -16,16 +16,6 @@ public class Profesor implements Serializable {
         this.apellido = apellido;
         this.legajo = legajo;
     }
-
-    public JSONObject toJson() throws JSONException
-    {
-        JSONObject objeto = new JSONObject();
-        objeto.put("nombre",this.nombre);
-        objeto.put("apellido",this.apellido);
-        objeto.put("legajo",this.legajo);
-        return  objeto;
-    }
-
     public String getNombre() {
         return nombre;
     }
@@ -61,7 +51,14 @@ public class Profesor implements Serializable {
             }
         return retorno;
     }
-
+    public JSONObject toJson() throws JSONException
+    {
+        JSONObject objeto = new JSONObject();
+        objeto.put("nombre",this.nombre);
+        objeto.put("apellido",this.apellido);
+        objeto.put("legajo",this.legajo);
+        return  objeto;
+    }
     public int hashCode() {
         return 1;
     }

@@ -27,14 +27,7 @@ public class Materia implements Serializable {
         iDSatic = id;
     }
 
-    public JSONObject toJson() throws JSONException
-    {
-        JSONObject objeto = new JSONObject();
-        objeto.put("nombre",this.nombre);
-        objeto.put("id",this.id);
-        objeto.put("profesor",this.profesor.toJson());
-        return  objeto;
-    }
+
 
     public String getNombre() {
         return nombre;
@@ -77,7 +70,14 @@ public class Materia implements Serializable {
     public int hashCode() {
         return 1;
     }
-
+    public JSONObject toJson() throws JSONException
+    {
+        JSONObject objeto = new JSONObject();
+        objeto.put("nombre",this.nombre);
+        objeto.put("id",this.id);
+        objeto.put("profesor",this.profesor.toJson());
+        return  objeto;
+    }
     @Override
     public String toString() {
         return   "Nombre='" + nombre + '\'' +

@@ -20,7 +20,13 @@ public class GestionColeccion<T> implements IGestion<T>{
         this.conjunto = new HashSet<T>();
     }
 
+    public HashSet<T> getConjunto() {
+        return conjunto;
+    }
 
+    public void setConjunto(HashSet<T> conjunto) {
+        this.conjunto = conjunto;
+    }
 
     //AGREGAR ELEMENTO
     @Override
@@ -29,8 +35,6 @@ public class GestionColeccion<T> implements IGestion<T>{
             conjunto.add(elemento);
         }
     }
-
-
 
     //ELIMINAR ELEMENTO
     @Override
@@ -42,25 +46,11 @@ public class GestionColeccion<T> implements IGestion<T>{
         return eliminar;
     }
 
-
-
     //VERIFICAR EXISTE DE UN ELEMENTO EN LA COLECCION. DEVUELVE UN BOOLEANO
     @Override
     public boolean verificarExistenciaElemento(T elemento) {
         return conjunto.contains(elemento);
     }
-
-    public HashSet<T> getConjunto() {
-        return conjunto;
-    }
-
-
-
-    public void setConjunto(HashSet<T> conjunto) {
-        this.conjunto = conjunto;
-    }
-
-
 
     //BUSCA Y DEVUELVE UNA CADENA DE STRING CON EL ELEMENTO QUE SE PASA POR PARAMETRO
     @Override
