@@ -101,19 +101,6 @@ public class ReservaPorMes {
     }
 
 
-    /*public String verReservaDiaDeterminado(EnumDia dia)
-    {
-        StringBuilder builder=new StringBuilder();
-        for(EnumMes mes : reservaMensual.keySet())
-        {
-            ReservaPorSemana reservaPorSemana= reservaMensual.get(mes);
-            String reservaDia=reservaPorSemana.verReservaDia(dia);
-            builder.append(reservaDia.toString()).append("\n");
-        }
-
-        return builder.toString();
-    }*/
-
     public String verReservaSemana(EnumMes mes, EnumSemana semana)
     {
         StringBuilder builder=new StringBuilder();
