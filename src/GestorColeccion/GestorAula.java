@@ -20,7 +20,9 @@ public class GestorAula {
     public GestorAula() {
         this.mapaAula = new HashMap<>();
     }
-
+    public boolean tengoDatos (){
+        return mapaAula.isEmpty();
+    }
     public JSONArray toJson()throws JSONException
     {
         JSONObject obj = new JSONObject();
@@ -131,9 +133,7 @@ public class GestorAula {
         return aux;
     }
 
-    public boolean tengoDatos (){
-        return mapaAula.isEmpty();
-    }
+
 
     //MUESTRA TODAS LAS AULAS
     public String listarAulas()
@@ -266,10 +266,5 @@ public class GestorAula {
                 throw new RuntimeException(e);
             }
         }
-
-
-
     }
-
-
 }

@@ -28,14 +28,6 @@ public class Universidad {
         this.reservaMes = new ReservaPorMes();
     }
 
-
-    public JSONObject toJson() throws JSONException
-    {
-        JSONObject objeto= new JSONObject();
-        objeto.put("Reservas",reservaMes.toJson());
-        return objeto;
-    }
-
     // ============================ GETTERS AND SETTERS =================================
     public GestorAula getGestorAula() {
         return gestorAula;
@@ -45,6 +37,15 @@ public class Universidad {
     public GestorMateria getGestorMateria() {
         return gestorMateria;
     }
+    // ============================ CARGAR JSON =================================
+    public JSONObject toJson() throws JSONException
+    {
+        JSONObject objeto= new JSONObject();
+        objeto.put("Reservas",reservaMes.toJson());
+        return objeto;
+    }
+
+
 
 
 

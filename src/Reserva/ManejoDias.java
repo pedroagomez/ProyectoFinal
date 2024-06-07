@@ -20,7 +20,10 @@ public class ManejoDias {
         this.horarios = new HashMap<>();
     }
 
-
+    public boolean isEmpty()
+    {
+        return horarios.isEmpty();
+    }
     public JSONArray toJson()  throws JSONException
     {
         JSONArray array = new JSONArray();
@@ -58,10 +61,7 @@ public class ManejoDias {
         return reservado;
     }
 
-    public boolean isEmpty()
-    {
-        return horarios.isEmpty();
-    }
+
 
     public boolean eliminarAulaEnHorario(EnumHorarios hora) {
         boolean darBaja = false;

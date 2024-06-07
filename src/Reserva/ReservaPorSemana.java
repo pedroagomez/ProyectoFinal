@@ -18,7 +18,10 @@ public class ReservaPorSemana {
     public ReservaPorSemana() {
         this.reservaPorSemana = new LinkedHashMap<>();
     }
-
+    public boolean isEmpty()
+    {
+        return reservaPorSemana.isEmpty();
+    }
 
     public JSONArray toJson()  throws JSONException
     {
@@ -49,10 +52,7 @@ public class ReservaPorSemana {
         return mensaje;
     }
 
-    public boolean isEmpty()
-    {
-        return reservaPorSemana.isEmpty();
-    }
+
     public boolean cancelarReserva(EnumSemana numSemana, EnumDia dia, EnumHorarios hora) {
         boolean reservaCancelada=false;
         if (reservaPorSemana.containsKey(numSemana)) {

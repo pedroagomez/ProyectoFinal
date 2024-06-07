@@ -148,6 +148,4 @@ public class GestorMateria implements Serializable {
         Materia materia = new Materia(contador());
 
     }
-
-
 }

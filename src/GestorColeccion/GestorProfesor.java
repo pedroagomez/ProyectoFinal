@@ -17,7 +17,10 @@ public class GestorProfesor implements  Serializable  {
     public GestorProfesor() {
         this.conjuntoProfesores = new GestionColeccion<Profesor>();
     }
-
+    public String listarProfesores()
+    {
+        return conjuntoProfesores.listarConjunto();
+    }
     public JSONArray toJson() throws JSONException
     {
         JSONArray array = new JSONArray();
@@ -54,16 +57,6 @@ public class GestorProfesor implements  Serializable  {
         }
         return  eliminado;
     }
-
-
-
-    public String listarProfesores()
-    {
-        return conjuntoProfesores.listarConjunto();
-    }
-
-
-
     //SE PASA POR PARAMETRO UN LEGAJO Y DEVUELVE AL PROFESOR
 
     public Profesor buscarProfesorPorLegajo(int legajo)

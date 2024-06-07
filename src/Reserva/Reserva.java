@@ -22,7 +22,10 @@ public class Reserva {
     {
         this.configurador = new LinkedHashMap<>();
     }
-
+    public boolean isEmpty()
+    {
+        return configurador.isEmpty();
+    }
     public JSONArray toJson()  throws JSONException
     {
         JSONArray array = new JSONArray();
@@ -59,10 +62,7 @@ public class Reserva {
             return mensaje;
         }
 
-        public boolean isEmpty()
-        {
-            return configurador.isEmpty();
-        }
+
 
         public boolean cancelarReserva(EnumDia dia, EnumHorarios hora) {
             boolean reservaCancelada=false;

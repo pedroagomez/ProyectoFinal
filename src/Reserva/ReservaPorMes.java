@@ -21,6 +21,9 @@ public class ReservaPorMes {
         this.reservaMensual = new LinkedHashMap<>();
     }
 
+    public LinkedHashMap<EnumMes, ReservaPorSemana> getReservaMensual() {
+        return reservaMensual;
+    }
 
     public JSONArray toJson()  throws JSONException
     {
@@ -36,9 +39,6 @@ public class ReservaPorMes {
 
     }
 
-    public LinkedHashMap<EnumMes, ReservaPorSemana> getReservaMensual() {
-        return reservaMensual;
-    }
 
     public String agregar(EnumMes mes, EnumSemana numSemana, EnumDia dia, EnumHorarios hora, Aula aula, Materia materia){
         String mensaje = "";
