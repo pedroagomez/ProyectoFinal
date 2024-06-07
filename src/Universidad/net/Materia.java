@@ -23,6 +23,9 @@ public class Materia implements Serializable {
     }
 
 
+    public Materia(int id){
+        iDSatic = id;
+    }
 
     public JSONObject toJson() throws JSONException
     {

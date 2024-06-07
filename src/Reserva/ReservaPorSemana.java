@@ -33,7 +33,7 @@ public class ReservaPorSemana {
         return array;
 
     }
-
+    /// FUNCION PARA AGREGAR LA RESERVA POR SEMANA
     public String agregar(EnumSemana numSemana, EnumDia dia, EnumHorarios hora, Aula aula, Materia materia)
     {
         String mensaje = "";
@@ -48,11 +48,12 @@ public class ReservaPorSemana {
 
         return mensaje;
     }
-
+    /// FUNCION PARA VER SI EL MAP ESTA VACIO
     public boolean isEmpty()
     {
         return reservaPorSemana.isEmpty();
     }
+    /// FUCNION PARA CANCELAR UNA RESERVA
     public boolean cancelarReserva(EnumSemana numSemana, EnumDia dia, EnumHorarios hora) {
         boolean reservaCancelada=false;
         if (reservaPorSemana.containsKey(numSemana)) {
@@ -71,7 +72,7 @@ public class ReservaPorSemana {
     }
 
 
-
+    /// FUNCION PARA ACCEDER A UNA SEMANA EN PARTICULAR
     public String accederASemana (EnumSemana semana){
         Reserva aux = null;
         if(reservaPorSemana.containsKey(semana)){
@@ -80,7 +81,7 @@ public class ReservaPorSemana {
 
         return aux.toString();
     }
-
+    /// FUNCION PARA RETORNAR POR STRING QUE PROFESOR ESTA EN ESA SEMANA
     public StringBuilder retornoProfesorPorSemana (Profesor profesor){
         StringBuilder cadena = new StringBuilder();
         Reserva aux = null;
@@ -92,7 +93,7 @@ public class ReservaPorSemana {
         return cadena;
     }
 
-
+    /// FUNCION PARA VER LA RESERVA EN UN DIA EN ESPECIFICO
     public String verReservaDia(EnumDia dia,EnumSemana semana)
     {
         StringBuilder builder=new StringBuilder();
@@ -103,7 +104,7 @@ public class ReservaPorSemana {
         }
         return  builder.toString();
     }
-
+    /// FUNCION PARA VER LA DISPONIBILIDAD DE LAS AULAS PARA LA RESERVA
     public boolean verDisponibilidad(EnumDia dia,EnumSemana semana, EnumHorarios hora, Aula aula){
         boolean disponibilidad=true;
         Reserva aux = null;

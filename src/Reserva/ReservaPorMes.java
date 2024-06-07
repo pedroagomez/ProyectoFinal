@@ -39,7 +39,7 @@ public class ReservaPorMes {
     public LinkedHashMap<EnumMes, ReservaPorSemana> getReservaMensual() {
         return reservaMensual;
     }
-
+    /// FUNCION PARA AGREGAR LA RESERVA POR MES
     public String agregar(EnumMes mes, EnumSemana numSemana, EnumDia dia, EnumHorarios hora, Aula aula, Materia materia){
         String mensaje = "";
 
@@ -55,7 +55,7 @@ public class ReservaPorMes {
         return mensaje;
     }
 
-
+    /// FUNCION PARA CANCELAR UNA RESERVA
     public boolean cancelarReserva(EnumMes mes,EnumSemana numSemana,EnumDia dia, EnumHorarios hora)
     {
         boolean reservaCancelada=false;
@@ -74,17 +74,21 @@ public class ReservaPorMes {
         return  reservaCancelada;
     }
 
-
+    /// FUNCION PARA RETORNAR EL PROFESOR QUE TIENE RESERVA EN ESE MES
     public StringBuilder retornoProfesorPorMes (Profesor profesor){
         StringBuilder cadena = new StringBuilder();
         ReservaPorSemana aux = null;
         for(EnumMes mes : reservaMensual.keySet()){
-            cadena.append(mes).append("\n");
             aux = reservaMensual.get(mes);
-            cadena.append(aux.retornoProfesorPorSemana(profesor).append("\n"));
+            if(aux!=null){
+                cadena.append(mes).append("\n");
+                cadena.append(aux.retornoProfesorPorSemana(profesor).append("\n"));
+            }
+
         }
         return cadena;
     }
+    /// FUNCION PARA ACCEDER AL MES
     public String accederAMes (EnumMes mes){
         ReservaPorSemana aux = null;
         String mensaje = "";
@@ -96,21 +100,7 @@ public class ReservaPorMes {
         }
         return mensaje;
     }
-
-
-    /*public String verReservaDiaDeterminado(EnumDia dia)
-    {
-        StringBuilder builder=new StringBuilder();
-        for(EnumMes mes : reservaMensual.keySet())
-        {
-            ReservaPorSemana reservaPorSemana= reservaMensual.get(mes);
-            String reservaDia=reservaPorSemana.verReservaDia(dia);
-            builder.append(reservaDia.toString()).append("\n");
-        }
-
-        return builder.toString();
-    }*/
-
+    /// FUNCION PARA VER LAS RESERVAS EN EL MES Y LA SEMANA ASIGANADA
     public String verReservaSemana(EnumMes mes, EnumSemana semana)
     {
         StringBuilder builder=new StringBuilder();
@@ -125,6 +115,7 @@ public class ReservaPorMes {
 
         return builder.toString();
     }
+    /// FUNCION PARA VER LA RESERVA EN EL DIA ASIGANDO
     public String verReservaDia(EnumDia dia,EnumSemana semana,EnumMes mes)
     {
         StringBuilder builder=new StringBuilder();
@@ -139,7 +130,7 @@ public class ReservaPorMes {
 
         return  builder.toString();
     }
-
+    /// FUNCION PARA VER LA DISPONIBILIDAD DE LAS AULAS PARA RESERVAR
     public boolean verDisponibilidad(EnumDia dia,EnumSemana semana,EnumMes mes,EnumHorarios hora, Aula aula ){
         boolean disponibilidad=true;
         ReservaPorSemana aux = null;

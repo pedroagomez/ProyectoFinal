@@ -35,7 +35,7 @@ public class GestorAula {
         return array;
 
     }
-
+    ///AGREGAMOS UN AULA AL MAP
     public void agregarAula(int numeroAula,Aula aula)
     {
         if(!mapaAula.containsKey(numeroAula))
@@ -43,7 +43,7 @@ public class GestorAula {
             mapaAula.put(numeroAula,aula);
         }
     }
-
+    /// VALIDACION SI EXISTE ESTE NUMERO DE AULA
     public boolean validarExistenciaAula(int numeroAula)
     {
         boolean existencia=false;
@@ -53,43 +53,6 @@ public class GestorAula {
         }
         return existencia;
     }
-
-    /*public String aulaNoDisponible()
-    {
-        StringBuilder builder=new StringBuilder();
-        Iterator<Map.Entry<Integer,Aula>>it=mapaAula.entrySet().iterator();
-        while(it.hasNext() )
-        {
-            Map.Entry<Integer,Aula>conjunto=it.next();
-            if(!conjunto.getValue().isDisponible())
-            {
-                builder.append("Numero de aula : "+conjunto.getKey()).append("\n");
-                builder.append(conjunto.getValue().toStringSinMateria()).append("\n");
-
-            }
-        }
-        return builder.toString();
-    }
-*/
-
-
-    // DEVUELVE CADENA DE STRING QUE MUESTRA TODAS LAS AULAS DISPONIBLES
-   /* public String verAulasDisponibles()
-    {
-        StringBuilder builder= new StringBuilder();
-        Iterator<Map.Entry<Integer,Aula>>it=mapaAula.entrySet().iterator();
-        while(it.hasNext())
-        {
-            Map.Entry<Integer,Aula>conjunto=it.next();
-            if(conjunto.getValue().isDisponible())
-            {
-                builder.append(conjunto.getValue().toStringSinMateria()).append("\n");
-            }
-        }
-        return builder.toString();
-    }*/
-
-    //LISTA LAS
 
     // LISTA TODAS LAS AULAS QUE TIENEN UNA COMPUTADORA
     public String verAulasConComputadoras() {
@@ -103,7 +66,7 @@ public class GestorAula {
         }
         return builder.toString();
     }
-
+    // LISTAMOS LAS AULAS NORMALES
     public String verAulasNormales() {
         StringBuilder builder = new StringBuilder();
         for (Map.Entry<Integer, Aula> entry : mapaAula.entrySet()) {
@@ -130,7 +93,7 @@ public class GestorAula {
         }
         return aux;
     }
-
+    /// VALIDACION PARA SABER SI EL MAPA CONTIENE DATOS
     public boolean tengoDatos (){
         return mapaAula.isEmpty();
     }
@@ -149,7 +112,7 @@ public class GestorAula {
         }
         return builder.toString();
     }
-
+    //BUSCAMOS LAS AULAS POR SU NUMERO
     public Aula buscarAulaPorNumero(int numeroAula) {
         return mapaAula.get(numeroAula);
     }
@@ -172,7 +135,7 @@ public class GestorAula {
             exception.printStackTrace();
         }
     }
-
+    /// ELIMINAMOS AULAS POR SU NUMERO
     public String eliminarAula(int idAula){
         String cadena = "";
         Aula aux = null;
@@ -185,7 +148,7 @@ public class GestorAula {
         }
         return cadena;
     }
-
+    /// VALIDACION DE EXISTENCIA DE AULA COMPUTADORA POR ID
     public boolean validarAulaComputadora(int id )
     {
         boolean existe=false;
@@ -199,7 +162,7 @@ public class GestorAula {
         }
         return existe;
     }
-
+    /// FUNCION PARA MODIFICAR UN AULA
     public String modificarAula(int idAula,int capacidad,boolean tele,boolean proyector)
     {
         StringBuilder builder= new StringBuilder();
@@ -217,7 +180,7 @@ public class GestorAula {
         }
         return builder.toString();
     }
-
+    // FUNCION PARA MODIFICAR UN AULA DE COMPUTADORA
     public String modificarAulaComputadora(int idAula,int capacidad,int cantidadCompus,boolean tele,boolean proyector,boolean auriculares)
     {
         StringBuilder builder= new StringBuilder();
@@ -237,7 +200,7 @@ public class GestorAula {
         }
         return builder.toString();
     }
-
+    // FUNCION PARA LEER EL ARCHIVO
     public void leerArchivoAula(){
         DataInputStream dis=null;
         ObjectInputStream ois=null;
