@@ -83,6 +83,9 @@ public class ReservaPorMes {
             aux = reservaMensual.get(mes);
             cadena.append(aux.retornoProfesorPorSemana(profesor).append("\n"));
         }
+        if (aux == null){
+            cadena.append("No existe la reserva");
+        }
         return cadena;
     }
     public String accederAMes (EnumMes mes){
