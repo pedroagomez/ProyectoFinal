@@ -75,7 +75,7 @@ public class ReservaPorMes {
     }
 
     /// FUNCION PARA RETORNAR EL PROFESOR QUE TIENE RESERVA EN ESE MES
-    public StringBuilder retornoProfesorPorMes (Profesor profesor){
+    public String retornoProfesorPorMes (Profesor profesor){
         StringBuilder cadena = new StringBuilder();
         ReservaPorSemana aux = null;
         for(EnumMes mes : reservaMensual.keySet()){
@@ -84,9 +84,12 @@ public class ReservaPorMes {
                 cadena.append(mes).append("\n");
                 cadena.append(aux.retornoProfesorPorSemana(profesor).append("\n"));
             }
-
+            else
+            {
+                cadena.append("No hay reservas");
+            }
         }
-        return cadena;
+        return cadena.toString();
     }
     /// FUNCION PARA ACCEDER AL MES
     public String accederAMes (EnumMes mes){

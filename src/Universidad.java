@@ -315,10 +315,11 @@ public class Universidad {
         return cadenaAula.toString();
     }
     /// BUSCAMOS UN PROFESOR Y VEMOS EN QUE AULA DA CLASES
+
     public String buscarYretornarProfeYAula(int idProfesor){
         StringBuilder builder =new StringBuilder();
         Profesor profesor = buscarProfesorPorLegajo(idProfesor);
-        if(profesor== null)
+        if(profesor == null)
         {
             builder.append("No hay reservas del profesor " + profesor.getNombre());
         }
