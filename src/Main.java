@@ -1003,22 +1003,39 @@ public class Main {
     //===================================================================
     public static void cargaProfesor(Scanner entrada, Universidad universidad)
     {
-        System.out.println("Ingrese el nombre ");
-        while(!entrada.hasNextLine())
-        {
-            System.out.println("Entrada no valida. Por favor ingrese un String");
-            entrada.nextLine();
-        }
+        String nombre= " ";
+        System.out.println("Ingrese el nombre del profesor: ");
+        boolean correcto=false;
         entrada.nextLine();
-        String nombre=entrada.nextLine();
+        while(!correcto)
+        {
+            nombre=entrada.nextLine();
+            if(nombre.matches("[a-zA-Z]+"))
+            {
+                correcto=true;
+            }
+            else
+            {
+                System.out.println("Entrada no valida ");
+            }
+        }
 
         System.out.println("Ingrese el apellido : ");
-        while(!entrada.hasNextLine())
+        String apellido= " ";
+        //entrada.nextLine();
+        boolean entra=false;
+        while(!entra)
         {
-            System.out.println("Entrada no valida. Por favor ingrese un String");
-            entrada.nextLine();
+            apellido=entrada.nextLine();
+            if(apellido.matches("[a-zA-Z]+"))
+            {
+                entra=true;
+            }
+            else
+            {
+                System.out.println("Entrada no valida ");
+            }
         }
-        String apellido=entrada.nextLine();
         int intentos=0;
         boolean existe=true;
         while(intentos<3 && existe)
