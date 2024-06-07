@@ -17,7 +17,10 @@ public class GestorProfesor implements  Serializable  {
     public GestorProfesor() {
         this.conjuntoProfesores = new GestionColeccion<Profesor>();
     }
-
+    public String listarProfesores()
+    {
+        return conjuntoProfesores.listarConjunto();
+    }
     public JSONArray toJson() throws JSONException
     {
         JSONArray array = new JSONArray();
@@ -28,13 +31,17 @@ public class GestorProfesor implements  Serializable  {
         }
         return array;
     }
-    /// FUNCION PARA AGREGAR UN PROFESOR
+
     public void agregarProfesor(Profesor profe)
     {
         conjuntoProfesores.agregar(profe);
     }
 
-    /// FUNCION PARA ELIMINAR UN PROFESOR POR LEGAJO
+    public void eliminarProfesor(Profesor profe)
+    {
+        conjuntoProfesores.eliminar(profe);
+    }
+
     public boolean eliminarProfesorPorLegajo(int legajo)
     {
         boolean eliminado=false;
@@ -50,16 +57,6 @@ public class GestorProfesor implements  Serializable  {
         }
         return  eliminado;
     }
-
-
-    /// FUNCION PARA LISTAR LOS PROFESORES
-    public String listarProfesores()
-    {
-        return conjuntoProfesores.listarConjunto();
-    }
-
-
-
     //SE PASA POR PARAMETRO UN LEGAJO Y DEVUELVE AL PROFESOR
 
     public Profesor buscarProfesorPorLegajo(int legajo)
@@ -76,7 +73,7 @@ public class GestorProfesor implements  Serializable  {
         }
         return aux;
     }
-    /// VERIFICACION SI UN PROFESOR YA EXISTE
+
     public boolean verificarExistenciaProfesor(int id)
     {
         boolean existe=false;
@@ -91,7 +88,6 @@ public class GestorProfesor implements  Serializable  {
         }
         return existe;
     }
-    /// FUNCIONES DE CARGA Y LECTURA DE ARCHIVOS
     public void cargarArchivoProfesor(){
         conjuntoProfesores.cargarArchivoConjunto("Profesores.bin");
     }

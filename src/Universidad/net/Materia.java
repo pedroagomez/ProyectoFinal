@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class Materia implements Serializable {
     private String nombre;
     private int id;
-    private static int iDSatic = 0 ;
+    private static int iDSatic=0;
     private Profesor profesor;
 
 
@@ -18,19 +18,13 @@ public class Materia implements Serializable {
         this.id = iDSatic++;
         this.profesor = profesor;
     }
-
-    public Materia(int id){
+    public Materia( int id) {
         iDSatic = id;
     }
 
-    public JSONObject toJson() throws JSONException
-    {
-        JSONObject objeto = new JSONObject();
-        objeto.put("nombre",this.nombre);
-        objeto.put("id",this.id);
-        objeto.put("profesor",this.profesor.toJson());
-        return  objeto;
-    }
+
+
+
 
     public String getNombre() {
         return nombre;
@@ -42,6 +36,10 @@ public class Materia implements Serializable {
 
     public int getId() {
         return id;
+    }
+
+    public static void setiDSatic(int iDSatic) {
+        Materia.iDSatic = iDSatic;
     }
 
     //PROFESOR LO PODEMOS MOVER?
@@ -69,7 +67,14 @@ public class Materia implements Serializable {
     public int hashCode() {
         return 1;
     }
-
+    public JSONObject toJson() throws JSONException
+    {
+        JSONObject objeto = new JSONObject();
+        objeto.put("nombre",this.nombre);
+        objeto.put("id",this.id);
+        objeto.put("profesor",this.profesor.toJson());
+        return  objeto;
+    }
     @Override
     public String toString() {
         return   "Nombre='" + nombre + '\'' +

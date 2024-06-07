@@ -20,7 +20,13 @@ public class GestionColeccion<T> implements IGestion<T>{
         this.conjunto = new HashSet<T>();
     }
 
+    public HashSet<T> getConjunto() {
+        return conjunto;
+    }
 
+    public void setConjunto(HashSet<T> conjunto) {
+        this.conjunto = conjunto;
+    }
 
     //AGREGAR ELEMENTO
     @Override
@@ -29,8 +35,6 @@ public class GestionColeccion<T> implements IGestion<T>{
             conjunto.add(elemento);
         }
     }
-
-
 
     //ELIMINAR ELEMENTO
     @Override
@@ -42,25 +46,11 @@ public class GestionColeccion<T> implements IGestion<T>{
         return eliminar;
     }
 
-
-
     //VERIFICAR EXISTE DE UN ELEMENTO EN LA COLECCION. DEVUELVE UN BOOLEANO
     @Override
     public boolean verificarExistenciaElemento(T elemento) {
         return conjunto.contains(elemento);
     }
-
-    public HashSet<T> getConjunto() {
-        return conjunto;
-    }
-
-
-
-    public void setConjunto(HashSet<T> conjunto) {
-        this.conjunto = conjunto;
-    }
-
-
 
     //BUSCA Y DEVUELVE UNA CADENA DE STRING CON EL ELEMENTO QUE SE PASA POR PARAMETRO
     @Override
@@ -79,7 +69,7 @@ public class GestionColeccion<T> implements IGestion<T>{
         }
         return builder.toString();
     }
-    // DEVOLVEMOS UN ELEMENTO
+
     public T devolverElementoElemento(T elemento) {
 
         boolean encontrado = false;
@@ -136,12 +126,11 @@ public class GestionColeccion<T> implements IGestion<T>{
     }
     public int leerArchivoConjunto(String nombreA){
         ObjectInputStream ois=null;
-        int contador = 0;
+        int  contador=0;
         try {
             FileInputStream fis=new FileInputStream(nombreA);
             ois=new ObjectInputStream(fis);
             boolean bandera = true;
-
             while (bandera) {
 
                 agregar((T)ois.readObject());
@@ -164,4 +153,6 @@ public class GestionColeccion<T> implements IGestion<T>{
         }
         return contador;
     }
+
+
 }

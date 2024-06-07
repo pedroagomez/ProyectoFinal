@@ -1,6 +1,5 @@
 package Aula;
 
-import Universidad.net.Materia;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -29,25 +28,21 @@ public class AulaComputadora extends Aula{
     public void setAuriculares(boolean auriculares) {
         this.auriculares = auriculares;
     }
-
-    @Override
     public JSONObject toJson() throws JSONException {
         JSONObject obj = new JSONObject();
-        obj.put("numeroAula", super.getNumeroAula());
-        obj.put("capacidad",super.getCapacidad());
-        obj.put("proyector", super.isProyector());
-        obj.put("tele", super.isTele());
-        obj.put("cantidad computadoras", this.cantidadComputadoras);
-        obj.put("auriculares", this.auriculares);
-        Materia aux= super.getMateria();
-        if (aux != null) {
-            obj.put("materia", aux.toJson());
+        obj.put("numeroAula", this.getNumeroAula());
+        obj.put("capacidad", this.getCapacidad());
+        obj.put("proyector", this.isProyector());
+        obj.put("tele", this.isTele());
+        if (this.getMateria() != null) {
+            obj.put("materia", this.getMateria().toJson());
         } else {
             obj.put("materia", JSONObject.NULL);
         }
+        obj.put("Cantidad computadoras",this.cantidadComputadoras);
+        obj.put("Auriculares",this.auriculares);
         return obj;
     }
-
 
     @Override
     public String toStringSinMateria() {

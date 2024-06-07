@@ -134,6 +134,7 @@ public class Main {
     }
 
     //===================================================================
+       
     public static void verAulas(Scanner entrada, Universidad universidad) {
         int opcion;
         do {
@@ -1173,7 +1174,11 @@ public class Main {
         if(universidad.listarMaterias().isEmpty()){
             System.out.println("\nLista de materias cargada no encontrada");
         }
-        System.out.println(universidad.listarMaterias());
+        else
+        {
+            System.out.println(universidad.listarMaterias());
+        }
+
     }
 
     //===================================================================
